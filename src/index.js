@@ -2,9 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { scenarioBuilder } from "./scenario-builder";
-import { scenario } from "../data/scenario";
+import { scenario } from "./data/scenario";
 
-// import App from "./App1";
 import App1 from "./App1";
 import App2 from "./App2";
 
