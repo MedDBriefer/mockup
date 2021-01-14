@@ -1,0 +1,29 @@
+ul {
+  list-style: none;
+  padding-left: 20px;
+  margin: 0px;
+}
+ul.first {
+  /*   transform: translateX(-30px) */
+  padding-left: 5px;
+  /*   margin: 10px 0px; */
+}
+
+.wrapper {
+  width: 70vw;
+  height: 85vh;
+  margin: auto;
+}
+.dev {
+  border: 1px dashed hotpink;
+}
+
+.callout-icon {
+  margin-left: 10px;
+}
+.callout {
+  margin-left: 10px;
+  color: blue;
+  overflow: none;
+  text-overflow: ellipsis;
+}
