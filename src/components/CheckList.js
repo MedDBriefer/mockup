@@ -1,23 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
+import classnames from "classnames";
 
 import CheckBox from "./CheckBox";
 
-const CheckList = ({ steps, first }) => {
+import {
+  // Collapse,
+  ListGroup, ListGroupItem } from "reactstrap"
+
+const CheckList = ({ heading, steps, depth=2 }) => {
+  const [collapsed, setCollapsed] = useState(true);
+  const toggle = () => setCollapsed(!collapsed);
+
   return (
     <>
+    <p className={`h${depth+1}`} onClick={() => {toggle()}}>{heading}</p>
+    <ListGroup className={classnames("collapse", {"show": !collapsed})} key={`lg-${steps[0].id}`}>
       {steps.map((step) => (
-        <ul className={first ? "first" : ""}>
-          {0 === step.children.length && (
-            <CheckBox step={step} key={`cb-${step.id}`} />
+        <ListGroupItem key={`lgi-${step.id}`}>
+         {0 === step.children.length && (
+              <CheckBox step={step} key={`cb-${step.id}`} />
           )}
           {step.children.length > 0 && (
-            <>
-              <li key={`li-${step.id}`}>{step.label}</li>
-              <CheckList steps={step.children} key={`cl-${step.id}`} />
-            </>
+              <CheckList heading={step.label} steps={step.children} depth={depth+1} key={`cl-${step.id}`} />
           )}
-        </ul>
+        </ListGroupItem>
       ))}
+      </ListGroup>
     </>
   );
 };

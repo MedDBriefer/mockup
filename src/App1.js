@@ -13,7 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <h1>This is App1</h1>
+        <h1>{this.props.branding}</h1>
         <div className="wrapper dev">
           <CheckList steps={this.scenario.steps} first={true} />
         </div>
