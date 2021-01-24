@@ -2,28 +2,26 @@ import React, { useState } from "react";
 import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import {
-  Container,
-  Row,
-} from 'reactstrap'
-
 import MDBNavBar from "./components/mdb-navbar"
-import InfoPane from "./components/InfoPane";
-import CheckListPane from "./components/CheckListPane"
+import MDBContainer from "./components/MDBContainer"
+import MDBModal from "./components/MDBModal"
 
 const App = (props) => {
-    const [infoPaneCollapsed, setInfoPaneCollapsed] = useState(true);
-    const toggleInfoPane = () => setInfoPaneCollapsed(!infoPaneCollapsed);
+    // const [infoPaneCollapsed, setInfoPaneCollapsed] = useState(true);
+    // const toggleInfoPane = () => setInfoPaneCollapsed(!infoPaneCollapsed);
+    const [showModal, setShowModal] = useState(false);
+    const toggleModal = () => setShowModal(!showModal);
 
    return (
       <>
-        <MDBNavBar branding={props.branding} toggler={toggleInfoPane} />
-        <Container fluid={true} className="main">
-          <Row>
-            <CheckListPane steps={props.scenario.steps} />
-            <InfoPane info={props.scenario.info} show={!infoPaneCollapsed} />
-          </Row>
-        </Container>
+        <MDBNavBar branding={props.branding} toggler={toggleModal} />
+        <MDBContainer scenario={props.scenario} />
+        <MDBModal title="Scenario Info" show={showModal} toggler={toggleModal}>
+          <h3>Dispatch Information</h3>
+          <p>{props.scenario.info.dispatchInfo}</p>
+          <h3>Scene Assessment</h3>
+          <p>{props.scenario.info.sceneAssessment}</p>
+        </MDBModal>
       </>
     );
 
