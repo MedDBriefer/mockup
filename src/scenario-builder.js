@@ -14,15 +14,16 @@ function annotateStepsTree(steps, callouts) {
 }
 
 export const scenarioBuilder = (scen) => {
-  let { info, callouts, outline, criticalCriteria} = scen;
-  console.log(info)
-  console.log(callouts)
-  console.log(outline)
+  let { info, callouts, outline, items, criticalCriteria} = scen;
+  // console.log(info)
+  // console.log(callouts)
+  // console.log(outline)
   // items
   let newScen = {
     info,
     callouts,
     steps: annotateStepsTree(outline, callouts),
+    items,
     criticalCriteria
   };
   return newScen;
