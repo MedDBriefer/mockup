@@ -14,14 +14,25 @@ const CheckList = ({ heading, steps, depth=2 }) => {
   return (
     <>
     <p className={`h${depth+1}`} onClick={() => {toggle()}}>{heading}</p>
-    <ListGroup className={classnames("collapse", {"show": !collapsed})} key={`lg-${steps[0].id}`}>
+    <ListGroup
+      className={classnames("collapse", {"show": !collapsed})}
+      key={`lg-${steps[0].id}`}
+    >
       {steps.map((step) => (
         <ListGroupItem key={`lgi-${step.id}`}>
-         {0 === step.children.length && (
-              <CheckBox step={step} key={`cb-${step.id}`} />
+         {!step.children && (
+              <CheckBox
+                step={step}
+                key={`cb-${step.id}`}
+              />
           )}
-          {step.children.length > 0 && (
-              <CheckList heading={step.label} steps={step.children} depth={depth+1} key={`cl-${step.id}`} />
+          {step.children && step.children.length > 0 && (
+              <CheckList
+                heading={step.label}
+                steps={step.children}
+                depth={depth+1}
+                key={`cl-${step.id}`}
+              />
           )}
         </ListGroupItem>
       ))}

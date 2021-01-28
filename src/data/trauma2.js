@@ -1,6 +1,6 @@
 const ASSESS = "assessment";
 const INTERV = "intervention";
-const CRIT_FAIL = "critical-criteria";
+// const CRIT_FAIL = "critical-criteria";
 
 
 const data = {
@@ -168,4 +168,5 @@ const data = {
     ]
 };
 
-export default data;
+module.exports = data;
+// export default data;

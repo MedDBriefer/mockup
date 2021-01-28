@@ -1,6 +1,7 @@
 function annotateStepsTree(steps, callouts) {
+  console.log(steps);
   return steps.map((step) => {
-    if (!step.children.length) {
+      if (!step.children) {
       let callout = callouts.find((ca) => ca.step === step.id);
       if (callout) {
         step.callout = callout.id;
@@ -13,11 +14,16 @@ function annotateStepsTree(steps, callouts) {
 }
 
 export const scenarioBuilder = (scen) => {
-  let { info, steps, callouts } = scen;
+  let { info, callouts, outline, criticalCriteria} = scen;
+  console.log(info)
+  console.log(callouts)
+  console.log(outline)
+  // items
   let newScen = {
     info,
     callouts,
-    steps: annotateStepsTree(steps, callouts),
+    steps: annotateStepsTree(outline, callouts),
+    criticalCriteria
   };
   return newScen;
 };
