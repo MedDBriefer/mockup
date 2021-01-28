@@ -3,6 +3,8 @@ import React from 'react';
 import {
     Button,
     Navbar,
+    // NavItem,
+    NavbarText,
     NavbarBrand,
 } from "reactstrap";
 // Nav,
@@ -11,24 +13,21 @@ import {
 
 
 
-class MDBNavBar extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     let foo=1;
-    // }
 
-    render() {
-        return (
-            <Navbar color="primary" dark>
-                <NavbarBrand href="#">
-                    {this.props.branding}
-                </NavbarBrand>
-                <Button color="success" onClick={this.props.toggler}>
-                    Info
-                </Button>
-            </Navbar>
-        )
-    }
+const MDBNavBar = ({branding, title, toggler}) => {
+    return (
+        <Navbar color="primary" dark>
+            <NavbarBrand href="#">
+                {branding}
+            </NavbarBrand>
+           {!!title &&
+                <NavbarText>{title}</NavbarText>
+            }
+            <Button color="success" onClick={toggler}>
+                Info
+            </Button>
+        </Navbar>
+    )
 }
 
 export default MDBNavBar;
