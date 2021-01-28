@@ -3,7 +3,6 @@ import React from 'react';
 import {
     Button,
     Navbar,
-    // NavItem,
     NavbarText,
     NavbarBrand,
 } from "reactstrap";
@@ -21,7 +20,7 @@ const MDBNavBar = ({branding, title, toggler}) => {
                 {branding}
             </NavbarBrand>
            {!!title &&
-                <NavbarText>{title}</NavbarText>
+                <NavbarText tag="h3">{title}</NavbarText>
             }
             <Button color="success" onClick={toggler}>
                 Info
