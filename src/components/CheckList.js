@@ -1,39 +1,78 @@
-import React, {useState} from "react";
+import React
+, { useState }
+ from "react";
+
+import {
+  // Collapse,
+  ListGroup,
+  ListGroupItem
+} from "reactstrap"
+
 import classnames from "classnames";
 
 import CheckBox from "./CheckBox";
 
-import {
-  // Collapse,
-  ListGroup, ListGroupItem } from "reactstrap"
 
-const CheckList = ({ heading, steps, depth=2 }) => {
-  const [collapsed, setCollapsed] = useState(true);
+const CheckList = ({ stateGetter, stateToggler, heading, steps, depth=2 }) => {
+  const [collapsed, setCollapsed] = useState(false);
   const toggle = () => setCollapsed(!collapsed);
 
+  // return (
+  //   <ul>
+  //     {steps.map((step) => (
+  //       <li key={`li-${step.id}`}>
+  //         <CheckBox
+  //           step={step}
+  //           stateGetter={stateGetter}
+  //           stateToggler={stateToggler}
+  //         />
+  //         {step.children &&
+  //           <CheckList
+  //             stateGetter={stateGetter}
+  //             stateToggler={stateToggler}
+  //             steps={step.children}
+  //             depth={depth+1}
+  //           />
+  //         }
+  //       </li>
+  //     )
+  //     )}
+  //   </ul>
+  // )
   return (
     <>
-    <p className={`h${depth+1}`} onClick={() => {toggle()}}>{heading}</p>
     <ListGroup
       className={classnames("collapse", {"show": !collapsed})}
       key={`lg-${steps[0].id}`}
     >
       {steps.map((step) => (
         <ListGroupItem key={`lgi-${step.id}`}>
-         {!step.children && (
-              <CheckBox
-                step={step}
-                key={`cb-${step.id}`}
-              />
-          )}
-          {step.children && step.children.length > 0 && (
-              <CheckList
-                heading={step.label}
-                steps={step.children}
-                depth={depth+1}
-                key={`cl-${step.id}`}
-              />
-          )}
+        {
+          !step.children
+          ?
+            <CheckBox
+              key={`cb-${step.id}`}
+              step={step}
+              stateGetter={stateGetter}
+              stateToggler={stateToggler}
+            />
+          :
+            <>
+            <p
+              className={`h${depth+1}`}
+              onClick={() => {toggle()}}>
+                {step.label}
+            </p>
+            <CheckList
+              key={`cl-${step.id}`}
+              stateGetter={stateGetter}
+              stateToggler={stateToggler}
+              // heading={step.label}
+              steps={step.children}
+              depth={depth+1}
+            />
+            </>
+        }
         </ListGroupItem>
       ))}
       </ListGroup>
