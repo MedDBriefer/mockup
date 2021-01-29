@@ -139,10 +139,10 @@ const data = {
         { id: "680", label: "Failure to manage the patient as a competent EMT" },
         { id: "690", label: "Uses or orders a dangerous or inappropriate intervention" }
     ],
-    selectedInterventions: {
+    interventionForms: {
         // Each selected intervention should, by default, also include an 'other / incorrect intervention' option
-        // Each object title matches checklist item id for easy mapping
-        // TODO: may have to assign type to individual steps to account for medical scenarios (or just a mix or radios/checks)
+        // Each object title matches checklist item id for easier mapping
+        // TODO: may have to assign type to individual steps to account for medical scenarios (or for a mix or radios/checks)
         "stabilizes-spine": {
             id: "intervention-10",
             type: CHECK,
@@ -210,8 +210,7 @@ const data = {
                 { id: "transport-110", label: "Did not reassess motor, sensory, and circulatory functions in each extremity after immobilizing patient to the device" }
             ]
         }
-
-    },
+    }
 };
 
 module.exports = data;
