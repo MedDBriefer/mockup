@@ -168,7 +168,7 @@ const data = {
                 { id: "bleeding-10", label: "Applies direct pressure" },
                 { id: "bleeding-20", label: "Applies tourniquet" }
             ],
-            criticalCriteria: [
+            criticalCriteria: [ // Critical criteria should automatically be check boxes
                 { id: "bleeding-30", label: "Did not control hemorrhage using correct procedures in a timely manner" },
                 { id: "bleeding-40", label: "Did not apply direct pressure to wound before applying tourniquet" },
                 { id: "bleeding-50", label: "Did not properly position the patient" },
