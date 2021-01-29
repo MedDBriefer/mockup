@@ -1,11 +1,11 @@
 import React from "react"
 
-import Checkbox from "./CheckBox"
+import CheckBox from "./CheckBox"
 
 const DetailsItem = ({item, stateGetter, stateToggler}) => {
 
     if ("assessment" === item.type) {
-        return <Checkbox
+        return <CheckBox
                     step={item}
                     stateGetter={stateGetter}
                     stateToggler={stateToggler} />
