@@ -11,7 +11,7 @@ const data = {
         { id: "scene-size-up", label: "Scene Size-Up" },
         {
             id: "initial-assessment-resuscitation",
-            label: "INITIAL ASSESSMENT/RESUSCITATION",
+            label: "Primary Assessment/Resuscitation",
             children: [
                 { id: 'general-assessment', label: 'General Assessment' },
                 { id: "airway", label: "Airway" },
@@ -20,10 +20,10 @@ const data = {
                 { id: "transport-decision", label: "Transport Decision" }
             ]
         },
-        { id: "history-taking", label: "HISTORY TAKING" },
+        { id: "history-taking", label: "History Taking" },
         {
             id: "detailed-physical-examination",
-            label: "DETAILED PHYSICAL EXAMINATION",
+            label: "Secondary Assessment",
             children: [
                 { id: "head", label: "Head" },
                 { id: "neck", label: "Neck" },
