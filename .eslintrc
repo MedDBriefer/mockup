@@ -1,0 +1,6 @@
+{
+    "extends": ["react-app", "shared-config"],
+    "rules": {
+        "no-unused-vars": "off"
+    }
+}
