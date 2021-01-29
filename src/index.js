@@ -35,23 +35,24 @@ let builtScen = scenarioBuilder(scenario);
 
 // reactstrap is using some deprecated stuff, which is causing React.StrictMode
 // to output warnings which make the console difficult to read
-let Mode;
-switch(process.env.NODE_ENV) {
-  case 'development':
-    // passes the scenario data to the app as props.  passing 'target' as branding
-    // (for the navbar) so we know which app variant we're working with
-    Mode = () => <App branding={target} scenario={builtScen} />;
-    break;
-  default:
-    Mode = () => (
-    // ditto
-    <React.StrictMode>
-        <App branding={target} scenario={builtScen} />
-      </React.StrictMode>
-    )
-}
+// let Mode;
+// switch(process.env.NODE_ENV) {
+//   case 'development':
+//     // passes the scenario data to the app as props.  passing 'target' as branding
+//     // (for the navbar) so we know which app variant we're working with
+//     Mode = () => <App branding={target} scenario={builtScen} />;
+//     break;
+//   default:
+//     Mode = () => (
+//     // ditto
+//     <React.StrictMode>
+//         <App branding={target} scenario={builtScen} />
+//       </React.StrictMode>
+//     )
+// }
+// <Mode />,
 
 ReactDOM.render(
-  <Mode />,
+  <App branding={target} scenario={builtScen} />,
   document.getElementById("root")
 );
