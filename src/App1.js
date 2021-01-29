@@ -11,12 +11,19 @@ import Outline from "./components/Outline";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      callouts: {},
+      vitals: {},
+      showScenarioInfoModal: false,
+      currentNode: null,
+      checkListItems: {},
+      criticalCriteria: {}
+    };
     // bind event event handlers;
     this.toggleScenarioInfoModal = this.toggleScenarioInfoModal.bind(this)
     this.setCurrentNode          = this.setCurrentNode.bind(this)
     this.toggleCheckListItem     = this.toggleCheckListItem.bind(this)
-    // don't *think* I need to bind this
+    // need to bind this as well as functional components don't have a 'this'
     this.getCheckedState         = this.getCheckedState.bind(this)
   }
 
@@ -70,12 +77,15 @@ class App extends React.Component {
   }
 
   render() {
+    const scen = this.props.scenario;
+
     const lhs = <Outline
                   switcher={this.setCurrentNode}
                   heading="Navigation"
-                  steps={this.props.scenario.steps}
+                  steps={scen.steps}
+                  first={true}
                 />
-    const currentNode = this.props.scenario.items[this.state.currentNode] || [];
+    const currentNode = scen.items[this.state.currentNode] || [];
     const rhs = <MDBDetailsPane
                   children={currentNode}
                   stateGetter={this.getCheckedState}
@@ -85,8 +95,8 @@ class App extends React.Component {
     return (
       <>
         <MDBNavBar
-          branding={this.props.branding}
-          title={this.props.scenario.info.name}
+          branding="Nav Pane"
+          title={scen.info.name}
           toggler={this.toggleScenarioInfoModal}
         />
         <MDBContainer
@@ -99,9 +109,9 @@ class App extends React.Component {
           toggler={this.toggleScenarioInfoModal}
         >
           <h3>Dispatch Information</h3>
-          <p>{this.props.scenario.info.dispatchInfo}</p>
+          <p>{scen.info.dispatchInfo}</p>
           <h3>Scene Assessment</h3>
-          <p>{this.props.scenario.info.sceneAssessment}</p>
+          <p>{scen.info.sceneAssessment}</p>
         </MDBModal>
       </>
     );
