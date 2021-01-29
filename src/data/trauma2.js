@@ -47,30 +47,30 @@ const data = {
             { id: "apply-ppe",                  type: "????", label: "Takes or verbalizes body substance isolation precautions." }
         ],
         'scene-size-up': [
-            { id: "assess-scene-safety",        type: ASSESS, label: "Determines the scene/situation is safe" },
-            { id: "assess-injury-mechanism",    type: ASSESS, label: "Determines the mechanism of injury/nature of illness" },
-            { id: "assess-num-patients",        type: ASSESS, label: "Determines the number of patients" },
-            { id: "request-addl-help",          type: ASSESS, label: "Requests additional help if necessary" },
+            { id: "assess-scene-safety",        type: ASSESS, label: "Determines the scene/situation is safe", calloutLabel: "Scene Safety"},
+            { id: "assess-injury-mechanism",    type: ASSESS, label: "Determines the mechanism of injury/nature of illness", calloutLabel: "Mechanism of Injury"},
+            { id: "assess-num-patients",        type: ASSESS, label: "Determines the number of patients", calloutLabel: "Num Patients"},
+            { id: "request-addl-help",          type: ASSESS, label: "Requests additional help if necessary", calloutLabel: "Additional Help"},
             { id: "assess-spinal-stability",    type: ASSESS, label: "Considers stabilization of spine" },
             { id: "stabilizes-spine",           type: INTERV, label: "Stabilizes or directs assistant to stabilize the cervical spine, as indicated"}
         ],
         'general-assessment': [
             { id: "verbalizes-patient-condition", type: ASSESS, label: "Verbalizes general impression of the patient" },
-            { id: "determines-loc",               type: ASSESS, label: "Determines responsiveness/level of consciousness" },
+            { id: "determines-loc",               type: ASSESS, label: "Determines responsiveness/level of consciousness", calloutLabel: "LOC"},
             { id: "determines-life-threats",      type: ASSESS, label: "Determines chief complaint/apparent life-threats" }
         ],
         'airway': [
-            { id: "assess-airway", type: ASSESS, label: "Opens & assesses airway" },
+            { id: "assess-airway", type: ASSESS, label: "Opens & assesses airway", calloutLabel: "Airway" },
             { id: "clears-aiway",  type: INTERV, label: "Inserts adjunct as indicated" }
         ],
         'breathing': [
-            { id: "assess-breathing",        type: ASSESS, label: "Assess breathing" },
+            { id: "assess-breathing",        type: ASSESS, label: "Assess breathing", calloutLabel: "Breathing" },
             { id: "assess-ventilation",      type: ASSESS, label: "Assess adequate ventilation" },
             { id: "oxygen-therapy",          type: INTERV, label: "Initiates appropriate oxygen therapy" },
             { id: "manage-breathing-injury", type: INTERV, label: "Manages & injure which may compromise breathing/ventilation" }
         ],
         'circulation': [
-            { id: "assess-pulse",     type: ASSESS, label: "Checks pulse" },
+            { id: "assess-pulse",     type: ASSESS, label: "Checks pulse", calloutLabel: "Pulse"},
             { id: "assess-skin",      type: ASSESS, label: "Assess skin [color, temperature, or condition]" },
             { id: "control-bleading", type: INTERV, label: "Assesses for & controls major bleeding if present" },
             { id: "control-shock",    type: INTERV, label: "Initiates shock management" }
@@ -83,32 +83,32 @@ const data = {
             { id: "attempt-obtain-sample", type: ASSESS, label: "Attempts to obtain SAMPLE history" }
         ],
         'head': [
-            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth, nose, & assesses facial area" },
+            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth, nose, & assesses facial area", calloutLabel: "Face" },
             { id: "assess-scape-ears",      type: ASSESS, label: "Inspects & palpates scalp & ears" },
-            { id: "assess-perrl",           type: ASSESS, label: "Assesses eyes for PERRL" }
+            { id: "assess-perrl",           type: ASSESS, label: "Assesses eyes for PERRL", calloutLabel: "PERRL" }
         ],
         'neck': [
-            { id: "assess-trachea-position", type: ASSESS, label: "Checks position of trachea" },
-            { id: "assess-jugular",          type: ASSESS, label: "Checks jugular veins" },
+            { id: "assess-trachea-position", type: ASSESS, label: "Checks position of trachea", calloutLabel: "Trachea"},
+            { id: "assess-jugular",          type: ASSESS, label: "Checks jugular veins", calloutLabel: "Jugular" },
             { id: "assess-spine",            type: ASSESS, label: "Palpates cervical spine" }
         ],
         'chest': [
-            { id: "inspect-chess",    type: ASSESS, label: "Inspects chest" },
-            { id: "palpate-chest",    type: ASSESS, label: "Palpates chest" },
-            { id: "auscultate-chest", type: ASSESS, label: "Auscultates chest" }
+            { id: "inspect-chest",    type: ASSESS, label: "Inspects chest", calloutLabel: "Inspect Chest"},
+            { id: "palpate-chest",    type: ASSESS, label: "Palpates chest", calloutLabel: "Palpate Chest" },
+            { id: "auscultate-chest", type: ASSESS, label: "Auscultates chest", calloutLabel: "Auscultates Chest" }
         ],
         'abdomen-pelvis': [
-            { id: "assess-abdomen",    type: ASSESS, label: "Inspects & palpates abdomen" },
+            { id: "assess-abdomen",    type: ASSESS, label: "Inspects & palpates abdomen", calloutLabel: "Inspect Abdomen"},
             { id: "assess-pelvis",     type: ASSESS, label: "Assesses pelvis" },
             { id: "assess-nads-taint", type: ASSESS, label: "Verbalizes assessment of genitalia/perineum as needed" }
         ],
         'lower-extremities': [
-            { id: "assess-left-leg",  type: ASSESS, label: "Left Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions" },
-            { id: "assess-right-leg", type: ASSESS, label: "Right Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions" }
+            { id: "assess-left-leg",  type: ASSESS, label: "Left Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Left Leg" },
+            { id: "assess-right-leg", type: ASSESS, label: "Right Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Right Leg" }
         ],
         'upper-extremities': [
-            { id: "assess-left-arm",  type: ASSESS, label: "Left Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions" },
-            { id: "assess-right-arm", type: ASSESS, label: "Right Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions" }
+            { id: "assess-left-arm",  type: ASSESS, label: "Left Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Left Arm" },
+            { id: "assess-right-arm", type: ASSESS, label: "Right Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Right Arm" }
         ],
         "posterior-thorax-lumbar-buttocks": [
             { id: "assess-posterior-thorax", type: ASSESS, label: "Inspects & palpates posterior thorax" },
