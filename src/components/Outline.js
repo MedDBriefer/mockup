@@ -2,13 +2,13 @@ import React from "react"
 
 import {Button} from "reactstrap"
 
-const Outline = ({switcher, steps, depth=2}) => {
+const Outline = ({switcher, steps, depth=2, first=false}) => {
 
     // console.log(heading, steps, depth);
 
     return (
         <>
-        <ul>
+        <ul className={first ? "first" : false}>
             {steps.map((step) => (
             <li key={step.id}>
 
