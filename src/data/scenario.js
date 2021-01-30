@@ -14,11 +14,12 @@ export const scenario = Object.assign({}, data, {
     "assess-num-patients": "1 patient",
     "request-addl-help": "Additional EMS is on the way.",
     "determines-loc": "Patient is unresponsive.",
-    "assess-airway": "Airway is patent",
-    "assess-breathing": "8 BPM, shallow, irregular",
-    "assess-pulse": "130; weak radial pulses",
+    //"assess-airway": "Airway is patent", // Info says airway requires management (non-patent)
+    "clears-airway": "Patient has a gag reflex in response to OPA",
+    "assess-breathing": "8 BPM, shallow, irregular", // ** point to vitals?
+    "assess-pulse": "130; weak radial pulses", // ** point to vitals?
     "assess-mouth-nose-face": "Multiple lacerations with minor bleeding",
-    "assess-perrl": "Pupils equal, round, and responsive",
+    "assess-perrl": "Pupils equal, round, and responsive", // ** point to vitals?
     "assess-trachea": "Neck unremarkable",
     "assess-jugular": "No JVD",
     "inspects-chest": "Multiple lacerations; red marks to right chest; flail segment to right upper chest",
