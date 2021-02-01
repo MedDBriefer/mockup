@@ -60,5 +60,47 @@ export const scenario = Object.assign({}, data, {
     P: "unknown",
     L: "unknown",
     E: "Riding a lawnmower on an incline and it rolled over the patient"
+  },
+  reassessmentVitals: {
+    bloodPressure: {
+      goodVitals: "96 / P",
+      badVitals: "78 / P" // No hemorrhage control AND no IV fluids
+    },
+    pulse: {
+      goodVitals: "120, weak", // Hemorrhage control AND starts IV fluids
+      badVitals: "130, weak radial pulses"
+    },
+    respirations: {
+      goodVitals: "12, LS clear and equal with crepitus on right", // Intubates and ventilates
+      badVitals: "38, shallow; LS clear and equal with crepitus on right"
+    }, 
+    skin: {
+      goodVitals: "Pale, diaphoretic", // Hemorrhage control, starts IV fluids AND intubates and ventilates
+      badVitals: "Cyanonic, diaphoretic" // No hemorrhage control OR no IV fluids OR no intubation
+    }, 
+    spo2: {
+      goodVitals: "99%, O2 ", // No intubation
+      badVitals: "No capture" // Intubates and ventilates
+    }, 
+    etco2: {
+      goodVitals: "45 mm Hg", // Intubates and ventilates
+      badVitals: "32 mm Hg" // No intubation
+    },
+    gcs: {
+      goodVitals: "8",
+      badVitals: "4" // No hemorrhage control OR no IV fluids OR no intubation
+    },
+    glucose: {
+      goodVitals: "86 mg/dl(4.8 mmol / l)",
+      badVitals: "86 mg/dl(4.8 mmol / l)"
+    },
+    pain: {
+      goodVitals: "Unable to access",
+      badVitals: "Unable to access"
+    },
+    temp: {
+      goodVitals: "96.5 F(35.8 C)",
+      badVitals: "94.8" // Does not maintain body heat (shock management)
+    }
   }
 });
