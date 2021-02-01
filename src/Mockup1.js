@@ -1,14 +1,11 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles.css";
 
-import MDBNavBar from "./components/mdb-navbar"
 import MDBContainer from "./components/MDBContainer"
-import MDBModal from "./components/MDBModal"
 import MDBDetailsPane from "./components/MDBDetailsPane"
 import Outline from "./components/Outline";
 
-class App extends React.Component {
+
+class Mockup1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -92,30 +89,11 @@ class App extends React.Component {
                   stateToggler={this.toggleCheckListItem}
                 />
 
-    return (
-      <>
-        <MDBNavBar
-          branding="Nav Pane"
-          title={scen.info.name}
-          toggler={this.toggleScenarioInfoModal}
-        />
-        <MDBContainer
-          lhs={lhs}
-          rhs={rhs}
-        />
-        <MDBModal
-          title="Scenario Info"
-          show={this.state.showScenarioInfoModal}
-          toggler={this.toggleScenarioInfoModal}
-        >
-          <h3>Dispatch Information</h3>
-          <p>{scen.info.dispatchInfo}</p>
-          <h3>Scene Assessment</h3>
-          <p>{scen.info.sceneAssessment}</p>
-        </MDBModal>
-      </>
-    );
+    return <MDBContainer
+            lhs={lhs}
+            rhs={rhs}
+            />;
   }
 }
 
-export default App;
+export default Mockup1;
