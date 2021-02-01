@@ -1,7 +1,5 @@
 const data = require("./trauma2.js");
-// console.log(steps);
 
-console.log(data);
 export const scenario = Object.assign({}, data, {
   info: {
     name: "PHTC M2CA",
@@ -73,15 +71,15 @@ export const scenario = Object.assign({}, data, {
     respirations: {
       goodVitals: "12, LS clear and equal with crepitus on right", // Intubates and ventilates
       badVitals: "38, shallow; LS clear and equal with crepitus on right"
-    }, 
+    },
     skin: {
       goodVitals: "Pale, diaphoretic", // Hemorrhage control, starts IV fluids AND intubates and ventilates
       badVitals: "Cyanonic, diaphoretic" // No hemorrhage control OR no IV fluids OR no intubation
-    }, 
+    },
     spo2: {
       goodVitals: "99%, O2 ", // No intubation
       badVitals: "No capture" // Intubates and ventilates
-    }, 
+    },
     etco2: {
       goodVitals: "45 mm Hg", // Intubates and ventilates
       badVitals: "32 mm Hg" // No intubation
