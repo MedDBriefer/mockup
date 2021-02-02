@@ -8,33 +8,25 @@ import Outline from "./components/Outline";
 class Mockup1 extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
       callouts: {},
       vitals: {},
-      showScenarioInfoModal: false,
       currentNode: null,
       checkListItems: {},
       criticalCriteria: {}
     };
     // bind event event handlers;
-    this.toggleScenarioInfoModal = this.toggleScenarioInfoModal.bind(this)
     this.setCurrentNode          = this.setCurrentNode.bind(this)
     this.toggleCheckListItem     = this.toggleCheckListItem.bind(this)
     // need to bind this as well as functional components don't have a 'this'
     this.getCheckedState         = this.getCheckedState.bind(this)
   }
 
-  toggleScenarioInfoModal(event) {
-    this.setState((state, props) => ({
-      showScenarioInfoModal: !state.showScenarioInfoModal
-    }))
-  }
-
   setCurrentNode(node) {
-    console.log(node);
-    this.setState((state, props) => ({
+    this.setState({
       currentNode: node
-    }));
+    });
   }
 
   getCheckedState(id) {
@@ -42,8 +34,6 @@ class Mockup1 extends React.Component {
   }
 
   toggleCheckListItem(node) {
-    // console.log(node)
-
     this.setState((prevState) => ({
         checkListItems: {...prevState.checkListItems, [node]: !prevState.checkListItems[node]}
     }))
@@ -51,7 +41,6 @@ class Mockup1 extends React.Component {
 
   componentDidMount() {
     let scen = this.props.scenario;
-    // console.log(scen)
     let crits = {}
     scen.criticalCriteria.forEach((cc) => {crits[cc.id] = false});
     let cli = {}
@@ -65,7 +54,6 @@ class Mockup1 extends React.Component {
       // ui-related state vars
       callouts: {},
       vitals: {},
-      showScenarioInfoModal: false,
       currentNode: null,
       // domain stuff (log to db)
       checkListItems: cli,
