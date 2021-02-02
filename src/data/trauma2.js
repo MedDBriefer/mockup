@@ -58,13 +58,13 @@ const data = {
         ],
         'airway': [
             { id: "assess-airway", type: ASSESS, label: "Opens & assesses airway", calloutLabel: "Airway" },
-            { id: "clears-aiway", type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
+            { id: "manages-aiway",  type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
         ],
         'breathing': [
-            { id: "assess-breathing", type: ASSESS, label: "Assess breathing", calloutLabel: "Breathing" },
-            { id: "assess-ventilation", type: ASSESS, label: "Assess adequate ventilation", calloutLabel: "Ventilations" },
-            { id: "oxygen-therapy", type: INTERV, label: "Initiates appropriate oxygen therapy" }, // crit criteria 620
-            { id: "manage-breathing-injury", type: INTERV, label: "Manages & injure which may compromise breathing/ventilation" } // crit criteria 630
+            { id: "assess-breathing",        type: ASSESS, label: "Assess breathing", calloutLabel: "Breathing" },
+            { id: "assess-ventilation",      type: ASSESS, label: "Assess adequate ventilation", calloutLabel: "Ventilations"},
+            { id: "oxygen-therapy",          type: INTERV, label: "Initiates appropriate oxygen therapy" }, // crit criteria 620
+            { id: "manage-breathing-injury", type: INTERV, label: "Manages any injury which may compromise breathing/ventilation" } // crit criteria 630
         ],
         'circulation': [
             { id: "assess-pulse", type: ASSESS, label: "Checks pulse", calloutLabel: "Pulse" },
@@ -143,70 +143,70 @@ const data = {
         // Each object title matches checklist item id for easier mapping
         // TODO: may have to assign type to individual steps to account for medical scenarios (or for a mix or radios/checks)
         "stabilizes-spine": {
-            id: "intervention-10",
+            id: "c-spine-interventions",
             type: CHECK,
             steps: [
-                { id: "spine-10", label: "Holds manual stabilization" },
-                { id: "spine-20", label: "Applies cervical collar" }
+                { id: "c-spine-intervention-10", label: "Holds manual stabilization" },
+                { id: "c-spine-intervention-20", label: "Applies cervical collar" }
             ],
             criticalCriteria: []
         },
         "assess-ventilation": {
-            id: "intervention-20",
+            id: "ventilation-interventions",
             type: RADIO,
             steps: [
-                { id: "ventilation-10", label: "Endotracheal intubation" },
-                { id: "ventilation-20", label: "Bag-valve mask" },
+                { id: "ventilation-intervention-10", label: "Endotracheal intubation" },
+                { id: "ventilation-intervention-20", label: "Bag-valve mask" },
             ],
             criticalCriteria: []
         },
         "control-bleeding": {
-            id: "intervnetion-30",
+            id: "bleeding-interventions",
             type: RADIO,
             steps: [
-                { id: "bleeding-10", label: "Applies direct pressure" },
-                { id: "bleeding-20", label: "Applies tourniquet" }
+                { id: "bleeding-intervention-10", label: "Applies direct pressure" },
+                { id: "bleeding-intervention-20", label: "Applies tourniquet" }
             ],
             criticalCriteria: [ // Critical criteria should automatically be check boxes
-                { id: "bleeding-30", type: CRIT_FAIL, label: "Did not control hemorrhage using correct procedures in a timely manner" },
-                { id: "bleeding-40", type: CRIT_FAIL, label: "Did not apply direct pressure to wound before applying tourniquet" },
-                { id: "bleeding-50", type: CRIT_FAIL, label: "Did not properly position the patient" },
-                { id: "bleeding-60", type: CRIT_FAIL, label: "Did not take steps to prevent heat loss" }
+                { id: "bleeding-crit-30", type: CRIT_FAIL, label: "Did not control hemorrhage using correct procedures in a timely manner" },
+                { id: "bleeding-crit-40", type: CRIT_FAIL, label: "Did not apply direct pressure to wound before applying tourniquet" },
+                { id: "bleeding-crit-50", type: CRIT_FAIL, label: "Did not properly position the patient" },
+                { id: "bleeding-crit-60", type: CRIT_FAIL, label: "Did not take steps to prevent heat loss" }
             ]
         },
         "control-shock": {
-            id: "intervention-40",
+            id: "shock-interventions",
             type: RADIO,
             steps: [
-                { id: "shock-10", label: "IV fluid therapy--Peripheral IV insertion" },
-                { id: "shock-20", label: "IV fluid therapy--IV Push/Bolus" },
-                { id: "shock-30", label: "Covers patient" }
+                { id: "shock-intervention-10", label: "IV fluid therapy--Peripheral IV insertion" },
+                { id: "shock-intervention-20", label: "IV fluid therapy--IV Push/Bolus" },
+                { id: "shock-intervention-30", label: "Covers patient" }
             ],
             criticalCriteria: [
-                { id: "shock-40", type: CRIT_FAIL, label: "Fails to establish a patent and properly adjusted IV within 6-minute time limit" },
-                { id: "shock-50", type: CRIT_FAIL, label: "Fails to establish IV within 3 attempts during 6-minute time limit" },
-                { id: "shock-60", type: CRIT_FAIL, label: "Contaminates equipment or site without appropriately correcting situation" },
-                { id: "shock-70", type: CRIT_FAIL, label: "Performs any improper technique resulting in the potential for uncontrolled hemorrhage, catheter shear, or air embolism" },
-                { id: "shock-80", type: CRIT_FAIL, label: "Fails to dispose/verbalize disposal of blood-contaminated sharps immediately in proper container at point of use" }
+                { id: "shock-crit-10", type: CRIT_FAIL, label: "Fails to establish a patent and properly adjusted IV within 6-minute time limit" },
+                { id: "shock-crit-20", type: CRIT_FAIL, label: "Fails to establish IV within 3 attempts during 6-minute time limit" },
+                { id: "shock-crit-30", type: CRIT_FAIL, label: "Contaminates equipment or site without appropriately correcting situation" },
+                { id: "shock-crit-40", type: CRIT_FAIL, label: "Performs any improper technique resulting in the potential for uncontrolled hemorrhage, catheter shear, or air embolism" },
+                { id: "shock-crit-50", type: CRIT_FAIL, label: "Fails to dispose/verbalize disposal of blood-contaminated sharps immediately in proper container at point of use" }
             ]
         },
         "transport-decision": {
-            id: "intervention-10",
+            id: "transport-interventions",
             type: RADIO,
             steps: [
-                { id: "transport-10", label: "Scoop Stretcher" },
-                { id: "transport-20", label: "Supine Long Backboard" },
+                { id: "transport-intervention-10", label: "Scoop Stretcher" },
+                { id: "transport-intervention-20", label: "Supine Long Backboard" },
             ],
             criticalCriteria: [
-                { id: "transport-30", type: CRIT_FAIL, label: "Did not immediately direct or take manual immobilization of head" },
-                { id: "transport-40", type: CRIT_FAIL, label: "Did not properly apply appropriately sized cervical collar before ordering releaseof manual immobilization" },
-                { id: "transport-50", type: CRIT_FAIL, label: "Released or ordered relase of manual immobilization before it was maintained mechanically" },
-                { id: "transport-60", type: CRIT_FAIL, label: "Manipulated or moved patient excessively causing potential spinal compromise" },
-                { id: "transport-70", type: CRIT_FAIL, label: "Head immobilized to the device before device sufficiently secured to torso" },
-                { id: "transport-80", type: CRIT_FAIL, label: "Patient moves excessively up, down, left, or right on the device" },
-                { id: "transport-90", type: CRIT_FAIL, label: "Head immobilization allows for excessive movement" },
-                { id: "transport-100", type: CRIT_FAIL, label: "Upon completion of immobilization, head is not in a neutral, in-line position" },
-                { id: "transport-110", type: CRIT_FAIL, label: "Did not reassess motor, sensory, and circulatory functions in each extremity after immobilizing patient to the device" }
+                { id: "transport-crit-10", type: CRIT_FAIL, label: "Did not immediately direct or take manual immobilization of head" },
+                { id: "transport-crit-20", type: CRIT_FAIL, label: "Did not properly apply appropriately sized cervical collar before ordering releaseof manual immobilization" },
+                { id: "transport-crit-30", type: CRIT_FAIL, label: "Released or ordered relase of manual immobilization before it was maintained mechanically" },
+                { id: "transport-crit-40", type: CRIT_FAIL, label: "Manipulated or moved patient excessively causing potential spinal compromise" },
+                { id: "transport-crit-50", type: CRIT_FAIL, label: "Head immobilized to the device before device sufficiently secured to torso" },
+                { id: "transport-crit-60", type: CRIT_FAIL, label: "Patient moves excessively up, down, left, or right on the device" },
+                { id: "transport-crit-70", type: CRIT_FAIL, label: "Head immobilization allows for excessive movement" },
+                { id: "transport-crit-80", type: CRIT_FAIL, label: "Upon completion of immobilization, head is not in a neutral, in-line position" },
+                { id: "transport-crit-90", type: CRIT_FAIL, label: "Did not reassess motor, sensory, and circulatory functions in each extremity after immobilizing patient to the device" }
             ]
         }
     }

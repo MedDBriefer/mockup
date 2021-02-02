@@ -1,4 +1,7 @@
 const data = require("./trauma2.js");
+const AND = "and";
+const OR = "or";
+// console.log(steps);
 
 export const scenario = Object.assign({}, data, {
   info: {
@@ -61,44 +64,84 @@ export const scenario = Object.assign({}, data, {
   },
   reassessmentVitals: {
     bloodPressure: {
-      goodVitals: "96 / P",
-      badVitals: "78 / P" // No hemorrhage control AND no IV fluids
+      "good-if": {
+        "type": AND,
+        "ids": ["bleeding-interventions", "shock-interventions"] // hemorrhage control, IV
+      },
+      "goodVitals": "96 / P",
+      "badVitals": "78 / P"
     },
     pulse: {
-      goodVitals: "120, weak", // Hemorrhage control AND starts IV fluids
-      badVitals: "130, weak radial pulses"
+      "good-if": {
+        "type": AND,
+        "ids": ["bleeding-interventions", "shock-interventions"] // hemorrhage control, IV
+      },
+      "goodVitals": "120, weak",
+      "badVitals": "130, weak radial pulses"
     },
     respirations: {
-      goodVitals: "12, LS clear and equal with crepitus on right", // Intubates and ventilates
-      badVitals: "38, shallow; LS clear and equal with crepitus on right"
+      "good-if": {
+        "type": AND,
+        "ids": ["ventilation-intervention-10", "manage-breathing-injury"] // intubation, ventilation
+      },
+      "goodVitals": "12, LS clear and equal with crepitus on right",
+      "badVitals": "38, shallow; LS clear and equal with crepitus on right"
     },
     skin: {
-      goodVitals: "Pale, diaphoretic", // Hemorrhage control, starts IV fluids AND intubates and ventilates
-      badVitals: "Cyanonic, diaphoretic" // No hemorrhage control OR no IV fluids OR no intubation
+      "good-if": {
+        "type": AND,
+        "ids": ["bleeding-interventions", "shock-interventions", "ventilation-intervention-10", "manage-breathing-injury"] // Hemorrhage control, IV, intubates, ventilates
+      },
+      "goodVitals": "Pale, diaphoretic",
+      "badVitals": "Cyanonic, diaphoretic"
     },
     spo2: {
-      goodVitals: "99%, O2 ", // No intubation
-      badVitals: "No capture" // Intubates and ventilates
+      "good-if": {
+        "type": AND,
+        "ids": ["ventilation-intervention-10", "manage-breathing-injury"] // intubation, ventilation
+      },
+      "goodVitals": "99%, O2 ",
+      "badVitals": "No capture"
     },
     etco2: {
-      goodVitals: "45 mm Hg", // Intubates and ventilates
-      badVitals: "32 mm Hg" // No intubation
+      "good-if": {
+        "type": AND,
+        "ids": ["ventilation-intervention-10", "manage-breathing-injury"] // intubation, ventilation
+      },
+      goodVitals: "45 mm Hg",
+      badVitals: "32 mm Hg"
     },
     gcs: {
-      goodVitals: "8",
-      badVitals: "4" // No hemorrhage control OR no IV fluids OR no intubation
+      "good-if": {
+        "type": AND,
+        "ids": ["bleeding-interventions", "shock-interventions", "ventilation-intervention-10" ] // hemorrhage control, IV, intubation
+      },
+      "goodVitals": "8",
+      "badVitals": "4"
     },
     glucose: {
-      goodVitals: "86 mg/dl(4.8 mmol / l)",
-      badVitals: "86 mg/dl(4.8 mmol / l)"
+      "good-if": {
+        "type": OR,
+        "ids": [] // always the same
+      },
+      "goodVitals": "86 mg/dl(4.8 mmol / l)",
+      "badVitals": "86 mg/dl(4.8 mmol / l)"
     },
     pain: {
-      goodVitals: "Unable to access",
-      badVitals: "Unable to access"
+      "good-if": {
+        "type": OR,
+        "ids": [] // always the same
+      },
+      "goodVitals": "Unable to access",
+      "badVitals": "Unable to access"
     },
     temp: {
-      goodVitals: "96.5 F(35.8 C)",
-      badVitals: "94.8" // Does not maintain body heat (shock management)
+      "good-if": {
+        "type": OR,
+        "ids": ["shock-intervention-30"] // covers patient
+      },
+      "goodVitals": "96.5 F(35.8 C)",
+      "badVitals": "94.8"
     }
   }
 });
