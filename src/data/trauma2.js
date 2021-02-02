@@ -144,7 +144,7 @@ const data = {
         // Each object title matches checklist item id for easier mapping
         // TODO: may have to assign type to individual steps to account for medical scenarios (or for a mix or radios/checks)
         "stabilizes-spine": {
-            id: "intervention-10",
+            id: "c-spine-intervention",
             type: CHECK,
             steps: [
                 { id: "spine-10", label: "Holds manual stabilization" },
@@ -153,7 +153,7 @@ const data = {
             criticalCriteria: []
         },
         "assess-ventilation": {
-            id: "intervention-20",
+            id: "ventilation-intervention",
             type: RADIO,
             steps: [
                 { id: "ventilation-10", label: "Endotracheal intubation" },
@@ -162,7 +162,7 @@ const data = {
             criticalCriteria: []
         },
         "control-bleeding": {
-            id: "intervnetion-30",
+            id: "bleeding-intervention",
             type: RADIO,
             steps: [
                 { id: "bleeding-10", label: "Applies direct pressure" },
@@ -176,7 +176,7 @@ const data = {
             ]
         },
         "control-shock": {
-            id: "intervention-40",
+            id: "shock-intervention",
             type: RADIO,
             steps: [
                 { id: "shock-10", label: "IV fluid therapy--Peripheral IV insertion" },
@@ -192,7 +192,7 @@ const data = {
             ]
         },
         "transport-decision": {
-            id: "intervention-10",
+            id: "transport-intervention",
             type: RADIO,
             steps: [
                 { id: "transport-10", label: "Scoop Stretcher" },
