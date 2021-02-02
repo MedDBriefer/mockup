@@ -68,6 +68,8 @@ class Mockup2 extends React.Component {
     return <MDBContainer
               lhs={lhs}
               rhs={rhs}
+              lhsWidth={7}
+              rhsWidth={5}
             />;
     }
 }
