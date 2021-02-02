@@ -2,142 +2,141 @@ const ASSESS = "assessment";
 const INTERV = "intervention";
 const CHECK = "check-box";
 const RADIO = "radio-button";
-// const CRIT_FAIL = "critical-criteria";
-
+const CRIT_FAIL = "critical-criteria";
+const HEADING = "heading";
 
 const data = {
     outline: [
-        { id: "bsi", label: "BSI" },
-        { id: "scene-size-up", label: "Scene Size-Up" },
+        { id: "bsi", type: HEADING, label: "BSI" },
+        { id: "scene-size-up", type: HEADING, label: "Scene Size-Up" },
         {
             id: "initial-assessment-resuscitation",
+            type: HEADING,
             label: "Primary Assessment/Resuscitation",
             children: [
-                { id: 'general-assessment', label: 'General Assessment' },
-                { id: "airway", label: "Airway" },
-                { id: "breathing", label: "Breathing" },
-                { id: "circulation", label: "Circulation" },
-                { id: "transport-decision", label: "Transport Decision" }
+                { id: 'general-assessment', type: HEADING, label: 'General Assessment' },
+                { id: "airway", type: HEADING, label: "Airway" },
+                { id: "breathing", type: HEADING, label: "Breathing" },
+                { id: "circulation", type: HEADING, label: "Circulation" },
+                { id: "transport-decision", type: HEADING, label: "Transport Decision" }
             ]
         },
-        { id: "history-taking", label: "History Taking" },
+        { id: "history-taking", type: HEADING, label: "History Taking" },
         {
             id: "detailed-physical-examination",
+            type: HEADING,
             label: "Secondary Assessment",
             children: [
-                { id: "head", label: "Head" },
-                { id: "neck", label: "Neck" },
-                { id: "chest", label: "Chest" },
-                { id: "abdomen-pelvis", label: "Abdomen/pelvis" },
-                { id: "lower-extremities", label: "Lower extremities" },
-                { id: "upper-extremities", label: "Upper extremities" },
-                { id: "posterior-thorax-lumbar-buttocks", label: "Posterior thorax, lumbar, & buttocks" },
-                {
-                    id: "550",
-                    label: "Manages secondary injuries & wounds appropriately",
-                },
-                {
-                    id: "560",
-                    label: "Performs ongoing assessment",
-                }
+                { id: "head", type: HEADING, label: "Head" },
+                { id: "neck", type: HEADING, label: "Neck" },
+                { id: "chest", type: HEADING, label: "Chest" },
+                { id: "abdomen-pelvis", type: HEADING, label: "Abdomen/pelvis" },
+                { id: "lower-extremities", type: HEADING, label: "Lower extremities" },
+                { id: "upper-extremities", type: HEADING, label: "Upper extremities" },
+                { id: "posterior-thorax-lumbar-buttocks", type: HEADING, label: "Posterior thorax, lumbar, & buttocks" },
+                { id: "misc", type: HEADING, label: "Misc."}
             ]
         },
 
     ],
     items: {
         'bsi': [
-            { id: "apply-ppe",                  type: "????", label: "Takes or verbalizes body substance isolation precautions." } // crit criteria 590
+            { id: "apply-ppe", type: ASSESS, label: "Takes or verbalizes body substance isolation precautions." } // crit criteria 590
         ],
         'scene-size-up': [
-            { id: "assess-scene-safety",        type: ASSESS, label: "Determines the scene/situation is safe", calloutLabel: "Scene Safety"},
-            { id: "assess-injury-mechanism",    type: ASSESS, label: "Determines the mechanism of injury/nature of illness", calloutLabel: "Mechanism of Injury"},
-            { id: "assess-num-patients",        type: ASSESS, label: "Determines the number of patients", calloutLabel: "Num Patients"},
-            { id: "request-addl-help",          type: ASSESS, label: "Requests additional help if necessary", calloutLabel: "Additional Help"},
-            { id: "assess-spinal-stability",    type: ASSESS, label: "Considers stabilization of spine" }, // crit criteria 610
-            { id: "stabilizes-spine",           type: INTERV, label: "Stabilizes or directs assistant to stabilize the cervical spine, as indicated" } // crit criteria 610
+            { id: "assess-scene-safety", type: ASSESS, label: "Determines the scene/situation is safe", calloutLabel: "Scene Safety" },
+            { id: "assess-injury-mechanism", type: ASSESS, label: "Determines the mechanism of injury/nature of illness", calloutLabel: "Mechanism of Injury" },
+            { id: "assess-num-patients", type: ASSESS, label: "Determines the number of patients", calloutLabel: "Num Patients" },
+            { id: "request-addl-help", type: ASSESS, label: "Requests additional help if necessary", calloutLabel: "Additional Help" },
+            { id: "assess-spinal-stability", type: ASSESS, label: "Considers stabilization of spine" }, // crit criteria 610
+            { id: "stabilizes-spine", type: INTERV, label: "Stabilizes or directs assistant to stabilize the cervical spine, as indicated" } // crit criteria 610
         ],
         'general-assessment': [
             { id: "verbalizes-patient-condition", type: ASSESS, label: "Verbalizes general impression of the patient", calloutLabel: "Condition" },
-            { id: "determines-loc",               type: ASSESS, label: "Determines responsiveness/level of consciousness", calloutLabel: "LOC"},
-            { id: "determines-life-threats",      type: ASSESS, label: "Determines chief complaint/apparent life-threats", calloutLabel: "Life Threats" }
+            { id: "determines-loc", type: ASSESS, label: "Determines responsiveness/level of consciousness", calloutLabel: "LOC" },
+            { id: "determines-life-threats", type: ASSESS, label: "Determines chief complaint/apparent life-threats", calloutLabel: "Life Threats" }
         ],
         'airway': [
             { id: "assess-airway", type: ASSESS, label: "Opens & assesses airway", calloutLabel: "Airway" },
-            { id: "clears-aiway",  type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
+            { id: "clears-aiway", type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
         ],
         'breathing': [
-            { id: "assess-breathing",        type: ASSESS, label: "Assess breathing", calloutLabel: "Breathing" },
-            { id: "assess-ventilation",      type: ASSESS, label: "Assess adequate ventilation", calloutLabel: "Ventilations"},
-            { id: "oxygen-therapy",          type: INTERV, label: "Initiates appropriate oxygen therapy" }, // crit criteria 620
+            { id: "assess-breathing", type: ASSESS, label: "Assess breathing", calloutLabel: "Breathing" },
+            { id: "assess-ventilation", type: ASSESS, label: "Assess adequate ventilation", calloutLabel: "Ventilations" },
+            { id: "oxygen-therapy", type: INTERV, label: "Initiates appropriate oxygen therapy" }, // crit criteria 620
             { id: "manage-breathing-injury", type: INTERV, label: "Manages & injure which may compromise breathing/ventilation" } // crit criteria 630
         ],
         'circulation': [
-            { id: "assess-pulse",     type: ASSESS, label: "Checks pulse", calloutLabel: "Pulse"},
-            { id: "assess-skin",      type: ASSESS, label: "Assess skin [color, temperature, or condition]", calloutLabel: "Skin" },
+            { id: "assess-pulse", type: ASSESS, label: "Checks pulse", calloutLabel: "Pulse" },
+            { id: "assess-skin", type: ASSESS, label: "Assess skin [color, temperature, or condition]", calloutLabel: "Skin" },
             { id: "control-bleeding", type: INTERV, label: "Assesses for & controls major bleeding if present", calloutLabel: "Bleeding" },
-            { id: "control-shock",    type: INTERV, label: "Initiates shock management" } // crit criteria 640
+            { id: "control-shock", type: INTERV, label: "Initiates shock management" } // crit criteria 640
         ],
-        'transport-decision': [ 
-            { id: "260",              type: ASSESS, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
+        'transport-decision': [
+            { id: "260", type: ASSESS, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
         ],
         'history-taking': [
-            { id: "obtains-vitals",        type: ASSESS, label: "Obtains, or directs assistant to obtain, baseline vital signs" }, // point to vitals
+            { id: "obtains-vitals", type: ASSESS, label: "Obtains, or directs assistant to obtain, baseline vital signs" }, // point to vitals
             { id: "attempt-obtain-sample", type: ASSESS, label: "Attempts to obtain SAMPLE history" } // point to SAMPLE
         ],
         'head': [
             { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth, nose, & assesses facial area", calloutLabel: "Face" },
-            { id: "assess-scape-ears",      type: ASSESS, label: "Inspects & palpates scalp & ears", calloutLabel: "Ears" },
-            { id: "assess-perrl",           type: ASSESS, label: "Assesses eyes for PERRL", calloutLabel: "PERRL" }
+            { id: "assess-scape-ears", type: ASSESS, label: "Inspects & palpates scalp & ears", calloutLabel: "Ears" },
+            { id: "assess-perrl", type: ASSESS, label: "Assesses eyes for PERRL", calloutLabel: "PERRL" }
         ],
         'neck': [
-            { id: "assess-trachea-position", type: ASSESS, label: "Checks position of trachea", calloutLabel: "Trachea"},
-            { id: "assess-jugular",          type: ASSESS, label: "Checks jugular veins", calloutLabel: "Jugular" },
-            { id: "assess-spine",            type: ASSESS, label: "Palpates cervical spine", calloutLabel: "Assess C-Spine" }
+            { id: "assess-trachea-position", type: ASSESS, label: "Checks position of trachea", calloutLabel: "Trachea" },
+            { id: "assess-jugular", type: ASSESS, label: "Checks jugular veins", calloutLabel: "Jugular" },
+            { id: "assess-spine", type: ASSESS, label: "Palpates cervical spine", calloutLabel: "Assess C-Spine" }
         ],
         'chest': [
-            { id: "inspect-chest",    type: ASSESS, label: "Inspects chest", calloutLabel: "Inspect Chest"},
-            { id: "palpate-chest",    type: ASSESS, label: "Palpates chest", calloutLabel: "Palpate Chest" },
+            { id: "inspect-chest", type: ASSESS, label: "Inspects chest", calloutLabel: "Inspect Chest" },
+            { id: "palpate-chest", type: ASSESS, label: "Palpates chest", calloutLabel: "Palpate Chest" },
             { id: "auscultate-chest", type: ASSESS, label: "Auscultates chest", calloutLabel: "Auscultates Chest" }
         ],
         'abdomen-pelvis': [
-            { id: "assess-abdomen",    type: ASSESS, label: "Inspects & palpates abdomen", calloutLabel: "Inspect Abdomen"},
-            { id: "assess-pelvis",     type: ASSESS, label: "Assesses pelvis", calloutLabel: "Assess Pelvis" },
+            { id: "assess-abdomen", type: ASSESS, label: "Inspects & palpates abdomen", calloutLabel: "Inspect Abdomen" },
+            { id: "assess-pelvis", type: ASSESS, label: "Assesses pelvis", calloutLabel: "Assess Pelvis" },
             { id: "assess-nads-taint", type: ASSESS, label: "Verbalizes assessment of genitalia/perineum as needed", calloutLabel: "Assess Genitalia" }
         ],
         'lower-extremities': [
-            { id: "assess-left-leg",  type: ASSESS, label: "Left Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Left Leg" },
+            { id: "assess-left-leg", type: ASSESS, label: "Left Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Left Leg" },
             { id: "assess-right-leg", type: ASSESS, label: "Right Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Right Leg" }
         ],
         'upper-extremities': [
-            { id: "assess-left-arm",  type: ASSESS, label: "Left Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Left Arm" },
+            { id: "assess-left-arm", type: ASSESS, label: "Left Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Left Arm" },
             { id: "assess-right-arm", type: ASSESS, label: "Right Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Right Arm" }
         ],
         "posterior-thorax-lumbar-buttocks": [
             { id: "assess-posterior-thorax", type: ASSESS, label: "Inspects & palpates posterior thorax", calloutLabel: "Assess posterior" },
-            { id: "assess-lumbar-buttocks",  type: ASSESS, label: "Inspects & palpates lumbar & buttocks area", calloutLabel: "Assess buttocks" }
+            { id: "assess-lumbar-buttocks", type: ASSESS, label: "Inspects & palpates lumbar & buttocks area", calloutLabel: "Assess buttocks" }
+        ],
+        "misc": [
+            { id: "550", type: ASSESS, label: "Manages secondary injuries & wounds appropriately" },
+            { id: "560", type: ASSESS, label: "Performs ongoing assessment" }
         ]
     },
     criticalCriteria: [
-        { id: "580", label: "Failure to initiate or call for transport of the patient within 10 minutes of time limit" },
+        { id: "580", type: CRIT_FAIL, label: "Failure to initiate or call for transport of the patient within 10 minutes of time limit" },
 
         // true if 'apply-ppe' not checked?
-        { id: "590", label: "Failure to take or verbalize body substance isolation precautions" },
+        { id: "590", type: CRIT_FAIL, label: "Failure to take or verbalize body substance isolation precautions" },
         // true if 'assess-scene-safety' not checked?
-        { id: "600", label: "Failure to determine scene safety" },
+        { id: "600", type: CRIT_FAIL, label: "Failure to determine scene safety" },
         // true if 'stabilize-spine' not checked AND indicated?
-        { id: "610", label: "Failure to assess for and provide spinal protection when indicated" },
+        { id: "610", type: CRIT_FAIL, label: "Failure to assess for and provide spinal protection when indicated" },
 
-        { id: "620", label: "Failure to voice & ultimately provide high concentration of oxygen" },
+        { id: "620", type: CRIT_FAIL, label: "Failure to voice & ultimately provide high concentration of oxygen" },
         // true if ANY of the ventiliation
-        { id: "630", label: "Failure to assess/provide adequate ventilation" },
-        { id: "640", label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
+        { id: "630", type: CRIT_FAIL, label: "Failure to assess/provide adequate ventilation" },
+        { id: "640", type: CRIT_FAIL, label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
 
-        { id: "650", label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
+        { id: "650", type: CRIT_FAIL, label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
 
-        { id: "660", label: "Does other detailed/focused history or physical exam before assessing/treating threats to airway, breathing, & circulation" },
-        { id: "670", label: "Exhibits unacceptable affect with patient or other personnel" },
-        { id: "680", label: "Failure to manage the patient as a competent EMT-P" },
-        { id: "690", label: "Uses or orders a dangerous or inappropriate intervention" }
+        { id: "660", type: CRIT_FAIL, label: "Does other detailed/focused history or physical exam before assessing/treating threats to airway, breathing, & circulation" },
+        { id: "670", type: CRIT_FAIL, label: "Exhibits unacceptable affect with patient or other personnel" },
+        { id: "680", type: CRIT_FAIL, label: "Failure to manage the patient as a competent EMT-P" },
+        { id: "690", type: CRIT_FAIL, label: "Uses or orders a dangerous or inappropriate intervention" }
     ],
     interventionForms: {
         // Each selected intervention should, by default, also include an 'other / incorrect intervention' option
@@ -169,10 +168,10 @@ const data = {
                 { id: "bleeding-20", label: "Applies tourniquet" }
             ],
             criticalCriteria: [ // Critical criteria should automatically be check boxes
-                { id: "bleeding-30", label: "Did not control hemorrhage using correct procedures in a timely manner" },
-                { id: "bleeding-40", label: "Did not apply direct pressure to wound before applying tourniquet" },
-                { id: "bleeding-50", label: "Did not properly position the patient" },
-                { id: "bleeding-60", label: "Did not take steps to prevent heat loss" }
+                { id: "bleeding-30", type: CRIT_FAIL, label: "Did not control hemorrhage using correct procedures in a timely manner" },
+                { id: "bleeding-40", type: CRIT_FAIL, label: "Did not apply direct pressure to wound before applying tourniquet" },
+                { id: "bleeding-50", type: CRIT_FAIL, label: "Did not properly position the patient" },
+                { id: "bleeding-60", type: CRIT_FAIL, label: "Did not take steps to prevent heat loss" }
             ]
         },
         "control-shock": {
@@ -184,11 +183,11 @@ const data = {
                 { id: "shock-30", label: "Covers patient" }
             ],
             criticalCriteria: [
-                { id: "shock-40", label: "Fails to establish a patent and properly adjusted IV within 6-minute time limit" },
-                { id: "shock-50", label: "Fails to establish IV within 3 attempts during 6-minute time limit" },
-                { id: "shock-60", label: "Contaminates equipment or site without appropriately correcting situation" },
-                { id: "shock-70", label: "Performs any improper technique resulting in the potential for uncontrolled hemorrhage, catheter shear, or air embolism" },
-                { id: "shock-80", label: "Fails to dispose/verbalize disposal of blood-contaminated sharps immediately in proper container at point of use" }
+                { id: "shock-40", type: CRIT_FAIL, label: "Fails to establish a patent and properly adjusted IV within 6-minute time limit" },
+                { id: "shock-50", type: CRIT_FAIL, label: "Fails to establish IV within 3 attempts during 6-minute time limit" },
+                { id: "shock-60", type: CRIT_FAIL, label: "Contaminates equipment or site without appropriately correcting situation" },
+                { id: "shock-70", type: CRIT_FAIL, label: "Performs any improper technique resulting in the potential for uncontrolled hemorrhage, catheter shear, or air embolism" },
+                { id: "shock-80", type: CRIT_FAIL, label: "Fails to dispose/verbalize disposal of blood-contaminated sharps immediately in proper container at point of use" }
             ]
         },
         "transport-decision": {
@@ -199,15 +198,15 @@ const data = {
                 { id: "transport-20", label: "Supine Long Backboard" },
             ],
             criticalCriteria: [
-                { id: "transport-30", label: "Did not immediately direct or take manual immobilization of head" },
-                { id: "transport-40", label: "Did not properly apply appropriately sized cervical collar before ordering releaseof manual immobilization" },
-                { id: "transport-50", label: "Released or ordered relase of manual immobilization before it was maintained mechanically" },
-                { id: "transport-60", label: "Manipulated or moved patient excessively causing potential spinal compromise" },
-                { id: "transport-70", label: "Head immobilized to the device before device sufficiently secured to torso" },
-                { id: "transport-80", label: "Patient moves excessively up, down, left, or right on the device" },
-                { id: "transport-90", label: "Head immobilization allows for excessive movement" },
-                { id: "transport-100", label: "Upon completion of immobilization, head is not in a neutral, in-line position" },
-                { id: "transport-110", label: "Did not reassess motor, sensory, and circulatory functions in each extremity after immobilizing patient to the device" }
+                { id: "transport-30", type: CRIT_FAIL, label: "Did not immediately direct or take manual immobilization of head" },
+                { id: "transport-40", type: CRIT_FAIL, label: "Did not properly apply appropriately sized cervical collar before ordering releaseof manual immobilization" },
+                { id: "transport-50", type: CRIT_FAIL, label: "Released or ordered relase of manual immobilization before it was maintained mechanically" },
+                { id: "transport-60", type: CRIT_FAIL, label: "Manipulated or moved patient excessively causing potential spinal compromise" },
+                { id: "transport-70", type: CRIT_FAIL, label: "Head immobilized to the device before device sufficiently secured to torso" },
+                { id: "transport-80", type: CRIT_FAIL, label: "Patient moves excessively up, down, left, or right on the device" },
+                { id: "transport-90", type: CRIT_FAIL, label: "Head immobilization allows for excessive movement" },
+                { id: "transport-100", type: CRIT_FAIL, label: "Upon completion of immobilization, head is not in a neutral, in-line position" },
+                { id: "transport-110", type: CRIT_FAIL, label: "Did not reassess motor, sensory, and circulatory functions in each extremity after immobilizing patient to the device" }
             ]
         }
     }
