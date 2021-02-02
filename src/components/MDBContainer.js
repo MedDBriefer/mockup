@@ -4,16 +4,16 @@ import {Container, Row, Col} from 'reactstrap'
 // import CheckList from "./CheckList"
 // import InfoPane from "./InfoPane";
 
-const MDBContainer = (props) => {
+const MDBContainer = ({lhs, rhs, lhsWidth=6, rhsWidth=6}) => {
 
     return (
         <Container fluid={true} className="main">
             <Row>
-                <Col>
-                    {props.lhs}
+                <Col md={lhsWidth} className="col">
+                    {lhs}
                 </Col>
-                <Col>
-                    {props.rhs}
+                <Col md={rhsWidth} className="col">
+                    {rhs}
                 </Col>
             </Row>
         </Container>
