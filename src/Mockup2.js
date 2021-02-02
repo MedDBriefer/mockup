@@ -3,7 +3,7 @@ import React from "react";
 import MDBContainer from "./components/MDBContainer"
 
 import CheckList from "./components/CheckList";
-
+import Accordian from "./components/Accordian"
 
 class Mockup2 extends React.Component {
 
@@ -56,12 +56,22 @@ class Mockup2 extends React.Component {
   render() {
     const scen = this.props.scenario;
 
-    const lhs = <CheckList
+    // const lhs = <CheckList
+    //               stateGetter={this.getCheckedState}
+    //               stateToggler={this.toggleCheckListItem}
+    //               key="first"
+    //               heading="Checklist"
+    //               steps={scen.steps}
+    //               first={true}
+    //             />
+    const lhs = <Accordian
                   stateGetter={this.getCheckedState}
                   stateToggler={this.toggleCheckListItem}
                   key="first"
                   heading="Checklist"
-                  steps={scen.steps} />
+                  steps={scen.steps}
+                  first={true}
+                />
     // const lhs = (<div>placeholder</div>)
     const rhs = (<div>placeholder</div>)
 
