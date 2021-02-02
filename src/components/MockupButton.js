@@ -1,7 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
+// , { useState }
 
 import { Button } from "reactstrap"
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 // This component wraps a bootstrap Button with a Link.  We're using NavLink
 // rather than Link, as it has an isActive() method.  I'm using the defalt
@@ -10,23 +11,23 @@ import { NavLink } from "react-router-dom"
 // is active
 const MockupButton = ({ to, label }) => {
 
-    const [isCurrent, toggleCurrent] = useState(false);
+    // the following seems to the be cause of a rendering compoment
+    // with the function of another component error, so I'm disabling
 
-    const setCurrent = (match, location) => {
-        toggleCurrent(!match ? false : true);
-        // console.log(to, isCurrent)
-        return isCurrent;
-    }
+    // const [isCurrent,  setIsCurrent] = useState(false);
 
+    // const toggleCurrent = (match, location) => {
+    //     setIsCurrent(!match ? false : true);
+    //     return isCurrent;
+    // }
+    // { isCurrent ? "success" : "primary" }
+    // isActive = { toggleCurrent }
     return (
-        <NavLink
-            to={to}
-            isActive={setCurrent}
-        >
-            <Button color={isCurrent ? "success" : "primary"}>
+        <Link to={to}>
+            <Button color="primary">
                 {label}
             </Button>
-        </NavLink>
+        </Link>
     )
 }
 
