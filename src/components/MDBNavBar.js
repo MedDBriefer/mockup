@@ -13,8 +13,6 @@ import {
 import MockupButton from "./MockupButton"
 
 
-
-
 const MDBNavBar = ({branding, title, toggler}) => {
     return (
         <Navbar color="dark" dark>

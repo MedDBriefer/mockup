@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 
-import MDBNavBar from "./components/mdb-navbar"
+import MDBNavBar from "./components/MDBNavBar"
 import MDBModal from "./components/MDBModal"
 
 import Mockup1 from "./Mockup1"
