@@ -2,13 +2,11 @@ import React from "react"
 
 import {Button} from "reactstrap"
 
-const Outline = ({switcher, steps, depth=2, first=false}) => {
+const Outline = ({switcher, steps, depth=3, first=false}) => {
 
-    // console.log(heading, steps, depth);
 
     return (
-        <>
-        <ul className={first ? "first" : false}>
+        <ul className={first ? "first" : ""}>
             {steps.map((step) => (
             <li key={step.id}>
 
@@ -21,7 +19,7 @@ const Outline = ({switcher, steps, depth=2, first=false}) => {
                 </Button>
 
                 {
-                    step.children &&
+                    step.children && step.children.length > 0 && step.children[0].type === 'heading' &&
                     <Outline
                         switcher={switcher}
                         steps={step.children}
@@ -32,7 +30,6 @@ const Outline = ({switcher, steps, depth=2, first=false}) => {
             ))}
 
         </ul>
-        </>
     )
 }
 
