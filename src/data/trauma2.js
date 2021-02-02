@@ -63,7 +63,7 @@ const data = {
         ],
         'airway': [
             { id: "assess-airway", type: ASSESS, label: "Opens & assesses airway", calloutLabel: "Airway" },
-            { id: "clears-aiway",  type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
+            { id: "manages-aiway",  type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
         ],
         'breathing': [
             { id: "assess-breathing",        type: ASSESS, label: "Assess breathing", calloutLabel: "Breathing" },
