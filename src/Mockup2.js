@@ -27,8 +27,6 @@ class Mockup2 extends React.Component {
   }
 
   toggleCheckListItem(node) {
-    // console.log(node)
-
     this.setState((prevState) => ({
       checkListItems: { ...prevState.checkListItems, [node]: !prevState.checkListItems[node] }
     }))
@@ -36,7 +34,6 @@ class Mockup2 extends React.Component {
 
   componentDidMount() {
     let scen = this.props.scenario;
-    // console.log(scen)
     let crits = {}
     scen.criticalCriteria.forEach((cc) => { crits[cc.id] = false });
     let cli = {}
@@ -72,7 +69,6 @@ class Mockup2 extends React.Component {
               lhs={lhs}
               rhs={rhs}
             />;
-
     }
 }
 
