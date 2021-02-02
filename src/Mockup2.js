@@ -12,36 +12,18 @@ class Mockup2 extends React.Component {
    this.state = {
      callouts: {},
      vitals: {},
-     showScenarioInfoModal: false,
-     currentNode: null,
      checkListItems: {},
      criticalCriteria: {}
    };
     // bind event event handlers;
-    this.toggleScenarioInfoModal = this.toggleScenarioInfoModal.bind(this)
-    this.setCurrentNode = this.setCurrentNode.bind(this)
     this.toggleCheckListItem = this.toggleCheckListItem.bind(this)
     // state accessor needs to be bound also as 'this' isn't defined in
     // function components
     this.getCheckedState = this.getCheckedState.bind(this)
   }
 
-
-  toggleScenarioInfoModal(event) {
-    this.setState((state, props) => ({
-      showScenarioInfoModal: !state.showScenarioInfoModal
-    }))
-  }
-
-  setCurrentNode(node) {
-    console.log(node);
-    this.setState((state, props) => ({
-      currentNode: node
-    }));
-  }
-
   getCheckedState(id) {
-    return this.state.checkListItems[id]
+    return (id in this.state.checkListItems) ? this.state.checkListItems[id] : false
   }
 
   toggleCheckListItem(node) {
@@ -68,8 +50,6 @@ class Mockup2 extends React.Component {
       // ui-related state vars
       callouts: {},
       vitals: {},
-      showScenarioInfoModal: false,
-      currentNode: null,
       // domain stuff (log to db)
       checkListItems: cli,
       criticalCriteria: crits
