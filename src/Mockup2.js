@@ -4,6 +4,7 @@ import MDBContainer from "./components/MDBContainer"
 
 import CheckList from "./components/CheckList";
 import Accordian from "./components/Accordian"
+import RaterInfo from "./components/RaterInfo"
 
 class Mockup2 extends React.Component {
 
@@ -73,7 +74,8 @@ class Mockup2 extends React.Component {
                   first={true}
                 />
     // const lhs = (<div>placeholder</div>)
-    const rhs = (<div>placeholder</div>)
+    const rhs = <RaterInfo scenario={scen} />
+    // const rhs = (<div>placeholder</div>)
 
     return <MDBContainer
               lhs={lhs}
