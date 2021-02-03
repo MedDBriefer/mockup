@@ -30,14 +30,14 @@ const App = (props) => {
                 toggler={toggleShowInfo}
             />
             <Switch>
-                <Route exact path="/">
-                    <h3>Click on one of the mockups listed above</h3>
-                </Route>
                 <Route path="/mockup1">
                     <Mockup1 scenario={scen} />
                 </Route>
                 <Route path="/mockup2">
                     <Mockup2 scenario={scen} />
+                </Route>
+                <Route path="*">
+                    <h3>Click on one of the mockups listed above</h3>
                 </Route>
             </Switch>
 
