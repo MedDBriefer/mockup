@@ -2,7 +2,7 @@ import React from "react";
 
 import MDBContainer from "./components/MDBContainer"
 
-import CheckList from "./components/CheckList";
+// import CheckList from "./components/CheckList";
 import Accordian from "./components/Accordian"
 import RaterInfo from "./components/RaterInfo"
 
