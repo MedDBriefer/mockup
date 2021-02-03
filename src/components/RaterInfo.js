@@ -15,7 +15,9 @@ import classnames from "classnames"
 
 import ScenarioInfo from "./ScenarioInfo"
 
- export default function RaterInfo({scenario, dispCallouts=true}) {
+import RevealTable from "./RevealTable"
+
+export default function RaterInfo({scenario, dispCallouts=true}) {
 
     const [activeTab, setActiveTab] = useState('scenInfo')
     const toggle = (tab) => {
@@ -63,13 +65,16 @@ import ScenarioInfo from "./ScenarioInfo"
                     <ScenarioInfo scenario={scenario} />
                 </TabPane>
                 <TabPane tabId="callouts">
-                    placeholder for callouts
+                    <RevealTable
+                        heading="Callouts"
+                        rows={[{label: 'Foo', value: "Foo Value"}, {label: "Bar", value: "Bar Value"}]}
+                    />
                 </TabPane>
                 <TabPane tabId="initVitals">
-                    placeholder for init vitals
+                    <RevealTable heading="Initial Vitals" />
                 </TabPane>
                 <TabPane tabId="reassessVitals">
-                    placeholder for reassessment vitals
+                    <RevealTable heading="Reassessment Vitals" />
                 </TabPane>
             </TabContent>
         </>
