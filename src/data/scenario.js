@@ -143,5 +143,50 @@ export const scenario = Object.assign({}, data, {
       "goodVitals": "96.5 F(35.8 C)",
       "badVitals": "94.8"
     }
+  },
+  interventions: {
+    "apply-ppe": "na",
+    "assess-scene-safety": "na",
+    "assess-injury-mechanism": "na",
+    "assess-num-patients": "na",
+    "request-addl-help": "na",
+    "assess-spinal-stability": "na",
+    "stabilizes-spine": "do", // "c-spine-interventions"
+    "verbalizes-patient-condition": "na",
+    "determines-loc": "na",
+    "determines-life-threats": "na",
+    "assess-airway": "na", 
+    "manages-aiway": "do", // "airway-interventions"
+    "assess-breathing": "na", 
+    "assess-ventilation": "na",
+    "oxygen-therapy": "do", // na?? - no intervention list for it but should be done
+    "manage-breathing-injury": "do", // ventilation-interventions
+    "assess-pulse": "na",
+    "assess-skin": "na",
+    "control-bleeding": "do", // "bleeding-interventions"
+    "control-shock": "say", // "shock-interventions"
+    "transport-priority": "do", // "transport-interventions"
+    "obtains-vitals": "na",
+    "attempt-obtain-sample": "na",
+    "assess-mouth-nose-face": "na",
+    "assess-scape-ears": "na",
+    "assess-perrl": "na",
+    "assess-trachea-position": "na",
+    "assess-jugular": "na",
+    "assess-spine": "na",
+    "inspect-chest": "na",
+    "palpate-chest": "na",
+    "auscultate-chest": "na",
+    "assess-abdomen": "na",
+    "assess-pelvis": "na",
+    "assess-nads-taint": "na",
+    "assess-left-leg": "na",
+    "assess-right-leg": "na",
+    "assess-left-arm": "na",
+    "assess-right-arm": "na",
+    "assess-posterior-thorax": "na",
+    "assess-lumbar-buttocks": "na",
+    "550": "na", // na in this scenario but may be a do in others
+    "560": "na"
   }
 });
