@@ -73,7 +73,7 @@ const data = {
             { id: "control-shock", type: INTERV, label: "Initiates shock management" } // crit criteria 640
         ],
         'transport-decision': [
-            { id: "260", type: ASSESS, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
+            { id: "transport-priority", type: ASSESS, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
         ],
         'history-taking': [
             { id: "obtains-vitals", type: ASSESS, label: "Obtains, or directs assistant to obtain, baseline vital signs" }, // point to vitals
@@ -117,21 +117,21 @@ const data = {
         ]
     },
     criticalCriteria: [
-        { id: "580", type: CRIT_FAIL, label: "Failure to initiate or call for transport of the patient within 10 minutes of time limit" },
+        { id: "580", type: CRIT_FAIL, parent: "transport-priority", label: "Failure to initiate or call for transport of the patient within 10 minutes of time limit" },
 
         // true if 'apply-ppe' not checked?
-        { id: "590", type: CRIT_FAIL, label: "Failure to take or verbalize body substance isolation precautions" },
+        { id: "590", type: CRIT_FAIL, parent: "apply-ppe", label: "Failure to take or verbalize body substance isolation precautions" },
         // true if 'assess-scene-safety' not checked?
-        { id: "600", type: CRIT_FAIL, label: "Failure to determine scene safety" },
+        { id: "600", type: CRIT_FAIL, parent: "assess-scene-safety", label: "Failure to determine scene safety" },
         // true if 'stabilize-spine' not checked AND indicated?
-        { id: "610", type: CRIT_FAIL, label: "Failure to assess for and provide spinal protection when indicated" },
+        { id: "610", type: CRIT_FAIL, parent: "stabilizes-spine", label: "Failure to assess for and provide spinal protection when indicated" },
 
-        { id: "620", type: CRIT_FAIL, label: "Failure to voice & ultimately provide high concentration of oxygen" },
+        { id: "620", type: CRIT_FAIL, parent: "oxygen-therapy", label: "Failure to voice & ultimately provide high concentration of oxygen" },
         // true if ANY of the ventiliation
-        { id: "630", type: CRIT_FAIL, label: "Failure to assess/provide adequate ventilation" },
-        { id: "640", type: CRIT_FAIL, label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
-
-        { id: "650", type: CRIT_FAIL, label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
+        { id: "630", type: CRIT_FAIL, parent: "assess-ventilation", label: "Failure to assess/provide adequate ventilation" },
+        { id: "640", type: CRIT_FAIL, parent: "Primary Assessment/Resuscitation", label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
+        // combine below with 580?
+        { id: "650", type: CRIT_FAIL, parent: "transport-priority", label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
 
         { id: "660", type: CRIT_FAIL, label: "Does other detailed/focused history or physical exam before assessing/treating threats to airway, breathing, & circulation" },
         { id: "670", type: CRIT_FAIL, label: "Exhibits unacceptable affect with patient or other personnel" },
