@@ -151,6 +151,15 @@ const data = {
             ],
             criticalCriteria: []
         },
+        "manages-aiway": {
+            id: "airway-interventions",
+            type: RADIO,
+            steps: [
+                { id: "airway-intervention-10", label: "Inserts OPA" },
+                { id: "airway-intervention-20", label: "Inserts NPA" },
+            ],
+            criticalCriteria: []
+        },
         "assess-ventilation": {
             id: "ventilation-interventions",
             type: RADIO,
