@@ -17,19 +17,19 @@ class Mockup2 extends React.Component {
      criticalCriteria: {}
    };
     // bind event event handlers;
-    this.toggleCheckListItem = this.toggleCheckListItem.bind(this)
+    this.toggleChecked = this.toggleChecked.bind(this)
     // state accessor needs to be bound also as 'this' isn't defined in
     // function components
-    this.getCheckedState = this.getCheckedState.bind(this)
+    this.isChecked = this.isChecked.bind(this)
   }
 
-  getCheckedState(id) {
+  isChecked(id) {
     return (id in this.state.checkListItems) ? this.state.checkListItems[id] : false
   }
 
-  toggleCheckListItem(node) {
+  toggleChecked(id) {
     this.setState((prevState) => ({
-      checkListItems: { ...prevState.checkListItems, [node]: !prevState.checkListItems[node] }
+      checkListItems: { ...prevState.checkListItems, [id]: !prevState.checkListItems[id] }
     }))
   }
 
@@ -58,16 +58,16 @@ class Mockup2 extends React.Component {
     const scen = this.props.scenario;
 
     // const lhs = <CheckList
-    //               stateGetter={this.getCheckedState}
-    //               stateToggler={this.toggleCheckListItem}
+    //               isChecked = { this.isChecked }
+    //               toggleChecked = { this.toggleChecked }
     //               key="first"
     //               heading="Checklist"
     //               steps={scen.steps}
     //               first={true}
     //             />
     const lhs = <Accordian
-                  stateGetter={this.getCheckedState}
-                  stateToggler={this.toggleCheckListItem}
+                  isChecked={this.isChecked}
+                  toggleChecked={this.toggleChecked}
                   key="first"
                   heading="Checklist"
                   steps={scen.steps}

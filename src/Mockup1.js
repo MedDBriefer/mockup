@@ -18,9 +18,9 @@ class Mockup1 extends React.Component {
     };
     // bind event event handlers;
     this.setCurrentNode          = this.setCurrentNode.bind(this)
-    this.toggleCheckListItem     = this.toggleCheckListItem.bind(this)
+    this.toggleChecked     = this.toggleChecked.bind(this)
     // need to bind this as well as functional components don't have a 'this'
-    this.getCheckedState         = this.getCheckedState.bind(this)
+    this.isChecked         = this.isChecked.bind(this)
   }
 
   setCurrentNode(node) {
@@ -29,13 +29,13 @@ class Mockup1 extends React.Component {
     });
   }
 
-  getCheckedState(id) {
+  isChecked(id) {
     return this.state.checkListItems[id]
   }
 
-  toggleCheckListItem(node) {
+  toggleChecked(id) {
     this.setState((prevState) => ({
-        checkListItems: {...prevState.checkListItems, [node]: !prevState.checkListItems[node]}
+        checkListItems: {...prevState.checkListItems, [id]: !prevState.checkListItems[id]}
     }))
   }
 
@@ -73,8 +73,8 @@ class Mockup1 extends React.Component {
     const currentNode = scen.items[this.state.currentNode] || [];
     const rhs = <MDBDetailsPane
                   children={currentNode}
-                  stateGetter={this.getCheckedState}
-                  stateToggler={this.toggleCheckListItem}
+                  isChecked={this.isChecked}
+                  toggleChecked={this.toggleChecked}
                 />
 
     return <MDBContainer
