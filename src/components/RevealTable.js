@@ -8,13 +8,12 @@ import {
     Table
 } from "reactstrap"
 
+// eslint-disable-next-line no-unused-vars
 import classnames from "classnames"
 
 import RevealTableRow from "./RevealTableRow"
 
 export default function RevealTable({heading, rows=[]}) {
-
-    // const foo=<span className={classnames("h3 primary text-centered")}></span>
 
     return (
         <Card color={"dark"} inverse={true}>
