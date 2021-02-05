@@ -13,29 +13,31 @@ import classnames from "classnames";
 import CheckBox from "./CheckBox";
 
 
-const CheckList = ({ stateGetter, stateToggler, heading, steps, depth=3, first=false }) => {
+export default function CheckList({ isChecked, toggleChecked, heading, steps, depth=3, first=false, showCallouts=true}){
   const [collapsed, setCollapsed] = useState(false);
   const toggle = () => setCollapsed(!collapsed);
 
   return (
-    <ul className={classnames(first ? "first" : "")}>
+    <ul className={classnames({first:  first})}>
       {steps.map((step) => (
         <li key={`li-${step.id}`}>
           {!step.children.length > 0
            ?
            <CheckBox
             step={step}
-            stateGetter={stateGetter}
-            stateToggler={stateToggler}
+            isChecked={isChecked}
+            toggleChecked={toggleChecked}
+            showCallouts={showCallouts}
             />
           :
             <>
             <p className={`h${depth}`} onClick={() => toggle()}>{step.label}</p>
             <CheckList
-              stateGetter={stateGetter}
-              stateToggler={stateToggler}
+              isChecked={isChecked}
+              toggleChecked={toggleChecked}
               steps={step.children}
               depth={depth+1}
+              showCallouts={showCallouts}
             />
             </>
           }
@@ -84,6 +86,4 @@ const CheckList = ({ stateGetter, stateToggler, heading, steps, depth=3, first=f
   //     </ListGroup>
   //   </>
   // );
-};
-
-export default CheckList;
+}

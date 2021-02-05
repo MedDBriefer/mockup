@@ -2,7 +2,7 @@ import React from 'react'
 
 import DetailsItem from "./DetailsItem"
 
-const MDBDetailsPane = ({children, stateGetter, stateToggler}) => {
+const MDBDetailsPane = ({children, isChecked, toggleChecked, showCallouts=true}) => {
 
     return (
     <ul>
@@ -10,8 +10,10 @@ const MDBDetailsPane = ({children, stateGetter, stateToggler}) => {
             <li key={child.id}>
                 <DetailsItem
                     item={child}
-                    stateGetter={stateGetter}
-                    stateToggler={stateToggler} />
+                    isChecked={isChecked}
+                    toggleChecked={toggleChecked}
+                    showCallouts={showCallouts}
+                />
             </li>
 
         )}

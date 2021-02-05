@@ -10,7 +10,7 @@ import {
 
 import  CheckList  from "./CheckList"
 
-const Accordian = ({stateGetter, stateToggler, steps}) => {
+const Accordian = ({isChecked, toggleChecked, steps, showCallouts}) => {
 
     const childrenAreHeadings = (step) => {
         return step.children && step.children[0].type === 'heading'
@@ -24,8 +24,18 @@ const Accordian = ({stateGetter, stateToggler, steps}) => {
                 </CardHeader>
                 <CardBody>
                     { childrenAreHeadings(step)
-                      ?  <Accordian stateGetter={stateGetter} stateToggler={stateToggler} steps={step.children} />
-                      :  <CheckList stateGetter={stateGetter} stateToggler={stateToggler} steps={step.children} />
+                      ?  <Accordian
+                            isChecked={isChecked}
+                            toggleChecked={toggleChecked}
+                            steps={step.children}
+                            showCallouts={showCallouts}
+                        />
+                      :  <CheckList
+                            isChecked={isChecked}
+                            toggleChecked={toggleChecked}
+                            steps={step.children}
+                            showCallouts={showCallouts}
+                        />
                     }
                 </CardBody>
             </Card>

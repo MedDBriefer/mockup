@@ -17,7 +17,7 @@ import ScenarioInfo from "./ScenarioInfo"
 
 import RevealTable from "./RevealTable"
 
-export default function RaterInfo({scenario, dispCallouts=true}) {
+export default function RaterInfo({scenario, showCallouts=true}) {
 
     const [activeTab, setActiveTab] = useState('scenInfo')
     const toggle = (tab) => {
@@ -35,6 +35,7 @@ export default function RaterInfo({scenario, dispCallouts=true}) {
                         Scenario Info
                     </NavLink>
                 </NavItem>
+                {showCallouts &&
                 <NavItem>
                     <NavLink
                         className={classnames({ active: activeTab === 'callouts' })}
@@ -43,6 +44,7 @@ export default function RaterInfo({scenario, dispCallouts=true}) {
                         Callouts
                     </NavLink>
                 </NavItem>
+                }
                 <NavItem>
                     <NavLink
                         className={classnames({ active: activeTab === 'initVitals' })}
