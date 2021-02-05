@@ -64,6 +64,7 @@ class Mockup2 extends React.Component {
     //               heading="Checklist"
     //               steps={scen.steps}
     //               first={true}
+    //               showCallouts={false}
     //             />
     const lhs = <Accordian
                   isChecked={this.isChecked}
@@ -72,10 +73,9 @@ class Mockup2 extends React.Component {
                   heading="Checklist"
                   steps={scen.steps}
                   first={true}
+                  showCallouts={false}
                 />
-    // const lhs = (<div>placeholder</div>)
-    const rhs = <RaterInfo scenario={scen} />
-    // const rhs = (<div>placeholder</div>)
+    const rhs = <RaterInfo scenario={scen} showCallouts={true}/>
 
     return <MDBContainer
               lhs={lhs}
