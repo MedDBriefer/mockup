@@ -1,11 +1,12 @@
 // eslint-disable-next-line
 function annotateItems(items, callouts) {
-  for (const [id, text] of Object.entries(callouts)) {
-    // console.log(id, text)
+
+  for (const { stepId, calloutLabel, calloutText } of callouts) {
+    // console.log(stepId, calloutLabel, calloutText)
     for (const key of Object.keys(items)) {
       let children = items[key].map((item) =>
-        item.id === id
-        ?  {...item, callout: text}
+        item.id === stepId
+        ?  {...item, calloutLabel: calloutLabel, callout: calloutText}
         : item
       )
       items[key] = children
@@ -42,7 +43,7 @@ function annotateStepsTree(steps, items) {
 }
 
 export const scenarioBuilder = (scen) => {
-  let { info, callouts, outline, items, criticalCriteria} = scen;
+  let { info, callouts, outline, items, criticalCriteria, initialVitalSigns, SAMPLE, reassessmentVitals} = scen;
   // console.log(info)
   // console.log(callouts)
   // console.log(outline)
@@ -52,7 +53,10 @@ export const scenarioBuilder = (scen) => {
     callouts,
     steps: annotateStepsTree(outline, items),
     items,
-    criticalCriteria
+    criticalCriteria,
+    initialVitalSigns,
+    SAMPLE,
+    reassessmentVitals
   };
   return newScen;
 };
