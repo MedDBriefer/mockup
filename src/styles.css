@@ -78,3 +78,7 @@ ul.first {
 .card-body {
   padding-top: 5px;
 }
+
+.hidden {
+  display: none;
+}
