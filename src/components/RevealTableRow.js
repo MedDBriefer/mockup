@@ -2,7 +2,10 @@ import React,
 {useState}
 from "react"
 
-import { Button } from "reactstrap"
+// import { Button } from "reactstrap"
+// <Button onClick={() => toggle()}>
+//     {label}
+// </Button>
 
 import classnames from "classnames"
 
@@ -12,13 +15,11 @@ export default function RevealTableRow({label, value}) {
 
     return (
         <tr>
-            <th>
-                <Button onClick={() => toggle()}>
-                    {label}
-                </Button>
+            <th onClick={() => toggle()}>
+                {label}
             </th>
             <td>
-                <p className={classnames({invisible: !show})}>
+                <p className={classnames({hidden: !show})}>
                     {value}
                 </p>
             </td>
