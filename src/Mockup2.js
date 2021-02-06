@@ -75,7 +75,10 @@ class Mockup2 extends React.Component {
                   first={true}
                   showCallouts={false}
                 />
-    const rhs = <RaterInfo scenario={scen} showCallouts={true}/>
+    const rhs = <RaterInfo
+                  scenario={scen}
+                  showCallouts={true}
+                />
 
     return <MDBContainer
               lhs={lhs}
