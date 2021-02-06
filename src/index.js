@@ -12,7 +12,7 @@ import App from "./App"
 // *weaves* them together.  this would be done beforehand by some scenario editing
 // too, but it's instantaneous, so I'm just doing it here for now
 let builtScen = scenarioBuilder(scenario);
-console.log(builtScen)
+// console.log(builtScen)
 // reactstrap is using some deprecated stuff, which is causing React.StrictMode
 // to output warnings which make the console difficult to read. Disabling for now
 // <React.StrictMode>
