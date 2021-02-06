@@ -16,12 +16,12 @@ import RevealTableRow from "./RevealTableRow"
 export default function RevealTable({heading, rows=[]}) {
 
     return (
-        <Card color={"dark"} inverse={true}>
+        <Card>
             <CardHeader>
                 <CardTitle className="h3 text-center">{heading}</CardTitle>
             </CardHeader>
             <CardBody>
-                <Table striped={true} dark={true}>
+                <Table striped={true}>
                     <thead>
                         <tr>
                             <th>Type</th>
