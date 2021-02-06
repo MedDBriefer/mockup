@@ -32,7 +32,7 @@ const MDBNavBar = ({branding, title, toggler}) => {
                 <NavbarText tag="h3">{title}</NavbarText>
             }
             <Button color="success" onClick={toggler}>
-                Info
+                Scenario Info
             </Button>
         </Navbar>
     )
