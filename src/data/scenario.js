@@ -3,44 +3,67 @@ const AND = "and";
 const OR = "or";
 // console.log(steps);
 
-export const scenario = Object.assign({}, data, {
+const calloutText = {
+  "assess-scene-safety": "scene is safe",
+  "assess-injury-mechanism": "Patient experienced a rollover with a riding lawn mower",
+  "assess-num-patients": "1 patient",
+  "request-addl-help": "Additional EMS is on the way.",
+  "verbalizes-patient-condition": "You arrive at a suburban yard where you observe a large riding lawn mower on its side at the bottom of an 8-ft (2.5-m) hill. A bystander is holding a towel to the patient’s right lower leg. As you approach the patient, the bystander tells you that he saw the mower tip over while the patient was driving it.",
+  "determines-loc": "Opens eyes to pain and becomes progressively more unresponsive",
+  "determines-life-threats": "Multiple lacerations to face, scalp, right arm, amputation at the right ankle",
+  "assess-airway": "Airway is patent",
+  "assess-breathing": "8 BPM", // point to vitals?
+  "assess-ventilation": "shallow, irregular",
+  "assess-pulse": "130; weak radial pulses", // point to vitals?
+  "assess-skin": "Cyanonic, diaphoretic",
+  "assess-bleeding": "Major external hemorrhage at lower right leg",
+  "assess-mouth-nose-face": "Multiple lacerations with minor bleeding",
+  "assess-scape-ears": "Unremarkable",
+  "assess-perrl": "Pupils equal, round, and responsive", // point to vitals?
+  "assess-trachea": "Neck unremarkable",
+  "assess-jugular": "No JVD",
+  "assess-spine": "Unremarkable / No step-off",
+  "inspects-chest": "Multiple lacerations; red marks to right chest",
+  "palpate-chest": "Flail segment to right upper chest",
+  "auscultate-chest": "Crepitus on right",
+  "assess-abdomen": "Soft, nontender",
+  "assess-pelvis": "Stable",
+  "assess-genitalia": "Unremarkable",
+  "assess-left-leg": "Multiple lacerations",
+  "assess-right-leg": "Amputation of right leg at the ankle",
+  "assess-left-arm": "Multiple lacerations",
+  "assess-right-arm": "Multiple lacerations",
+  "assess-posterior-thorax": "Unremarkable",
+  "assess-lumbar-buttocks": "Unremarkable"
+}
+
+// let traumacallouts = [...data.callouts]
+// console.log(callouts)
+// process.exit(0)
+const newCallouts = Object.entries(calloutText).map(([key, value]) => {
+  // const [key, value] = pair;
+  // console.log(key, "=>", value);
+  let found = data.callouts.find((co) => co.stepId === key);
+  if (found) {
+    found.calloutText = value;
+  } else {
+    console.log(`ERROR: CALLOUT ID NOT FOUND: ${key}`);
+    process.exit(1);
+    // found = {[key]: "NOT FOUND"}
+  }
+  return found;
+}).filter(item => !!item);
+
+// console.log(newCallouts);
+data.callouts = newCallouts;
+// console.log(data.callouts)
+// process.exit(0)
+
+const scenario = Object.assign({}, data, {
   info: {
     name: "PHTC M2CA",
     dispatchInfo: "You and your partners work for a transporting EMS agency and have been dispatched to a residential housing development for a lawn mower accident. It is 1330 hr on a Saturday afternoon and the temperature is 90°F (32°C). You are 5 minutes away from a level III trauma center and 25 minutes from a level I trauma center.",
     sceneAssessment: "You arrive at a suburban yard where you observe a large riding lawn mower on its side at the bottom of an 8-ft (2.5-m) hill. A bystander is holding a towel to the patient’s right lower leg. As you approach the patient, the bystander tells you that he saw the mower tip over while the patient was driving it.",
-  },
-  callouts: {
-    "assess-scene-safety": "scene is safe",
-    "assess-injury-mechanism": "Patient experienced a rollover with a riding lawn mower",
-    "assess-num-patients": "1 patient",
-    "request-addl-help": "Additional EMS is on the way.",
-    "verbalizes-patient-condition": "You arrive at a suburban yard where you observe a large riding lawn mower on its side at the bottom of an 8-ft (2.5-m) hill. A bystander is holding a towel to the patient’s right lower leg. As you approach the patient, the bystander tells you that he saw the mower tip over while the patient was driving it.",
-    "determines-loc": "Opens eyes to pain and becomes progressively more unresponsive",
-    "determines-life-threats": "Multiple lacerations to face, scalp, right arm, amputation at the right ankle",
-    "assess-airway": "Airway is patent",
-    "assess-breathing": "8 BPM", // point to vitals?
-    "assess-ventilation": "shallow, irregular",
-    "assess-pulse": "130; weak radial pulses", // point to vitals?
-    "assess-skin": "Cyanonic, diaphoretic",
-    "control-bleeding": "Major external hemorrhage at lower right leg",
-    "assess-mouth-nose-face": "Multiple lacerations with minor bleeding",
-    "assess-scape-ears": "Unremarkable",
-    "assess-perrl": "Pupils equal, round, and responsive", // point to vitals?
-    "assess-trachea": "Neck unremarkable",
-    "assess-jugular": "No JVD",
-    "assess-spine": "Unremarkable / No step-off",
-    "inspects-chest": "Multiple lacerations; red marks to right chest",
-    "palpate-chest": "Flail segment to right upper chest",
-    "auscultate-chest": "Crepitus on right",
-    "assess-abdomen": "Soft, nontender",
-    "assess-pelvis": "Stable",
-    "assess-nads-taint": "Unremarkable",
-    "assess-left-leg": "Multiple lacerations",
-    "assess-right-leg": "Amputation of right leg at the ankle",
-    "assess-left-arm": "Multiple lacerations",
-    "assess-right-arm": "Multiple lacerations",
-    "assess-posterior-thorax": "Unremarkable",
-    "assess-lumbar-buttocks": "Unremarkable"
   },
   initialVitalSigns: {
     BP: "96 / palpation",
@@ -63,7 +86,7 @@ export const scenario = Object.assign({}, data, {
     E: "Riding a lawnmower on an incline and it rolled over the patient"
   },
   reassessmentVitals: {
-    bloodPressure: {
+    BP: {
       "good-if": {
         "type": AND,
         "ids": ["bleeding-interventions", "shock-interventions"] // hemorrhage control, IV
@@ -71,7 +94,7 @@ export const scenario = Object.assign({}, data, {
       "goodVitals": "96 / P",
       "badVitals": "78 / P"
     },
-    pulse: {
+    P: {
       "good-if": {
         "type": AND,
         "ids": ["bleeding-interventions", "shock-interventions"] // hemorrhage control, IV
@@ -79,7 +102,7 @@ export const scenario = Object.assign({}, data, {
       "goodVitals": "120, weak",
       "badVitals": "130, weak radial pulses"
     },
-    respirations: {
+    R: {
       "good-if": {
         "type": AND,
         "ids": ["ventilation-intervention-10", "manage-breathing-injury"] // intubation, ventilation
@@ -87,7 +110,7 @@ export const scenario = Object.assign({}, data, {
       "goodVitals": "12, LS clear and equal with crepitus on right",
       "badVitals": "38, shallow; LS clear and equal with crepitus on right"
     },
-    skin: {
+    Skin: {
       "good-if": {
         "type": AND,
         "ids": ["bleeding-interventions", "shock-interventions", "ventilation-intervention-10", "manage-breathing-injury"] // Hemorrhage control, IV, intubates, ventilates
@@ -95,7 +118,7 @@ export const scenario = Object.assign({}, data, {
       "goodVitals": "Pale, diaphoretic",
       "badVitals": "Cyanonic, diaphoretic"
     },
-    spo2: {
+    Spo2: {
       "good-if": {
         "type": AND,
         "ids": ["ventilation-intervention-10", "manage-breathing-injury"] // intubation, ventilation
@@ -103,7 +126,7 @@ export const scenario = Object.assign({}, data, {
       "goodVitals": "99%, O2 ",
       "badVitals": "No capture"
     },
-    etco2: {
+    ETCO2: {
       "good-if": {
         "type": AND,
         "ids": ["ventilation-intervention-10", "manage-breathing-injury"] // intubation, ventilation
@@ -111,7 +134,7 @@ export const scenario = Object.assign({}, data, {
       goodVitals: "45 mm Hg",
       badVitals: "32 mm Hg"
     },
-    gcs: {
+    GCS: {
       "good-if": {
         "type": AND,
         "ids": ["bleeding-interventions", "shock-interventions", "ventilation-intervention-10" ] // hemorrhage control, IV, intubation
@@ -119,7 +142,7 @@ export const scenario = Object.assign({}, data, {
       "goodVitals": "8",
       "badVitals": "4"
     },
-    glucose: {
+    Glucose: {
       "good-if": {
         "type": OR,
         "ids": [] // always the same
@@ -127,7 +150,7 @@ export const scenario = Object.assign({}, data, {
       "goodVitals": "86 mg/dl(4.8 mmol / l)",
       "badVitals": "86 mg/dl(4.8 mmol / l)"
     },
-    pain: {
+    Pain: {
       "good-if": {
         "type": OR,
         "ids": [] // always the same
@@ -135,7 +158,7 @@ export const scenario = Object.assign({}, data, {
       "goodVitals": "Unable to access",
       "badVitals": "Unable to access"
     },
-    temp: {
+    Temp: {
       "good-if": {
         "type": OR,
         "ids": ["shock-intervention-30"] // covers patient
@@ -154,3 +177,7 @@ export const scenario = Object.assign({}, data, {
     "transport-priority": "do", // "transport-interventions"
   }
 });
+
+
+
+module.exports = {scenario};
