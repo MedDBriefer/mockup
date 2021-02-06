@@ -44,33 +44,34 @@ const data = {
             { id: "apply-ppe", type: ASSESS, label: "Takes or verbalizes body substance isolation precautions." } // crit criteria 590
         ],
         'scene-size-up': [
-            { id: "assess-scene-safety", type: ASSESS, label: "Determines the scene/situation is safe", calloutLabel: "Scene Safety" },
-            { id: "assess-injury-mechanism", type: ASSESS, label: "Determines the mechanism of injury/nature of illness", calloutLabel: "Mechanism of Injury" },
-            { id: "assess-num-patients", type: ASSESS, label: "Determines the number of patients", calloutLabel: "Num Patients" },
-            { id: "request-addl-help", type: ASSESS, label: "Requests additional help if necessary", calloutLabel: "Additional Help" },
+            { id: "assess-scene-safety",     type: ASSESS, label: "Determines the scene/situation is safe" },
+            { id: "assess-injury-mechanism", type: ASSESS, label: "Determines the mechanism of injury/nature of illness" },
+            { id: "assess-num-patients",     type: ASSESS, label: "Determines the number of patients" },
+            { id: "request-addl-help",       type: ASSESS, label: "Requests additional help if necessary" },
             { id: "assess-spinal-stability", type: ASSESS, label: "Considers stabilization of spine" }, // crit criteria 610
-            { id: "stabilizes-spine", type: INTERV, label: "Stabilizes or directs assistant to stabilize the cervical spine, as indicated" } // crit criteria 610
+            { id: "stabilizes-spine",        type: INTERV, label: "Stabilizes or directs assistant to stabilize the cervical spine, as indicated" } // crit criteria 610
         ],
         'general-assessment': [
-            { id: "verbalizes-patient-condition", type: ASSESS, label: "Verbalizes general impression of the patient", calloutLabel: "Condition" },
-            { id: "determines-loc", type: ASSESS, label: "Determines responsiveness/level of consciousness", calloutLabel: "LOC" },
-            { id: "determines-life-threats", type: ASSESS, label: "Determines chief complaint/apparent life-threats", calloutLabel: "Life Threats" }
+            { id: "verbalizes-patient-condition", type: ASSESS, label: "Verbalizes general impression of the patient" },
+            { id: "determines-loc",               type: ASSESS, label: "Determines responsiveness/level of consciousness" },
+            { id: "determines-life-threats",      type: ASSESS, label: "Determines chief complaint/apparent life-threats" }
         ],
         'airway': [
-            { id: "assess-airway", type: ASSESS, label: "Opens & assesses airway", calloutLabel: "Airway" },
+            { id: "assess-airway",   type: ASSESS, label: "Opens & assesses airway" },
             { id: "manages-airway",  type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
         ],
         'breathing': [
-            { id: "assess-breathing",        type: ASSESS, label: "Assess breathing", calloutLabel: "Breathing" },
-            { id: "assess-ventilation",      type: ASSESS, label: "Assess adequate ventilation", calloutLabel: "Ventilations"},
+            { id: "assess-breathing",        type: ASSESS, label: "Assess breathing" },
+            { id: "assess-ventilation",      type: ASSESS, label: "Assess adequate ventilation" },
             { id: "oxygen-therapy",          type: INTERV, label: "Initiates appropriate oxygen therapy" }, // crit criteria 620
             { id: "manage-breathing-injury", type: INTERV, label: "Manages any injury which may compromise breathing/ventilation" } // crit criteria 630
         ],
         'circulation': [
-            { id: "assess-pulse", type: ASSESS, label: "Checks pulse", calloutLabel: "Pulse" },
-            { id: "assess-skin", type: ASSESS, label: "Assess skin [color, temperature, or condition]", calloutLabel: "Skin" },
-            { id: "control-bleeding", type: INTERV, label: "Assesses for & controls major bleeding if present", calloutLabel: "Bleeding" },
-            { id: "control-shock", type: INTERV, label: "Initiates shock management" } // crit criteria 640
+            { id: "assess-pulse",     type: ASSESS, label: "Checks pulse" },
+            { id: "assess-skin",      type: ASSESS, label: "Assess skin [color, temperature, or condition]" },
+            { id: "assess-bleeding",  type: ASSESS, label: "Assesses for major bleeding" },
+            { id: "control-bleeding", type: INTERV, label: "Manages major bleeding if present" },
+            { id: "control-shock",    type: INTERV, label: "Initiates shock management" } // crit criteria 640
         ],
         'transport-decision': [
             { id: "transport-priority", type: ASSESS, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
@@ -80,42 +81,75 @@ const data = {
             { id: "attempt-obtain-sample", type: ASSESS, label: "Attempts to obtain SAMPLE history" } // point to SAMPLE
         ],
         'head': [
-            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth, nose, & assesses facial area", calloutLabel: "Face" },
-            { id: "assess-scape-ears", type: ASSESS, label: "Inspects & palpates scalp & ears", calloutLabel: "Ears" },
-            { id: "assess-perrl", type: ASSESS, label: "Assesses eyes for PERRL", calloutLabel: "PERRL" }
+            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth, nose, & assesses facial area" },
+            { id: "assess-scape-ears",      type: ASSESS, label: "Inspects & palpates scalp & ears" },
+            { id: "assess-perrl",           type: ASSESS, label: "Assesses eyes for PERRL" }
         ],
         'neck': [
-            { id: "assess-trachea-position", type: ASSESS, label: "Checks position of trachea", calloutLabel: "Trachea" },
-            { id: "assess-jugular", type: ASSESS, label: "Checks jugular veins", calloutLabel: "Jugular" },
-            { id: "assess-spine", type: ASSESS, label: "Palpates cervical spine", calloutLabel: "Assess C-Spine" }
+            { id: "assess-trachea", type: ASSESS, label: "Checks position of trachea" },
+            { id: "assess-jugular",          type: ASSESS, label: "Checks jugular veins" },
+            { id: "assess-spine",            type: ASSESS, label: "Palpates cervical spine" }
         ],
         'chest': [
-            { id: "inspect-chest", type: ASSESS, label: "Inspects chest", calloutLabel: "Inspect Chest" },
-            { id: "palpate-chest", type: ASSESS, label: "Palpates chest", calloutLabel: "Palpate Chest" },
-            { id: "auscultate-chest", type: ASSESS, label: "Auscultates chest", calloutLabel: "Auscultates Chest" }
+            { id: "inspects-chest",    type: ASSESS, label: "Inspects chest" },
+            { id: "palpate-chest",    type: ASSESS, label: "Palpates chest" },
+            { id: "auscultate-chest", type: ASSESS, label: "Auscultates chest" }
         ],
         'abdomen-pelvis': [
-            { id: "assess-abdomen", type: ASSESS, label: "Inspects & palpates abdomen", calloutLabel: "Inspect Abdomen" },
-            { id: "assess-pelvis", type: ASSESS, label: "Assesses pelvis", calloutLabel: "Assess Pelvis" },
-            { id: "assess-nads-taint", type: ASSESS, label: "Verbalizes assessment of genitalia/perineum as needed", calloutLabel: "Assess Genitalia" }
+            { id: "assess-abdomen",   type: ASSESS, label: "Inspects & palpates abdomen" },
+            { id: "assess-pelvis",    type: ASSESS, label: "Assesses pelvis" },
+            { id: "assess-genitalia", type: ASSESS, label: "Verbalizes assessment of genitalia/perineum as needed" }
         ],
         'lower-extremities': [
-            { id: "assess-left-leg", type: ASSESS, label: "Left Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Left Leg" },
-            { id: "assess-right-leg", type: ASSESS, label: "Right Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Right Leg" }
+            { id: "assess-left-leg",  type: ASSESS, label: "Left Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions" },
+            { id: "assess-right-leg", type: ASSESS, label: "Right Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions" }
         ],
         'upper-extremities': [
             { id: "assess-left-arm", type: ASSESS, label: "Left Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Left Arm" },
             { id: "assess-right-arm", type: ASSESS, label: "Right Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Right Arm" }
         ],
         "posterior-thorax-lumbar-buttocks": [
-            { id: "assess-posterior-thorax", type: ASSESS, label: "Inspects & palpates posterior thorax", calloutLabel: "Assess posterior" },
-            { id: "assess-lumbar-buttocks", type: ASSESS, label: "Inspects & palpates lumbar & buttocks area", calloutLabel: "Assess buttocks" }
+            { id: "assess-posterior-thorax", type: ASSESS, label: "Inspects & palpates posterior thorax" },
+            { id: "assess-lumbar-buttocks",  type: ASSESS, label: "Inspects & palpates lumbar & buttocks area" }
         ],
         "misc": [
             { id: "550", type: ASSESS, label: "Manages secondary injuries & wounds appropriately" },
             { id: "560", type: ASSESS, label: "Performs ongoing assessment" }
         ]
     },
+    callouts: [
+        { stepId: "assess-scene-safety",           calloutLabel: "Scene Safety" },
+        { stepId: "assess-injury-mechanism",       calloutLabel: "Mechanism of Injury" },
+        { stepId: "assess-num-patients",           calloutLabel: "Num Patients" },
+        { stepId: "request-addl-help",             calloutLabel: "Additional Help" },
+        { stepId: "verbalizes-patient-condition",  calloutLabel: "Condition" },
+        { stepId: "determines-loc",                calloutLabel: "LOC" },
+        { stepId: "determines-life-threats",       calloutLabel: "Life Threats" },
+        { stepId: "assess-airway",                 calloutLabel: "Airway" },
+        { stepId: "assess-breathing",              calloutLabel: "Breathing" },
+        { stepId: "assess-ventilation",            calloutLabel: "Ventilations" },
+        { stepId: "assess-pulse",                  calloutLabel: "Pulse" },
+        { stepId: "assess-skin",                   calloutLabel: "Skin" },
+        { stepId: "assess-bleeding",               calloutLabel: "Bleeding" },
+        { stepId: "assess-mouth-nose-face",        calloutLabel: "Face" },
+        { stepId: "assess-scape-ears",             calloutLabel: "Ears" },
+        { stepId: "assess-perrl",                  calloutLabel: "PERRL" },
+        { stepId: "assess-trachea",                calloutLabel: "Trachea" },
+        { stepId: "assess-jugular",                calloutLabel: "Jugular" },
+        { stepId: "assess-spine",                  calloutLabel: "Assess C-Spine" },
+        { stepId: "inspects-chest",                calloutLabel: "Inspect Chest" },
+        { stepId: "palpate-chest",                 calloutLabel: "Palpate Chest" },
+        { stepId: "auscultate-chest",              calloutLabel: "Auscultates Chest" },
+        { stepId: "assess-abdomen",                calloutLabel: "Abdomen" },
+        { stepId: "assess-pelvis",                 calloutLabel: "Pelvis" },
+        { stepId: "assess-genitalia",              calloutLabel: "Genitalia" },
+        { stepId: "assess-left-leg",               calloutLabel: "Left Leg" },
+        { stepId: "assess-right-leg",              calloutLabel: "Right Leg" },
+        { stepId: "assess-left-arm",               calloutLabel: "Left Arm" },
+        { stepId: "assess-right-arm",              calloutLabel: "Right Arm" },
+        { stepId: "assess-posterior-thorax",       calloutLabel: "Posterior/Thorax" },
+        { stepId: "assess-lumbar-buttocks",        calloutLabel: "Lumbar/Buttocks" }
+    ],
     criticalCriteria: [
         { id: "580", type: CRIT_FAIL, parent: "transport-priority", label: "Failure to initiate or call for transport of the patient within 10 minutes of time limit" },
 
