@@ -12,9 +12,9 @@ const data = {
         {
             id: "initial-assessment-resuscitation",
             type: HEADING,
-            label: "Primary Assessment/Resuscitation",
+            label: "Primary Survey/Resuscitation",
             children: [
-                { id: 'general-assessment', type: HEADING, label: 'General Assessment' },
+                { id: 'general-assessment', type: HEADING, label: 'General Impression and LOC' },
                 { id: "airway", type: HEADING, label: "Airway" },
                 { id: "breathing", type: HEADING, label: "Breathing" },
                 { id: "circulation", type: HEADING, label: "Circulation" },
@@ -34,7 +34,7 @@ const data = {
                 { id: "lower-extremities", type: HEADING, label: "Lower extremities" },
                 { id: "upper-extremities", type: HEADING, label: "Upper extremities" },
                 { id: "posterior-thorax-lumbar-buttocks", type: HEADING, label: "Posterior thorax, lumbar, & buttocks" },
-                { id: "misc", type: HEADING, label: "Misc."}
+                { id: "misc", type: HEADING, label: "Ongoing management and reassessment"}
             ]
         },
 
@@ -48,7 +48,7 @@ const data = {
             { id: "assess-injury-mechanism", type: ASSESS, label: "Determines the mechanism of injury/nature of illness" },
             { id: "assess-num-patients",     type: ASSESS, label: "Determines the number of patients" },
             { id: "request-addl-help",       type: ASSESS, label: "Requests additional help if necessary" },
-            { id: "assess-spinal-stability", type: ASSESS, label: "Considers stabilization of spine" }, // crit criteria 610
+            { id: "assess-spinal-stability", type: ASSESS, label: "Initiates spinal stabilization as indicated" }, // crit criteria 610
             { id: "stabilizes-spine",        type: INTERV, label: "Stabilizes or directs assistant to stabilize the cervical spine, as indicated" } // crit criteria 610
         ],
         'general-assessment': [
@@ -101,12 +101,12 @@ const data = {
             { id: "assess-genitalia", type: ASSESS, label: "Verbalizes assessment of genitalia/perineum as needed" }
         ],
         'lower-extremities': [
-            { id: "assess-left-leg",  type: ASSESS, label: "Left Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions" },
-            { id: "assess-right-leg", type: ASSESS, label: "Right Leg: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions" }
+            { id: "assess-right-leg", type: ASSESS, label: "Inspects, palpates, & assesses motor, sensory, & distal circulatory functions on right lower extremity" },
+            { id: "assess-left-leg",  type: ASSESS, label: "Inspects, palpates, & assesses motor, sensory, & distal circulatory functions on left lower extremity" }
         ],
         'upper-extremities': [
-            { id: "assess-left-arm", type: ASSESS, label: "Left Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Left Arm" },
-            { id: "assess-right-arm", type: ASSESS, label: "Right Arm: Inspects, palpates, & assesses motor, sensory, & distal circulatory functions", calloutLabel: "Right Arm" }
+            { id: "assess-right-arm", type: ASSESS, label: "Inspects, palpates, & assesses motor, sensory, & distal circulatory functions on right upper extremity" },
+            { id: "assess-left-arm",  type: ASSESS, label: "Inspects, palpates, & assesses motor, sensory, & distal circulatory functions on left upper extremity" }
         ],
         "posterior-thorax-lumbar-buttocks": [
             { id: "assess-posterior-thorax", type: ASSESS, label: "Inspects & palpates posterior thorax" },
