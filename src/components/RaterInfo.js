@@ -63,7 +63,7 @@ export default function RaterInfo({scenario, showCallouts=true}) {
                         className={classnames({ active: activeTab === 'callouts' })}
                         onClick={() => toggle('callouts')}
                     >
-                        Callouts
+                        Assessment Findings
                     </NavLink>
                 </NavItem>
                 }
@@ -98,7 +98,7 @@ export default function RaterInfo({scenario, showCallouts=true}) {
                 </TabPane>
                 <TabPane tabId="callouts">
                     <RevealTable
-                        heading="Callouts"
+                        heading="Assessment Findings"
                         rows={callouts}
                     />
                 </TabPane>
