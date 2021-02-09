@@ -49,14 +49,14 @@ export default function RaterInfo({scenario, showCallouts=true}) {
     return (
         <>
             <Nav tabs>
-                <NavItem>
+                {/* <NavItem>
                     <NavLink
                         className={classnames({active: activeTab === 'scenInfo'})}
                         onClick={() => toggle('scenInfo')}
                     >
                         Scenario Info
                     </NavLink>
-                </NavItem>
+                </NavItem> */}
                 {showCallouts &&
                 <NavItem>
                     <NavLink
