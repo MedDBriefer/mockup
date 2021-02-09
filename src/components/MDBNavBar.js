@@ -27,6 +27,9 @@ const MDBNavBar = ({branding, title, toggler}) => {
                 <NavItem>
                     <MockupButton to="/mockup2" label="Mockup 2" />
                 </NavItem>
+                <NavItem>
+                    <MockupButton to="/mockup3" label="Mockup 3" />
+                </NavItem>
             </Nav>
            {!!title &&
                 <NavbarText tag="h3">{title}</NavbarText>

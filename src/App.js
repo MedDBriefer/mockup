@@ -6,6 +6,7 @@ import ScenarioInfo from "./components/ScenarioInfo"
 
 import Mockup1 from "./Mockup1"
 import Mockup2 from "./Mockup2"
+import Mockup3 from "./Mockup3"
 
 import {
     BrowserRouter as Router,
@@ -35,6 +36,9 @@ const App = (props) => {
                 </Route>
                 <Route path="/mockup2">
                     <Mockup2 scenario={scen} />
+                </Route>
+                <Route path="/mockup3">
+                    <Mockup3 scenario={scen} />
                 </Route>
                 <Route path="*">
                     <h3>Click on one of the mockups listed above</h3>
