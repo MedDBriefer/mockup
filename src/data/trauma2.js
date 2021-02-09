@@ -33,22 +33,22 @@ const data = {
                 { id: "abdomen-pelvis", type: HEADING, label: "Abdomen/pelvis" },
                 { id: "lower-extremities", type: HEADING, label: "Lower extremities" },
                 { id: "upper-extremities", type: HEADING, label: "Upper extremities" },
-                { id: "posterior-thorax-lumbar-buttocks", type: HEADING, label: "Posterior thorax, lumbar, & buttocks" },
+                { id: "posterior-thorax-lumbar-buttocks", type: HEADING, label: "Posterior thorax, lumbar, and buttocks" },
                 { id: "misc", type: HEADING, label: "Ongoing management and reassessment"}
             ]
         },
-
+        { id: "critical-criteria", type: HEADING, label: "Critical Criteria" }
     ],
     items: {
         'bsi': [
-            { id: "apply-ppe", type: ASSESS, label: "Takes or verbalizes body substance isolation precautions." } // crit criteria 590
+            { id: "apply-ppe", type: ASSESS, label: "Takes or verbalizes appropriate PPE precautions." } // crit criteria 590
         ],
         'scene-size-up': [
             { id: "assess-scene-safety",     type: ASSESS, label: "Determines the scene/situation is safe" },
             { id: "assess-injury-mechanism", type: ASSESS, label: "Determines the mechanism of injury/nature of illness" },
             { id: "assess-num-patients",     type: ASSESS, label: "Determines the number of patients" },
             { id: "request-addl-help",       type: ASSESS, label: "Requests additional help if necessary" },
-            { id: "assess-spinal-stability", type: ASSESS, label: "Initiates spinal stabilization as indicated" }, // crit criteria 610
+            { id: "assess-spinal-stability", type: ASSESS, label: "Considers stabilization of spine" }, // crit criteria 610
             { id: "stabilizes-spine",        type: INTERV, label: "Stabilizes or directs assistant to stabilize the cervical spine, as indicated" } // crit criteria 610
         ],
         'general-assessment': [
@@ -57,7 +57,7 @@ const data = {
             { id: "determines-life-threats",      type: ASSESS, label: "Determines chief complaint/apparent life-threats" }
         ],
         'airway': [
-            { id: "assess-airway",   type: ASSESS, label: "Opens & assesses airway" },
+            { id: "assess-airway",   type: ASSESS, label: "Opens and assesses airway" },
             { id: "manages-airway",  type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
         ],
         'breathing': [
@@ -68,7 +68,7 @@ const data = {
         ],
         'circulation': [
             { id: "assess-pulse",     type: ASSESS, label: "Checks pulse" },
-            { id: "assess-skin",      type: ASSESS, label: "Assess skin [color, temperature, or condition]" },
+            { id: "assess-skin",      type: ASSESS, label: "Assess skin [either skin color, temperature, or condition]" },
             { id: "assess-bleeding",  type: ASSESS, label: "Assesses for major bleeding" },
             { id: "control-bleeding", type: INTERV, label: "Manages major bleeding if present" },
             { id: "control-shock",    type: INTERV, label: "Initiates shock management" } // crit criteria 640
@@ -81,17 +81,17 @@ const data = {
             { id: "attempt-obtain-sample", type: ASSESS, label: "Attempts to obtain SAMPLE history" } // point to SAMPLE
         ],
         'head': [
-            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth, nose, & assesses facial area" },
-            { id: "assess-scape-ears",      type: ASSESS, label: "Inspects & palpates scalp & ears" },
+            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth, nose, and assesses facial area" },
+            { id: "assess-scape-ears",      type: ASSESS, label: "Inspects and palpates scalp and ears" },
             { id: "assess-perrl",           type: ASSESS, label: "Assesses eyes for PERRL" }
         ],
         'neck': [
             { id: "assess-trachea", type: ASSESS, label: "Checks position of trachea" },
-            { id: "assess-jugular",          type: ASSESS, label: "Checks jugular veins" },
-            { id: "assess-spine",            type: ASSESS, label: "Palpates cervical spine" }
+            { id: "assess-jugular", type: ASSESS, label: "Checks jugular veins" },
+            { id: "assess-spine",   type: ASSESS, label: "Palpates cervical spine" }
         ],
         'chest': [
-            { id: "inspects-chest",    type: ASSESS, label: "Inspects chest" },
+            { id: "inspects-chest",   type: ASSESS, label: "Inspects chest" },
             { id: "palpate-chest",    type: ASSESS, label: "Palpates chest" },
             { id: "auscultate-chest", type: ASSESS, label: "Auscultates chest" }
         ],
@@ -101,21 +101,22 @@ const data = {
             { id: "assess-genitalia", type: ASSESS, label: "Verbalizes assessment of genitalia/perineum as needed" }
         ],
         'lower-extremities': [
-            { id: "assess-right-leg", type: ASSESS, label: "Inspects, palpates, & assesses motor, sensory, & distal circulatory functions on right lower extremity" },
-            { id: "assess-left-leg",  type: ASSESS, label: "Inspects, palpates, & assesses motor, sensory, & distal circulatory functions on left lower extremity" }
+            { id: "assess-right-leg", type: ASSESS, label: "Inspects, palpates, and assesses motor, sensory, and distal circulatory functions on right lower extremity" },
+            { id: "assess-left-leg",  type: ASSESS, label: "Inspects, palpates, and assesses motor, sensory, and distal circulatory functions on left lower extremity" }
         ],
         'upper-extremities': [
-            { id: "assess-right-arm", type: ASSESS, label: "Inspects, palpates, & assesses motor, sensory, & distal circulatory functions on right upper extremity" },
-            { id: "assess-left-arm",  type: ASSESS, label: "Inspects, palpates, & assesses motor, sensory, & distal circulatory functions on left upper extremity" }
+            { id: "assess-right-arm", type: ASSESS, label: "Inspects, palpates, and assesses motor, sensory, and distal circulatory functions on right upper extremity" },
+            { id: "assess-left-arm",  type: ASSESS, label: "Inspects, palpates, and assesses motor, sensory, and distal circulatory functions on left upper extremity" }
         ],
         "posterior-thorax-lumbar-buttocks": [
-            { id: "assess-posterior-thorax", type: ASSESS, label: "Inspects & palpates posterior thorax" },
-            { id: "assess-lumbar-buttocks",  type: ASSESS, label: "Inspects & palpates lumbar & buttocks area" }
+            { id: "assess-posterior-thorax", type: ASSESS, label: "Inspects and palpates posterior thorax" },
+            { id: "assess-lumbar-buttocks",  type: ASSESS, label: "Inspects and palpates lumbar and buttocks area" }
         ],
         "misc": [
-            { id: "550", type: ASSESS, label: "Manages secondary injuries & wounds appropriately" },
+            { id: "550", type: ASSESS, label: "Manages secondary injuries and wounds appropriately" },
             { id: "560", type: ASSESS, label: "Performs ongoing assessment" }
-        ]
+        ],
+        "critical-criteria": [] // these need to all be woven in by the scenario builder, as what goes here is depending on some options
     },
     callouts: [
         { stepId: "assess-scene-safety",           calloutLabel: "Scene Safety" },
@@ -151,25 +152,25 @@ const data = {
         { stepId: "assess-lumbar-buttocks",        calloutLabel: "Lumbar/Buttocks" }
     ],
     criticalCriteria: [
-        { id: "580", type: CRIT_FAIL, parent: "transport-priority", label: "Failure to initiate or call for transport of the patient within 10 minutes of time limit" },
+        { id: "580", type: CRIT_FAIL, parent: "transport-priority", label: "Failure to initiate or call for transport of the patient within 10 minute time limit" },
 
         // true if 'apply-ppe' not checked?
-        { id: "590", type: CRIT_FAIL, parent: "apply-ppe", label: "Failure to take or verbalize body substance isolation precautions" },
+        { id: "590", type: CRIT_FAIL, parent: "apply-ppe", label: "Failure to take or verbalize appropriate PPE precautions" },
         // true if 'assess-scene-safety' not checked?
         { id: "600", type: CRIT_FAIL, parent: "assess-scene-safety", label: "Failure to determine scene safety" },
         // true if 'stabilize-spine' not checked AND indicated?
         { id: "610", type: CRIT_FAIL, parent: "stabilizes-spine", label: "Failure to assess for and provide spinal protection when indicated" },
 
-        { id: "620", type: CRIT_FAIL, parent: "oxygen-therapy", label: "Failure to voice & ultimately provide high concentration of oxygen" },
+        { id: "620", type: CRIT_FAIL, parent: "oxygen-therapy", label: "Failure to voice and ultimately provide high concentration of oxygen" },
         // true if ANY of the ventiliation
         { id: "630", type: CRIT_FAIL, parent: "assess-ventilation", label: "Failure to assess/provide adequate ventilation" },
         { id: "640", type: CRIT_FAIL, parent: "Primary Assessment/Resuscitation", label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
         // combine below with 580?
         { id: "650", type: CRIT_FAIL, parent: "transport-priority", label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
 
-        { id: "660", type: CRIT_FAIL, label: "Does other detailed/focused history or physical exam before assessing/treating threats to airway, breathing, & circulation" },
+        { id: "660", type: CRIT_FAIL, label: "Does other detailed history or physical exam before assessing/treating threats to airway, breathing, and circulation" },
+        { id: "680", type: CRIT_FAIL, label: "Failure to manage the patient as a competent EMT" },
         { id: "670", type: CRIT_FAIL, label: "Exhibits unacceptable affect with patient or other personnel" },
-        { id: "680", type: CRIT_FAIL, label: "Failure to manage the patient as a competent EMT-P" },
         { id: "690", type: CRIT_FAIL, label: "Uses or orders a dangerous or inappropriate intervention" }
     ],
     interventionForms: {
