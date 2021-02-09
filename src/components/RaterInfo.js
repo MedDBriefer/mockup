@@ -19,7 +19,7 @@ import RevealTable from "./RevealTable"
 
 export default function RaterInfo({scenario, showCallouts=true}) {
 
-    const [activeTab, setActiveTab] = useState('scenInfo')
+    const [activeTab, setActiveTab] = useState('callouts')
     const toggle = (tab) => {
         if (activeTab !== tab) setActiveTab(tab)
     }
