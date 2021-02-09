@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-function annotateItems(items, callouts) {
+function annotateItems(items, callouts, criticalCriteria) {
 
   for (const { stepId, calloutLabel, calloutText } of callouts) {
     // console.log(stepId, calloutLabel, calloutText)
@@ -12,6 +12,9 @@ function annotateItems(items, callouts) {
       items[key] = children
     }
   }
+  criticalCriteria.forEach(element => {
+    items['critical-criteria'].push(element)
+  });
   return items;
 }
 
@@ -47,7 +50,7 @@ export const scenarioBuilder = (scen) => {
   // console.log(info)
   // console.log(callouts)
   // console.log(outline)
-  items = annotateItems(items, callouts)
+  items = annotateItems(items, callouts, criticalCriteria)
   let newScen = {
     info,
     callouts,
