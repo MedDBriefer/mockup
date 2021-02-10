@@ -1,18 +1,25 @@
-#!/usr/bin/env mode
+#!/usr/bin/env node
+const traumaScenarioIndexer = require("./TraumaScenario")
+const scenario = require("./scenario")
 
-const data = require("./src/data/trauma.json")
-
-function flatten(parent, children) {
+function flattenTree(parent, children) {
+    // console.log(parent, children)
     children.map(child => {
+        // console.log(child)
         let parentId = (null !== parent) ? parent.id : null;
-        const rec = {id: child.id, label: child.label, parent: parentId};
-        // console.log({"label:child.label, parentId, child.children.length);
-        console.log(rec);
-        if (child.children) {
-            flatten(child, child.children);
+        if (['heading','assessment','intervention'].includes(child.type)) {
+            const rec = `{"id": "${child.id}", "type": "${child.type}", "label": "${child.label}" },`;
+            // console.log({"label:child.label, parentId, child.children.length);
+            console.log(rec);
+        }
+        if (child.children && child.children.length > 0) {
+            flattenTree(child, child.children);
         }
     })
     // console.log(parent, children.length)
 }
 
-flatten(null, data)
+const data = traumaScenarioIndexer(scenario)
+// console.log(data.steps)
+
+flattenTree(null, data.steps)
