@@ -17,17 +17,21 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
+import scenarioData  from "./data/scenario"
+import traumaScenarioIndexer from "./data/traumaScenarioIndexer"
+
 const App = (props) => {
     const [showInfo, setShowInfo] = useState(false);
     const toggleShowInfo = () => {
         setShowInfo(!showInfo);
     }
-    const scen = props.scenario;
+    const scen = traumaScenarioIndexer(scenarioData)
+    console.log(scen)
 
     return (
         <Router>
             <MDBNavBar
-                title={scen.info.name}
+                title={scen.id}
                 toggler={toggleShowInfo}
             />
             <Switch>
