@@ -1,69 +1,51 @@
-const data = require("./trauma2.js");
 const AND = "and";
 const OR = "or";
-// console.log(steps);
 
-const calloutText = {
-  "assess-scene-safety": "scene is safe",
-  "assess-injury-mechanism": "Patient experienced a rollover with a riding lawn mower",
-  "assess-num-patients": "1 patient",
-  "request-addl-help": "Additional EMS is on the way.",
-  "verbalizes-patient-condition": "You arrive at a suburban yard where you observe a large riding lawn mower on its side at the bottom of an 8-ft (2.5-m) hill. A bystander is holding a towel to the patient’s right lower leg. As you approach the patient, the bystander tells you that he saw the mower tip over while the patient was driving it.",
-  "determines-loc": "Opens eyes to pain and becomes progressively more unresponsive",
-  "determines-life-threats": "Multiple lacerations to face, scalp, right arm, amputation at the right ankle",
-  "assess-airway": "Airway is patent",
-  "assess-breathing": "8 BPM", // point to vitals?
-  "assess-ventilation": "shallow, irregular",
-  "assess-pulse": "130; weak radial pulses", // point to vitals?
-  "assess-skin": "Cyanonic, diaphoretic",
-  "assess-bleeding": "Major external hemorrhage at lower right leg",
-  "assess-mouth-nose-face": "Multiple lacerations with minor bleeding",
-  "assess-scape-ears": "Unremarkable",
-  "assess-perrl": "Pupils equal, round, and responsive", // point to vitals?
-  "assess-trachea": "Neck unremarkable",
-  "assess-jugular": "No JVD",
-  "assess-spine": "Unremarkable / No step-off",
-  "inspects-chest": "Multiple lacerations; red marks to right chest",
-  "palpate-chest": "Flail segment to right upper chest",
-  "auscultate-chest": "Crepitus on right",
-  "assess-abdomen": "Soft, nontender",
-  "assess-pelvis": "Stable",
-  "assess-genitalia": "Unremarkable",
-  "assess-left-leg": "Multiple lacerations",
-  "assess-right-leg": "Amputation of right leg at the ankle",
-  "assess-left-arm": "Multiple lacerations",
-  "assess-right-arm": "Multiple lacerations",
-  "assess-posterior-thorax": "Unremarkable",
-  "assess-lumbar-buttocks": "Unremarkable"
-}
-
-// let traumacallouts = [...data.callouts]
-// console.log(callouts)
-// process.exit(0)
-const newCallouts = Object.entries(calloutText).map(([key, value]) => {
-  // const [key, value] = pair;
-  // console.log(key, "=>", value);
-  let found = data.callouts.find((co) => co.stepId === key);
-  if (found) {
-    found.calloutText = value;
-  } else {
-    console.log(`ERROR: CALLOUT ID NOT FOUND: ${key}`);
-    process.exit(1);
-    // found = {[key]: "NOT FOUND"}
-  }
-  return found;
-}).filter(item => !!item);
-
-// console.log(newCallouts);
-data.callouts = newCallouts;
-// console.log(data.callouts)
-// process.exit(0)
-
-const scenario = Object.assign({}, data, {
+const scenarioData = {
+  id: "PHTC M2CA",
+  scenarioType: "trauma",
   info: {
-    name: "PHTC M2CA",
+    instructorInformation: "This skill station involves a middle-aged patient who experienced a rollover with a riding lawn mower. The patient requires airway/breathing management, hemorrhage control, immobilization, and rapid transport to a trauma center. Follow the written scenario, and provide information to all team members as the scenario progresses or as the team members ask.Patient InformationMoulage: Multiple lacerations to upper and lower extremities; partial amputation of right lower extremity with active bleeding; multiple bruises to chest and abdomen; flail segment to right upper chest; pale, cool, and diaphoretic skin Position: SupineActions: Opens eyes to pain and becomes progressively more ",
+    patientInformation: {
+      moulage: "Multiple lacerations to upper and lower extremities; partial amputation of right lower extremity with active bleeding; multiple bruises to chest and abdomen; flail segment to right upper chest; pale, cool, and diaphoretic skin",
+      position: "Supine",
+      actions: "Opens eyes to pain and becomes progressively more unresponsive"
+    },
     dispatchInfo: "You and your partners work for a transporting EMS agency and have been dispatched to a residential housing development for a lawn mower accident. It is 1330 hr on a Saturday afternoon and the temperature is 90°F (32°C). You are 5 minutes away from a level III trauma center and 25 minutes from a level I trauma center.",
     sceneAssessment: "You arrive at a suburban yard where you observe a large riding lawn mower on its side at the bottom of an 8-ft (2.5-m) hill. A bystander is holding a towel to the patient’s right lower leg. As you approach the patient, the bystander tells you that he saw the mower tip over while the patient was driving it.",
+  },
+  assessmentFindings: {
+      "assess-scene-safety": "scene is safe",
+      "assess-injury-mechanism": "Patient experienced a rollover with a riding lawn mower",
+      "assess-num-patients": "1 patient",
+      "request-addl-help": "Additional EMS is on the way.",
+      "verbalizes-patient-condition": "You arrive at a suburban yard where you observe a large riding lawn mower on its side at the bottom of an 8-ft (2.5-m) hill. A bystander is holding a towel to the patient’s right lower leg. As you approach the patient, the bystander tells you that he saw the mower tip over while the patient was driving it.",
+      "determines-loc": "Opens eyes to pain and becomes progressively more unresponsive",
+      "determines-life-threats": "Multiple lacerations to face, scalp, right arm, amputation at the right ankle",
+      "assess-airway": "Airway is patent",
+      "assess-breathing": "8 BPM", // point to vitals?
+      "assess-ventilation": "shallow, irregular",
+      "assess-pulse": "130; weak radial pulses", // point to vitals?
+      "assess-skin": "Cyanonic, diaphoretic",
+      "assess-bleeding": "Major external hemorrhage at lower right leg",
+      "assess-mouth-nose-face": "Multiple lacerations with minor bleeding",
+      "assess-scape-ears": "Unremarkable",
+      "assess-perrl": "Pupils equal, round, and responsive", // point to vitals?
+      "assess-trachea": "Neck unremarkable",
+      "assess-jugular": "No JVD",
+      "assess-spine": "Unremarkable / No step-off",
+      "inspects-chest": "Multiple lacerations; red marks to right chest",
+      "palpate-chest": "Flail segment to right upper chest",
+      "auscultate-chest": "Crepitus on right",
+      "assess-abdomen": "Soft, nontender",
+      "assess-pelvis": "Stable",
+      "assess-genitalia": "Unremarkable",
+      "assess-left-leg": "Multiple lacerations",
+      "assess-right-leg": "Amputation of right leg at the ankle",
+      "assess-left-arm": "Multiple lacerations",
+      "assess-right-arm": "Multiple lacerations",
+      "assess-posterior-thorax": "Unremarkable",
+      "assess-lumbar-buttocks": "Unremarkable"
   },
   initialVitalSigns: {
     BP: "96 / palpation",
@@ -176,8 +158,7 @@ const scenario = Object.assign({}, data, {
     "control-shock": "say", // "shock-interventions"
     "transport-priority": "do", // "transport-interventions"
   }
-});
+};
 
 
-
-module.exports = {scenario};
+export default scenarioData;
