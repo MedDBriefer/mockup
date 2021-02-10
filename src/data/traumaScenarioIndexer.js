@@ -1,12 +1,21 @@
+// the scenarios entered via forms are merely a set of fields and values and
+// aren't organized as steps.  the purpose of this file is to define the
+// structure of a trauma scenario, as
+// * a tree of steps (and weave the scenario-speific info into them)
+// * various other mappings of things so they can be looked up by id,  more details later
+
+
 const ASSESS = "assessment";
 const INTERV = "intervention";
+const REQURED = "required-action"
+
 const CHECK = "check-box";
 const RADIO = "radio-button";
 const CRIT_FAIL = "critical-criteria";
 const HEADING = "heading";
 
-const data = {
-    outline: [
+const TRAUMA_SCENARIO_STRUCTURE = {
+    tree: [
         { id: "bsi", type: HEADING, label: "BSI" },
         { id: "scene-size-up", type: HEADING, label: "Scene Size-Up" },
         {
@@ -39,9 +48,9 @@ const data = {
         },
         { id: "critical-criteria", type: HEADING, label: "Critical Criteria" }
     ],
-    items: {
+    leaves: {
         'bsi': [
-            { id: "apply-ppe", type: ASSESS, label: "Takes or verbalizes appropriate PPE precautions." } // crit criteria 590
+            { id: "apply-ppe",  type: REQURED, label: "Takes or verbalizes appropriate PPE precautions." } // crit criteria 590
         ],
         'scene-size-up': [
             { id: "assess-scene-safety",     type: ASSESS, label: "Determines the scene/situation is safe" },
@@ -74,7 +83,7 @@ const data = {
             { id: "control-shock",    type: INTERV, label: "Initiates shock management" } // crit criteria 640
         ],
         'transport-decision': [
-            { id: "transport-priority", type: ASSESS, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
+            { id: "transport-priority", type: REQURED, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
         ],
         'history-taking': [
             { id: "obtains-vitals", type: ASSESS, label: "Obtains, or directs assistant to obtain, baseline vital signs" }, // point to vitals
@@ -113,8 +122,8 @@ const data = {
             { id: "assess-lumbar-buttocks",  type: ASSESS, label: "Inspects and palpates lumbar and buttocks area" }
         ],
         "misc": [
-            { id: "550", type: ASSESS, label: "Manages secondary injuries and wounds appropriately" },
-            { id: "560", type: ASSESS, label: "Performs ongoing assessment" }
+            { id: "manage-secondary-injuries", type: REQURED, label: "Manages secondary injuries and wounds appropriately" },
+            { id: "performs-ongoing-assessment", type: REQURED, label: "Performs ongoing assessment" }
         ],
         "critical-criteria": [] // these need to all be woven in by the scenario builder, as what goes here is depending on some options
     },
@@ -152,26 +161,26 @@ const data = {
         { stepId: "assess-lumbar-buttocks",        calloutLabel: "Lumbar/Buttocks" }
     ],
     criticalCriteria: [
-        { id: "580", type: CRIT_FAIL, parent: "transport-priority", label: "Failure to initiate or call for transport of the patient within 10 minute time limit" },
-
+        // we might be able to auto-check based off of timer expiring
+        { id: "580", type: CRIT_FAIL, parent: "transport-decision", label: "Failure to initiate or call for transport of the patient within 10 minute time limit" },
         // true if 'apply-ppe' not checked?
-        { id: "590", type: CRIT_FAIL, parent: "apply-ppe", label: "Failure to take or verbalize appropriate PPE precautions" },
+        { id: "590", type: CRIT_FAIL, parent: "bsi",                label: "Failure to take or verbalize appropriate PPE precautions" },
         // true if 'assess-scene-safety' not checked?
-        { id: "600", type: CRIT_FAIL, parent: "assess-scene-safety", label: "Failure to determine scene safety" },
+        { id: "600", type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to determine scene safety" },
         // true if 'stabilize-spine' not checked AND indicated?
-        { id: "610", type: CRIT_FAIL, parent: "stabilizes-spine", label: "Failure to assess for and provide spinal protection when indicated" },
-
-        { id: "620", type: CRIT_FAIL, parent: "oxygen-therapy", label: "Failure to voice and ultimately provide high concentration of oxygen" },
+        { id: "610", type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to assess for and provide spinal protection when indicated" },
+        { id: "620", type: CRIT_FAIL, parent: "breathing",          label: "Failure to voice and ultimately provide high concentration of oxygen" },
         // true if ANY of the ventiliation
-        { id: "630", type: CRIT_FAIL, parent: "assess-ventilation", label: "Failure to assess/provide adequate ventilation" },
-        { id: "640", type: CRIT_FAIL, parent: "Primary Assessment/Resuscitation", label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
+        { id: "630", type: CRIT_FAIL, parent: "breathing",          label: "Failure to assess/provide adequate ventilation" },
+        // not giving this one a parent, as it belongs to a heading whose only other children are other headings, making it
+        // problematic in the navigation/details layout - readdress this if we don't go with that
+        { id: "640", type: CRIT_FAIL,                               label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
         // combine below with 580?
-        { id: "650", type: CRIT_FAIL, parent: "transport-priority", label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
-
-        { id: "660", type: CRIT_FAIL, label: "Does other detailed history or physical exam before assessing/treating threats to airway, breathing, and circulation" },
-        { id: "680", type: CRIT_FAIL, label: "Failure to manage the patient as a competent EMT" },
-        { id: "670", type: CRIT_FAIL, label: "Exhibits unacceptable affect with patient or other personnel" },
-        { id: "690", type: CRIT_FAIL, label: "Uses or orders a dangerous or inappropriate intervention" }
+        { id: "650", type: CRIT_FAIL, parent: "transport-decision", label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
+        { id: "660", type: CRIT_FAIL,                               label: "Does other detailed history or physical exam before assessing/treating threats to airway, breathing, and circulation" },
+        { id: "680", type: CRIT_FAIL,                               label: "Failure to manage the patient as a competent EMT" },
+        { id: "670", type: CRIT_FAIL,                               label: "Exhibits unacceptable affect with patient or other personnel" },
+        { id: "690", type: CRIT_FAIL,                               label: "Uses or orders a dangerous or inappropriate intervention" }
     ],
     interventionForms: {
         // Each selected intervention should, by default, also include an 'other / incorrect intervention' option
@@ -256,5 +265,132 @@ const data = {
     }
 };
 
-module.exports = data;
-// export default data;
+
+
+function addAssessmentFindings(assessmentFindings) {
+    return Object.entries(assessmentFindings).map(([key, value]) => {
+        const found = TRAUMA_SCENARIO_STRUCTURE.callouts.find((ca) => ca.stepId === key)
+        if (found) {
+            found.calloutText = value;
+        } else {
+            console.log("ERROR key not found!", key);
+            process.exit(1)
+        }
+        return found;
+    })
+}
+
+
+// eslint-disable-next-line
+function addAssessmentFindingsToLeaves(items, callouts) {
+
+    for (const { stepId, calloutLabel, calloutText } of callouts) {
+        // console.log(stepId, calloutLabel, calloutText)
+        for (const key of Object.keys(items)) {
+            let children = items[key].map((item) =>
+                item.id === stepId
+                    ? { ...item, calloutLabel: calloutLabel, callout: calloutText }
+                    : item
+            )
+            items[key] = children
+        }
+    }
+    return items;
+}
+
+function addCriticalCriteriaToLeaves(items, criticalCriteria) {
+    // add all to the critical criteria step, components can elect not to display
+    // ones with parents
+    criticalCriteria.forEach(element => {
+        items['critical-criteria'].push(element)
+    });
+    // append specific ones to the approriate 'items' based off their parent
+    // (if present)
+
+    const critsWithParents = criticalCriteria.filter((crit) => !!crit.parent)
+    for (const heading of Object.keys(items)) {
+        // console.log("\n", heading)
+        for (const crit of critsWithParents.filter((crit) => crit.parent === heading)) {
+            items[heading].push(crit)
+        }
+    }
+    // process.exit(0)
+}
+
+
+
+function addEmptyChildren(array) {
+    return array.map((item) =>
+        !item.children
+            ? { ...item, children: [] }
+            : item
+    )
+}
+
+    // eslint-disable-next-line
+ function addLeavesToBranches(steps, items) {
+    // console.log(steps);
+    // console.log(items)
+    return steps.map((step) => {
+        if (!step.children) {
+            step.children = (step.id in items) ? addEmptyChildren(items[step.id]) : []
+            // let callout = callouts.find((ca) => ca.step === step.id);
+            // // let callout = callouts[]
+            // if (callout) {
+            //   step.callout = callout.id;
+            // }
+        } else {
+            step.children = addLeavesToBranches(step.children, items);
+        }
+        return step;
+    });
+}
+
+function deepCopy(object) {
+    return JSON.parse(JSON.stringify(object))
+}
+
+const traumaScenarioIndexer = (scenario) => {
+    const data = {
+        id: scenario.id,
+        scenarioType: scenario.scenarioType,
+        info: scenario.info,
+        initialVitalSigns: scenario.initialVitalSigns,
+        SAMPLE: scenario.SAMPLE,
+        reassessmentVitals: scenario.reassessmentVitals,
+        interventionForms: deepCopy(TRAUMA_SCENARIO_STRUCTURE.interventionForms),
+        criticalCriteria: deepCopy(TRAUMA_SCENARIO_STRUCTURE.criticalCriteria),
+        items: deepCopy(TRAUMA_SCENARIO_STRUCTURE.leaves),
+    }
+    // callouts are defined separately, as 1. it's easier to access them from the
+    // right pane this way, and 2. it's easier to modify their labels if they're listed
+    // sequentially, rather than in the tree or leaves structures
+    // also, while we've changed the labels to 'Assessment Findings', I'm keeping things
+    // as callouts now, so we don't have to change all of the props, code, etc
+    data.callouts = addAssessmentFindings(scenario.assessmentFindings)
+    addAssessmentFindingsToLeaves(data.items, data.callouts)
+    addCriticalCriteriaToLeaves(data.items, TRAUMA_SCENARIO_STRUCTURE.criticalCriteria)
+    data.steps = addLeavesToBranches(TRAUMA_SCENARIO_STRUCTURE.tree, data.items)
+    return data;
+}
+
+
+// export const scenarioBuilder = (scen) => {
+//     let { info, callouts, outline, items, criticalCriteria, initialVitalSigns, SAMPLE, reassessmentVitals } = scen;
+//     items = annotateItems(items, callouts, criticalCriteria)
+//     let newScen = {
+//         info,
+//         callouts,
+//         steps: annotateStepsTree(outline, items),
+//         items,
+//         criticalCriteria,
+//         initialVitalSigns,
+//         SAMPLE,
+//         reassessmentVitals
+//     };
+//     return newScen;
+// };
+
+// }
+
+export default traumaScenarioIndexer
