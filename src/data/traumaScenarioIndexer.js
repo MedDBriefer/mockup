@@ -189,16 +189,16 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "stabilizes-spine": {
             id: "c-spine-interventions",
             type: CHECK,
-            steps: [
+            interventions: [
                 { id: "c-spine-intervention-10", label: "Holds manual stabilization" },
                 { id: "c-spine-intervention-20", label: "Applies cervical collar" }
             ],
             criticalCriteria: []
         },
-        "manages-aiway": {
+        "manages-airway": {
             id: "airway-interventions",
             type: RADIO,
-            steps: [
+            interventions: [
                 { id: "airway-intervention-10", label: "Inserts OPA" },
                 { id: "airway-intervention-20", label: "Inserts NPA" },
             ],
@@ -207,7 +207,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "assess-ventilation": {
             id: "ventilation-interventions",
             type: RADIO,
-            steps: [
+            interventions: [
                 { id: "ventilation-intervention-10", label: "Endotracheal intubation" },
                 { id: "ventilation-intervention-20", label: "Bag-valve mask" },
             ],
@@ -216,7 +216,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "control-bleeding": {
             id: "bleeding-interventions",
             type: RADIO,
-            steps: [
+            interventions: [
                 { id: "bleeding-intervention-10", label: "Applies direct pressure" },
                 { id: "bleeding-intervention-20", label: "Applies tourniquet" }
             ],
@@ -230,7 +230,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "control-shock": {
             id: "shock-interventions",
             type: RADIO,
-            steps: [
+            interventions: [
                 { id: "shock-intervention-10", label: "IV fluid therapy--Peripheral IV insertion" },
                 { id: "shock-intervention-20", label: "IV fluid therapy--IV Push/Bolus" },
                 { id: "shock-intervention-30", label: "Covers patient" }
@@ -243,10 +243,10 @@ const TRAUMA_SCENARIO_STRUCTURE = {
                 { id: "shock-crit-50", type: CRIT_FAIL, label: "Fails to dispose/verbalize disposal of blood-contaminated sharps immediately in proper container at point of use" }
             ]
         },
-        "transport-decision": {
+        "transport-priority": {
             id: "transport-interventions",
             type: RADIO,
-            steps: [
+            interventions: [
                 { id: "transport-intervention-10", label: "Scoop Stretcher" },
                 { id: "transport-intervention-20", label: "Supine Long Backboard" },
             ],
