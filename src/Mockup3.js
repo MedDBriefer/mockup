@@ -74,10 +74,12 @@ class Mockup3 extends React.Component {
                   steps={scen.steps}
                   first={true}
                   showCallouts={false}
+                  showCalloutIcon={true}
                 />
     const rhs = <RaterInfo
                   scenario={scen}
                   showCallouts={true}
+                  showCalloutIcon={true}
                 />
 
     return <MDBContainer

@@ -10,7 +10,7 @@ import {
 
 import  CheckList  from "./CheckList"
 
-const Accordian = ({isChecked, toggleChecked, steps, showCallouts}) => {
+const Accordian = ({isChecked, toggleChecked, steps, showCallouts, showCalloutIcon}) => {
 
     const childrenAreHeadings = (step) => {
         return step.children && step.children[0].type === 'heading'
@@ -29,12 +29,14 @@ const Accordian = ({isChecked, toggleChecked, steps, showCallouts}) => {
                             toggleChecked={toggleChecked}
                             steps={step.children}
                             showCallouts={showCallouts}
+                            showCalloutIcon={showCalloutIcon}
                         />
                       :  <CheckList
                             isChecked={isChecked}
                             toggleChecked={toggleChecked}
                             steps={step.children}
                             showCallouts={showCallouts}
+                            showCalloutIcon={showCalloutIcon}
                         />
                     }
                 </CardBody>

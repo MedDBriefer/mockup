@@ -3,7 +3,7 @@ import React from "react";
 import CallOut from "./CallOut";
 
 import {Input, Label } from "reactstrap"
-const CheckBox = ({ step, isChecked, toggleChecked , showCallouts=true}) => {
+const CheckBox = ({ step, isChecked, toggleChecked , showCallouts, showCalloutIcon}) => {
 
   return (
       <Label className={step.type === 'critical-criteria' ? "text-danger" : "text-default"}>
@@ -14,10 +14,17 @@ const CheckBox = ({ step, isChecked, toggleChecked , showCallouts=true}) => {
         />
         <b>{step.label}</b>
 
-        {showCallouts && step.callout &&
+        {showCallouts && step.callout && !showCalloutIcon &&
         <CallOut
           text={step.callout}
           show={isChecked(step.id)}
+        />
+        }
+
+        {!showCallouts && step.callout && showCalloutIcon &&
+        <CallOut
+          text={step.callout}
+          //show={isChecked(step.id)}
         />
         }
       </Label>

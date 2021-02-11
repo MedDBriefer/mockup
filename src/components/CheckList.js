@@ -13,7 +13,7 @@ import classnames from "classnames";
 import CheckBox from "./CheckBox";
 
 
-export default function CheckList({ isChecked, toggleChecked, heading, steps, depth=3, first=false, showCallouts=true}){
+export default function CheckList({ isChecked, toggleChecked, heading, steps, depth=3, first=false, showCallouts, showCalloutIcon}){
   const [collapsed, setCollapsed] = useState(false);
   const toggle = () => setCollapsed(!collapsed);
 
@@ -28,6 +28,7 @@ export default function CheckList({ isChecked, toggleChecked, heading, steps, de
             isChecked={isChecked}
             toggleChecked={toggleChecked}
             showCallouts={showCallouts}
+            showCalloutIcon={showCalloutIcon}
             />
           :
             <>
@@ -38,6 +39,7 @@ export default function CheckList({ isChecked, toggleChecked, heading, steps, de
               steps={step.children}
               depth={depth+1}
               showCallouts={showCallouts}
+              showCalloutIcon={showCalloutIcon}
             />
             </>
           }
