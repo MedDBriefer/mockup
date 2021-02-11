@@ -79,12 +79,12 @@ class Mockup1 extends React.Component {
     const scen = this.props.scenario;
 
     const lhs = <Outline
-                  switcher={this.setCurrentNode}
                   heading="Navigation"
+                  scenario={scen}
                   steps={scen.steps}
+                  switcher={this.setCurrentNode}
                   first={true}
                 />
-    const currentNode = scen.items[this.state.currentNode] || [];
     const rhs = <MDBDetailsPane
                   children={currentNode}
                   isChecked={this.isChecked}
