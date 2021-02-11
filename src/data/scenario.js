@@ -5,7 +5,7 @@ const scenarioData = {
   id: "PHTC M2CA",
   scenarioType: "trauma",
   info: {
-    instructorInformation: "This skill station involves a middle-aged patient who experienced a rollover with a riding lawn mower. The patient requires airway/breathing management, hemorrhage control, immobilization, and rapid transport to a trauma center. Follow the written scenario, and provide information to all team members as the scenario progresses or as the team members ask.Patient InformationMoulage: Multiple lacerations to upper and lower extremities; partial amputation of right lower extremity with active bleeding; multiple bruises to chest and abdomen; flail segment to right upper chest; pale, cool, and diaphoretic skin Position: SupineActions: Opens eyes to pain and becomes progressively more ",
+    instructorInformation: "This skill station involves a middle-aged patient who experienced a rollover with a riding lawn mower. The patient requires airway/breathing management, hemorrhage control, immobilization, and rapid transport to a trauma center. Follow the written scenario, and provide information to all team members as the scenario progresses or as the team members ask.",
     patientInformation: {
       moulage: "Multiple lacerations to upper and lower extremities; partial amputation of right lower extremity with active bleeding; multiple bruises to chest and abdomen; flail segment to right upper chest; pale, cool, and diaphoretic skin",
       position: "Supine",
