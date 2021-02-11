@@ -86,7 +86,8 @@ class Mockup1 extends React.Component {
                   first={true}
                 />
     const rhs = <MDBDetailsPane
-                  children={currentNode}
+                  scenario={scen}
+                  getCurrentNode={this.getCurrentNode}
                   isChecked={this.isChecked}
                   toggleChecked={this.toggleChecked}
                 />
