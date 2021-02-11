@@ -15,38 +15,57 @@ const CRIT_FAIL = "critical-criteria";
 const HEADING = "heading";
 
 const TRAUMA_SCENARIO_STRUCTURE = {
+    nodeLabels: {
+        bsi: "BSI",
+        "scene-size-up": "Scene Size-Up",
+        "initial-assessment-resuscitation": "Primary Survey/Resuscitation",
+        "general-assessment": 'General Impression and LOC',
+        "airway": "Airway",
+        "breathing": "Breathing",
+        "circulation": "Circulation",
+        "transport-decision": "Transport Decision",
+        "history-taking": "History Taking",
+        "detailed-physical-examination": "Secondary Assessment",
+        "head": "Head",
+        "neck": "Neck",
+        "chest": "Chest",
+        "abdomen-pelvis": "Abdomen/pelvis",
+        "lower-extremities": "Lower extremities",
+        "upper-extremities": "Upper extremities",
+        "posterior-thorax-lumbar-buttocks": "Posterior thorax, lumbar, and buttocks",
+        "misc": "Ongoing management and reassessment",
+        "critical-criteria": "Critical Criteria"
+    },
     tree: [
-        { id: "bsi", type: HEADING, label: "BSI" },
-        { id: "scene-size-up", type: HEADING, label: "Scene Size-Up" },
+        { id: "bsi",           type: HEADING },
+        { id: "scene-size-up", type: HEADING },
         {
             id: "initial-assessment-resuscitation",
             type: HEADING,
-            label: "Primary Survey/Resuscitation",
             children: [
-                { id: 'general-assessment', type: HEADING, label: 'General Impression and LOC' },
-                { id: "airway", type: HEADING, label: "Airway" },
-                { id: "breathing", type: HEADING, label: "Breathing" },
-                { id: "circulation", type: HEADING, label: "Circulation" },
-                { id: "transport-decision", type: HEADING, label: "Transport Decision" }
+                { id: 'general-assessment', type: HEADING },
+                { id: "airway",             type: HEADING },
+                { id: "breathing",          type: HEADING },
+                { id: "circulation",        type: HEADING },
+                { id: "transport-decision", type: HEADING }
             ]
         },
-        { id: "history-taking", type: HEADING, label: "History Taking" },
+        { id: "history-taking", type: HEADING },
         {
             id: "detailed-physical-examination",
             type: HEADING,
-            label: "Secondary Assessment",
             children: [
-                { id: "head", type: HEADING, label: "Head" },
-                { id: "neck", type: HEADING, label: "Neck" },
-                { id: "chest", type: HEADING, label: "Chest" },
-                { id: "abdomen-pelvis", type: HEADING, label: "Abdomen/pelvis" },
-                { id: "lower-extremities", type: HEADING, label: "Lower extremities" },
-                { id: "upper-extremities", type: HEADING, label: "Upper extremities" },
-                { id: "posterior-thorax-lumbar-buttocks", type: HEADING, label: "Posterior thorax, lumbar, and buttocks" },
-                { id: "misc", type: HEADING, label: "Ongoing management and reassessment"}
+                { id: "head",                             type: HEADING },
+                { id: "neck",                             type: HEADING },
+                { id: "chest",                            type: HEADING },
+                { id: "abdomen-pelvis",                   type: HEADING },
+                { id: "lower-extremities",                type: HEADING },
+                { id: "upper-extremities",                type: HEADING },
+                { id: "posterior-thorax-lumbar-buttocks", type: HEADING },
+                { id: "misc",                             type: HEADING }
             ]
         },
-        { id: "critical-criteria", type: HEADING, label: "Critical Criteria" }
+        { id: "critical-criteria", type: HEADING }
     ],
     leaves: {
         'bsi': [
@@ -327,6 +346,20 @@ function addEmptyChildren(array) {
     )
 }
 
+function addNodeLabelsToBranches(steps, labelsMap) {
+    return steps.map((step) => {
+        let found = (step.id in labelsMap) ? labelsMap[step.id] : false;
+        if (!found) {
+            console.error(`label for ${step.id} not found!`)
+        } else {
+            step.label = found;
+        }
+        if (step.children) {
+            step.children = addNodeLabelsToBranches(step.children, labelsMap)
+        }
+        return step
+    })
+}
     // eslint-disable-next-line
  function addLeavesToBranches(steps, items) {
     // console.log(steps);
@@ -360,6 +393,7 @@ const traumaScenarioIndexer = (scenario) => {
         reassessmentVitals: scenario.reassessmentVitals,
         interventionForms: deepCopy(TRAUMA_SCENARIO_STRUCTURE.interventionForms),
         criticalCriteria: deepCopy(TRAUMA_SCENARIO_STRUCTURE.criticalCriteria),
+        nodeLabels: deepCopy(TRAUMA_SCENARIO_STRUCTURE.nodeLabels),
         items: deepCopy(TRAUMA_SCENARIO_STRUCTURE.leaves),
     }
     // callouts are defined separately, as 1. it's easier to access them from the
@@ -370,7 +404,9 @@ const traumaScenarioIndexer = (scenario) => {
     data.callouts = addAssessmentFindings(scenario.assessmentFindings)
     addAssessmentFindingsToLeaves(data.items, data.callouts)
     addCriticalCriteriaToLeaves(data.items, TRAUMA_SCENARIO_STRUCTURE.criticalCriteria)
-    data.steps = addLeavesToBranches(TRAUMA_SCENARIO_STRUCTURE.tree, data.items)
+    const steps = addNodeLabelsToBranches(TRAUMA_SCENARIO_STRUCTURE.tree, TRAUMA_SCENARIO_STRUCTURE.nodeLabels)
+    data.steps = addLeavesToBranches(steps, data.items)
+
     return data;
 }
 
