@@ -20,15 +20,18 @@ const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, sho
             </CardHeader>
             <CardBody>
                 <ul>
-                    item={child}
-                    isChecked={isChecked}
-                    toggleChecked={toggleChecked}
-                    showCallouts={showCallouts}
-                />
-            </li>
-
-        )}
-    </ul>
+                    {children.map((child) =>
+                        <li key={child.id}>
+                            <DetailsItem
+                                scenario={scenario}
+                                item={child}
+                                isChecked={isChecked}
+                                toggleChecked={toggleChecked}
+                                showCallouts={showCallouts}
+                            />
+                        </li>
+                    )}
+                </ul>
             </CardBody>
         </Card>
         <RaterInfo
