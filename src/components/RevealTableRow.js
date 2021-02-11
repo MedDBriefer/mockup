@@ -19,9 +19,9 @@ export default function RevealTableRow({label, value}) {
                 {label}
             </th>
             <td>
-                <p className={classnames({hidden: !show})}>
+                <span className={classnames({hidden: !show})}>
                     {value}
-                </p>
+                </span>
             </td>
         </tr>
     )
