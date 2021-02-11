@@ -19,14 +19,28 @@ class Mockup1 extends React.Component {
     // bind event event handlers;
     this.setCurrentNode          = this.setCurrentNode.bind(this)
     this.toggleChecked     = this.toggleChecked.bind(this)
-    // need to bind this as well as functional components don't have a 'this'
+    // need to bind these as well as functional components don't have a 'this'
     this.isChecked         = this.isChecked.bind(this)
+    this.getCurrentNode    = this.getCurrentNode.bind(this)
   }
 
   setCurrentNode(node) {
     this.setState({
       currentNode: node
     });
+  }
+
+  getCurrentNode() {
+    const retVal = {
+      label: null,
+      children: []
+    }
+    const nodeId = this.state.currentNode || null;
+    if (nodeId) {
+      retVal.label = this.props.scenario.nodeLabels[nodeId]
+      retVal.children = this.props.scenario.items[nodeId]
+    }
+    return retVal;
   }
 
   isChecked(id) {
