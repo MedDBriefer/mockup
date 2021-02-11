@@ -2,8 +2,9 @@ import React from 'react'
 
 import DetailsItem from "./DetailsItem"
 
-const MDBDetailsPane = ({children, isChecked, toggleChecked, showCallouts=true}) => {
+const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, showCallouts=true}) => {
 
+    const {label, children} = getCurrentNode()
     return (
     <ul>
         {children.map((child) =>
