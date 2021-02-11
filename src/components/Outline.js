@@ -22,7 +22,7 @@ const Outline = ({switcher, steps, depth=3, first=false}) => {
                 (hasChildren(step) && allChildrenAreHeadings(step))
                 ?
                     <>
-                        <div>
+                        <div className={`h${depth + 1}`}>
                             {step.label}
                         </div>
                         <Outline
