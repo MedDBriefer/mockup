@@ -13,6 +13,9 @@ import RaterInfo from "./RaterInfo"
 const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, showCallouts=true}) => {
 
     const {label, children} = getCurrentNode()
+    if (null === label) {
+        return <div></div>
+    }
     return (
         <>
         <Card>
