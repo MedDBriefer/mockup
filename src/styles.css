@@ -64,6 +64,9 @@ ul.first {
 .dev {
   border: 1px dashed hotpink;
 }
+.empty-heading {
+  padding-left: 13px;
+}
 
 .callout-icon {
   margin-left: 10px;
