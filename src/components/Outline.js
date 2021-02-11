@@ -12,7 +12,7 @@ function allChildrenAreHeadings(step) {
 }
 
 
-const Outline = ({switcher, steps, depth=3, first=false}) => {
+const Outline = ({ scenario, steps, depth = 3, switcher, first=false}) => {
 
     return (
         <ul className={first ? "first" : ""}>
@@ -26,9 +26,10 @@ const Outline = ({switcher, steps, depth=3, first=false}) => {
                             {step.label}
                         </div>
                         <Outline
-                            switcher={switcher}
+                            scenario={scenario}
                             steps={step.children}
-                            depth={depth+1}
+                            depth={depth + 1}
+                            switcher={switcher}
                         />
                     </>
                 :
