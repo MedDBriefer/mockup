@@ -17,9 +17,9 @@ import ScenarioInfo from "./ScenarioInfo"
 
 import RevealTable from "./RevealTable"
 
-export default function RaterInfo({scenario, showCallouts=true}) {
+export default function RaterInfo({scenario, defaultTab = "callouts", showCallouts=true}) {
 
-    const [activeTab, setActiveTab] = useState('callouts')
+    const [activeTab, setActiveTab] = useState(defaultTab)
     const toggle = (tab) => {
         if (activeTab !== tab) setActiveTab(tab)
     }
@@ -69,8 +69,8 @@ export default function RaterInfo({scenario, showCallouts=true}) {
                 }
                 <NavItem>
                     <NavLink
-                        className={classnames({ active: activeTab === 'initVitals' })}
-                        onClick={() => toggle('initVitals')}
+                        className={classnames({ active: activeTab === 'initialVitals' })}
+                        onClick={() => toggle('initialVitals')}
                     >
                         Initial Vitals
                     </NavLink>
@@ -85,8 +85,8 @@ export default function RaterInfo({scenario, showCallouts=true}) {
                 </NavItem>
                 <NavItem>
                     <NavLink
-                        className={classnames({ active: activeTab === 'reassessVitals' })}
-                        onClick={() => toggle('reassessVitals')}
+                        className={classnames({ active: activeTab === 'reassessmentVitals' })}
+                        onClick={() => toggle('reassessmentVitals')}
                     >
                         Reassessment Vitals
                     </NavLink>
@@ -102,7 +102,7 @@ export default function RaterInfo({scenario, showCallouts=true}) {
                         rows={callouts}
                     />
                 </TabPane>
-                <TabPane tabId="initVitals">
+                <TabPane tabId="initialVitals">
                     <RevealTable
                         heading="Initial Vitals"
                         rows={initVitals}
@@ -114,7 +114,7 @@ export default function RaterInfo({scenario, showCallouts=true}) {
                         rows={sample}
                     />
                 </TabPane>
-                <TabPane tabId="reassessVitals">
+                <TabPane tabId="reassessmentVitals">
                     <RevealTable
                         heading="Reassessment Vitals"
                         rows={reassessVitals}
