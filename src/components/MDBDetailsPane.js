@@ -8,6 +8,7 @@ import {
 } from "reactstrap"
 
 import DetailsItem from "./DetailsItem"
+import RaterInfo from "./RaterInfo"
 
 const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, showCallouts=true}) => {
 
@@ -35,6 +36,12 @@ const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, sho
             </CardBody>
         </Card>
         <RaterInfo
+            scenario={scenario}
+            defaultTab={"initialVitals"}
+            showCallouts={false}
+            showCalloutIcon={false}
+        />
+        </>
     )
 }
 
