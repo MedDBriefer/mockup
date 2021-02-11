@@ -4,15 +4,18 @@ import CheckBox from "./CheckBox"
 
 const DetailsItem = ({item, isChecked, toggleChecked, showCallouts=true}) => {
 
-    if ("assessment" === item.type) {
-        return <CheckBox
-                    step={item}
-                    isChecked={isChecked}
-                    toggleChecked={toggleChecked}
-                    showCallouts={showCallouts}
-                />
-    } else {
-        return <p>{JSON.stringify(item, null, 4)}</p>
+    switch (item.type) {
+        case "assessment":
+        case "critical-criteria":
+        case "required-action":
+            return <CheckBox
+                step={item}
+                isChecked={isChecked}
+                toggleChecked={toggleChecked}
+                showCallouts={showCallouts}
+            />
+        default:
+            return <p>{JSON.stringify(item, null, 4)}</p>
     }
 }
 
