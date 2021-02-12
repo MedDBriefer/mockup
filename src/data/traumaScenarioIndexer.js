@@ -16,25 +16,25 @@ const HEADING = "heading";
 
 const TRAUMA_SCENARIO_STRUCTURE = {
     nodeLabels: {
-        bsi: "BSI",
-        "scene-size-up": "Scene Size-Up",
+        "bsi":                              "BSI",
+        "scene-size-up":                    "Scene Size-Up",
         "initial-assessment-resuscitation": "Primary Survey/Resuscitation",
-        "general-assessment": 'General Impression and LOC',
-        "airway": "Airway",
-        "breathing": "Breathing",
-        "circulation": "Circulation",
-        "transport-decision": "Transport Decision",
-        "history-taking": "History Taking",
-        "detailed-physical-examination": "Secondary Assessment",
-        "head": "Head",
-        "neck": "Neck",
-        "chest": "Chest",
-        "abdomen-pelvis": "Abdomen/pelvis",
-        "lower-extremities": "Lower extremities",
-        "upper-extremities": "Upper extremities",
+        "general-assessment":               "General Impression and LOC",
+        "airway":                           "Airway",
+        "breathing":                        "Breathing",
+        "circulation":                      "Circulation",
+        "transport-decision":               "Transport Decision",
+        "history-taking":                   "History Taking",
+        "detailed-physical-examination":    "Secondary Assessment",
+        "head":                             "Head",
+        "neck":                             "Neck",
+        "chest":                            "Chest",
+        "abdomen-pelvis":                   "Abdomen/pelvis",
+        "lower-extremities":                "Lower extremities",
+        "upper-extremities":                "Upper extremities",
         "posterior-thorax-lumbar-buttocks": "Posterior thorax, lumbar, and buttocks",
-        "misc": "Ongoing management and reassessment",
-        "critical-criteria": "Critical Criteria"
+        "misc":                             "Ongoing management and reassessment",
+        "critical-criteria":                "Critical Criteria"
     },
     tree: [
         { id: "bsi",           type: HEADING },
@@ -317,6 +317,19 @@ function addAssessmentFindingsToLeaves(items, callouts) {
     return items;
 }
 
+function addInterventionCategorizationsToLeaves(items, interventions) {
+    for (const [stepId, value] of Object.entries(interventions)) {
+        for (const key of Object.keys(items)) {
+            let children = items[key].map((item) =>
+                item.id === stepId
+                    ? {...item, intervention: value}
+                    : item
+            )
+            items[key] = children
+        }
+    }
+}
+
 function addCriticalCriteriaToLeaves(items, criticalCriteria) {
     // add all to the critical criteria step, components can elect not to display
     // ones with parents
@@ -404,6 +417,7 @@ const traumaScenarioIndexer = (scenario) => {
     data.callouts = addAssessmentFindings(scenario.assessmentFindings)
     addAssessmentFindingsToLeaves(data.items, data.callouts)
     addCriticalCriteriaToLeaves(data.items, TRAUMA_SCENARIO_STRUCTURE.criticalCriteria)
+    addInterventionCategorizationsToLeaves(data.items, scenario.interventions)
     const steps = addNodeLabelsToBranches(TRAUMA_SCENARIO_STRUCTURE.tree, TRAUMA_SCENARIO_STRUCTURE.nodeLabels)
     data.steps = addLeavesToBranches(steps, data.items)
 
