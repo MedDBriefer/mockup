@@ -1,14 +1,9 @@
 import React from 'react'
 
-import {
-    Card,
-    CardHeader,
-    CardTitle,
-    CardBody
-} from "reactstrap"
-
 import DetailsItem from "./DetailsItem"
 import RaterInfo from "./RaterInfo"
+
+import Panel from "./Panel"
 
 const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, showCallouts=true}) => {
 
@@ -18,26 +13,21 @@ const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, sho
     }
     return (
         <>
-        <Card>
-            <CardHeader>
-                <CardTitle className="h3 text-center">{label} Details</CardTitle>
-            </CardHeader>
-            <CardBody>
-                <ul>
-                    {children.map((child) =>
-                        <li key={child.id}>
-                            <DetailsItem
-                                scenario={scenario}
-                                item={child}
-                                isChecked={isChecked}
-                                toggleChecked={toggleChecked}
-                                showCallouts={showCallouts}
-                            />
-                        </li>
-                    )}
-                </ul>
-            </CardBody>
-        </Card>
+        <Panel title={`${label} Details`}>
+            <ul>
+                {children.map((child) =>
+                    <li key={child.id}>
+                        <DetailsItem
+                            scenario={scenario}
+                            item={child}
+                            isChecked={isChecked}
+                            toggleChecked={toggleChecked}
+                            showCallouts={showCallouts}
+                        />
+                    </li>
+                )}
+            </ul>
+        </Panel>
         <RaterInfo
             scenario={scenario}
             defaultTab={"initialVitals"}
