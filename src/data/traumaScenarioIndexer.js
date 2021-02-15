@@ -27,12 +27,12 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "history-taking":                   "History Taking",
         "detailed-physical-examination":    "Secondary Assessment",
         "head":                             "Head",
-        "neck":                             "Neck",
-        "chest":                            "Chest",
-        "abdomen-pelvis":                   "Abdomen/pelvis",
-        "lower-extremities":                "Lower extremities",
+        "neck":                             "Neck**",
+        "chest":                            "Chest**",
+        "abdomen-pelvis":                   "Abdomen/pelvis**",
+        "lower-extremities":                "Lower extremities**",
         "upper-extremities":                "Upper extremities",
-        "posterior-thorax-lumbar-buttocks": "Posterior thorax, lumbar, and buttocks",
+        "posterior-thorax-lumbar-buttocks": "Posterior thorax, lumbar, and buttocks**",
         "misc":                             "Ongoing management and reassessment",
         "critical-criteria":                "Critical Criteria"
     },
@@ -98,8 +98,8 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "assess-pulse",     type: ASSESS, label: "Checks pulse" },
             { id: "assess-skin",      type: ASSESS, label: "Assess skin [either skin color, temperature, or condition]" },
             { id: "assess-bleeding",  type: ASSESS, label: "Assesses for major bleeding" },
-            { id: "control-bleeding", type: INTERV, label: "Manages major bleeding if present" },
-            { id: "control-shock",    type: INTERV, label: "Initiates shock management" } // crit criteria 640
+            { id: "control-bleeding", type: INTERV, label: "Controls major bleeding if present" },
+            { id: "control-shock",    type: INTERV, label: "Initiates shock management as indicated" } // crit criteria 640
         ],
         'transport-decision': [
             { id: "transport-priority", type: REQURED, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
@@ -109,9 +109,9 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "attempt-obtain-sample", type: ASSESS, label: "Attempts to obtain SAMPLE history" } // point to SAMPLE
         ],
         'head': [
-            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth, nose, and assesses facial area" },
+            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth**, nose**, and assesses facial area" },
             { id: "assess-scape-ears",      type: ASSESS, label: "Inspects and palpates scalp and ears" },
-            { id: "assess-perrl",           type: ASSESS, label: "Assesses eyes for PERRL" }
+            { id: "assess-perrl",           type: ASSESS, label: "Assesses eyes for PERRL**" }
         ],
         'neck': [
             { id: "assess-trachea", type: ASSESS, label: "Checks position of trachea" },
@@ -124,7 +124,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "auscultate-chest", type: ASSESS, label: "Auscultates chest" }
         ],
         'abdomen-pelvis': [
-            { id: "assess-abdomen",   type: ASSESS, label: "Inspects & palpates abdomen" },
+            { id: "assess-abdomen",   type: ASSESS, label: "Inspects and palpates abdomen" },
             { id: "assess-pelvis",    type: ASSESS, label: "Assesses pelvis" },
             { id: "assess-genitalia", type: ASSESS, label: "Verbalizes assessment of genitalia/perineum as needed" }
         ],
