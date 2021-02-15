@@ -1,11 +1,11 @@
 import React from 'react'
 
-import DetailsItem from "./DetailsItem"
+import CheckListItem from "./CheckListItem"
 import RaterInfo from "./RaterInfo"
 
 import Panel from "./Panel"
 
-const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, showCallouts=true}) => {
+const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, setChecked, showCallouts, showCalloutIcon}) => {
 
     const {label, children} = getCurrentNode()
     if (null === label) {
@@ -17,12 +17,14 @@ const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, sho
             <ul>
                 {children.map((child) =>
                     <li key={child.id}>
-                        <DetailsItem
+                        <CheckListItem
                             scenario={scenario}
                             item={child}
                             isChecked={isChecked}
                             toggleChecked={toggleChecked}
+                            setChecked={setChecked}
                             showCallouts={showCallouts}
+                            showCalloutIcon={showCalloutIcon}
                         />
                     </li>
                 )}

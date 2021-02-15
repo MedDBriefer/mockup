@@ -17,8 +17,9 @@ class Mockup1 extends React.Component {
       criticalCriteria: {}
     };
     // bind event event handlers;
-    this.setCurrentNode          = this.setCurrentNode.bind(this)
+    this.setCurrentNode    = this.setCurrentNode.bind(this)
     this.toggleChecked     = this.toggleChecked.bind(this)
+    this.setChecked        = this.setChecked.bind(this)
     // need to bind these as well as functional components don't have a 'this'
     this.isChecked         = this.isChecked.bind(this)
     this.getCurrentNode    = this.getCurrentNode.bind(this)
@@ -45,6 +46,12 @@ class Mockup1 extends React.Component {
 
   isChecked(id) {
     return this.state.checkListItems[id]
+  }
+
+  setChecked(id, boolVal) {
+    this.setState((prevState) => ({
+      checkListItems: {...prevState.children, [id]: boolVal}
+    }))
   }
 
   toggleChecked(id) {
@@ -90,6 +97,9 @@ class Mockup1 extends React.Component {
                   getCurrentNode={this.getCurrentNode}
                   isChecked={this.isChecked}
                   toggleChecked={this.toggleChecked}
+                  setChecked={this.setChecked}
+                  showCallouts={true}
+                  showCalloutIcons={true}
                 />
 
     return <MDBContainer
