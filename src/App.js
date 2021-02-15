@@ -9,7 +9,7 @@ import Mockup2 from "./Mockup2"
 import Mockup3 from "./Mockup3"
 
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route
 } from "react-router-dom"
