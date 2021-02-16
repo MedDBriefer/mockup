@@ -12,7 +12,7 @@ function allChildrenAreHeadings(step) {
 }
 
 
-const Outline = ({ scenario, steps, depth = 3, switcher, first=false}) => {
+const Outline = ({ scenario, steps, depth = 3, first=false, config}) => {
 
     return (
         <ul className={first ? "first" : ""}>
@@ -29,13 +29,13 @@ const Outline = ({ scenario, steps, depth = 3, switcher, first=false}) => {
                             scenario={scenario}
                             steps={step.children}
                             depth={depth + 1}
-                            switcher={switcher}
+                            config={config}
                         />
                     </>
                 :
                     <Button
                         color="link"
-                        onClick={() => switcher(step.id)}>
+                        onClick={() => config.setCurrentNode(step.id)}>
                         <span className={`h${depth + 1}`}>
                             {step.label}
                         </span>

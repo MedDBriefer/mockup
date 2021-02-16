@@ -5,37 +5,33 @@ import RaterInfo from "./RaterInfo"
 
 import Panel from "./Panel"
 
-const MDBDetailsPane = ({scenario, getCurrentNode, isChecked, toggleChecked, setChecked, showCallouts, showCalloutIcon}) => {
+const MDBDetailsPane = ({scenario, config }) => {
 
-    const {label, children} = getCurrentNode()
+    const raterInfoConfig = Object.assign(config, {displayCalloutText: false})
+    const {label, children} = config.getCurrentNode()
     if (null === label) {
         return <div></div>
     }
     return (
         <>
-        <Panel title={`${label} Details`}>
-            <ul>
-                {children.map((child) =>
-                    <li key={child.id}>
-                        <CheckListItem
-                            scenario={scenario}
-                            item={child}
-                            isChecked={isChecked}
-                            toggleChecked={toggleChecked}
-                            setChecked={setChecked}
-                            showCallouts={showCallouts}
-                            showCalloutIcon={showCalloutIcon}
-                        />
-                    </li>
-                )}
-            </ul>
-        </Panel>
-        <RaterInfo
-            scenario={scenario}
-            defaultTab={"initialVitals"}
-            showCallouts={false}
-            showCalloutIcon={false}
-        />
+            <Panel title={`${label} Details`}>
+                <ul>
+                    {children.map((child) =>
+                        <li key={child.id}>
+                            <CheckListItem
+                                scenario={scenario}
+                                item={child}
+                                config={config}
+                            />
+                        </li>
+                    )}
+                </ul>
+            </Panel>
+            <RaterInfo
+                scenario={scenario}
+                defaultTab={"initialVitals"}
+                config={raterInfoConfig}
+            />
         </>
     )
 }
