@@ -76,7 +76,6 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "assess-injury-mechanism", type: ASSESS, label: "Determines the mechanism of injury/nature of illness" },
             { id: "assess-num-patients",     type: ASSESS, label: "Determines the number of patients" },
             { id: "request-addl-help",       type: ASSESS, label: "Requests additional help if necessary" },
-            { id: "assess-spinal-stability", type: ASSESS, label: "Considers stabilization of spine" }, // crit criteria 610
             { id: "stabilizes-spine",        type: INTERV, label: "Stabilizes or directs assistant to stabilize the cervical spine, as indicated" } // crit criteria 610
         ],
         'general-assessment': [
