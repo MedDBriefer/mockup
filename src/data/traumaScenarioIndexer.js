@@ -89,14 +89,14 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "manages-airway",   type: INTERV, label: "Appropriately manages any problems associated with airway"}
         ],
         'breathing': [
-            { id: "assess-breathing",        type: ASSESS, label: "Assess breathing" },
-            { id: "assess-ventilation",      type: ASSESS, label: "Assess adequate ventilation" },
+            { id: "assess-breathing",        type: ASSESS, label: "Assesses breathing" },
+            { id: "assess-ventilation",      type: ASSESS, label: "Assures adequate ventilation" },
             { id: "oxygen-therapy",          type: INTERV, label: "Initiates appropriate oxygen therapy" }, // crit criteria 620
-            { id: "manage-breathing-injury", type: INTERV, label: "Manages any injury which may compromise breathing/ventilation" } // crit criteria 630
+            { id: "manage-breathing-injury", type: INTERV, label: "Manages any injury that may compromise breathing/ventilation" } // crit criteria 630
         ],
         'circulation': [
             { id: "assess-pulse",     type: ASSESS, label: "Checks pulse" },
-            { id: "assess-skin",      type: ASSESS, label: "Assess skin [either skin color, temperature, or condition]" },
+            { id: "assess-skin",      type: ASSESS, label: "Assesses skin [either skin color, temperature, or condition]" },
             { id: "assess-bleeding",  type: ASSESS, label: "Assesses for major bleeding" },
             { id: "control-bleeding", type: INTERV, label: "Controls major bleeding if present" },
             { id: "control-shock",    type: INTERV, label: "Initiates shock management as indicated" } // crit criteria 640
