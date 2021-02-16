@@ -1,8 +1,9 @@
 import React from 'react'
-import {Container, Row, Col} from 'reactstrap'
-// import CheckListPane from "./CheckListPane"
-// import CheckList from "./CheckList"
-// import InfoPane from "./InfoPane";
+import {
+    Container,
+    Row,
+    Col
+} from 'reactstrap'
 
 const MDBContainer = ({lhs, rhs, lhsWidth=6, rhsWidth=6}) => {
 

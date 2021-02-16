@@ -1,10 +1,6 @@
 import React from "react"
 
 import {
-    // Card,
-    // CardHeader,
-    // CardTitle,
-    // CardBody,
     Table
 } from "reactstrap"
 
@@ -14,7 +10,7 @@ import classnames from "classnames"
 import Panel from "./Panel"
 import RevealTableRow from "./RevealTableRow"
 
-export default function RevealTable({heading, rows=[]}) {
+export default function RevealTable({heading, rows=[] }) {
 
     return (
         <Panel title={heading} titleSize={"h5"}>
