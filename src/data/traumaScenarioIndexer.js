@@ -84,8 +84,9 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "determines-life-threats",      type: ASSESS, label: "Determines chief complaint/apparent life-threats" }
         ],
         'airway': [
-            { id: "assess-airway",   type: ASSESS, label: "Opens and assesses airway" },
-            { id: "manages-airway",  type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
+            { id: "assess-airway",    type: ASSESS, label: "Opens and assesses airway" },
+            { id: "inserts-adjunct",  type: INTERV, label: "Inserts adjunct as indicated" }, // action / crit criteria 690
+            { id: "manages-airway",   type: INTERV, label: "Appropriately manages any problems associated with airway"}
         ],
         'breathing': [
             { id: "assess-breathing",        type: ASSESS, label: "Assess breathing" },
