@@ -2,7 +2,8 @@ import React from "react";
 
 import MDBContainer from "./components/MDBContainer"
 
-import Accordian from "./components/Accordian"
+// import Accordian from "./components/Accordian"
+import CheckList from "./components/CheckList"
 import RaterInfo from "./components/RaterInfo"
 
 class Mockup2 extends React.Component {
@@ -75,12 +76,19 @@ class Mockup2 extends React.Component {
     const lhsConfig = this.mkConfig(true, false, true)
     const rhsConfig = this.mkConfig(false, true, false)
 
-    const lhs = <Accordian
-                  key="first"
-                  heading="Checklist"
-                  steps={scen.steps}
-                  first={true}
-                  config={lhsConfig}
+    // const lhs = <Accordian
+    //               scenario={scen}
+    //               steps={scen.steps}
+    //               heading="Checklist"
+    //               first={true}
+    //               config={lhsConfig}
+    //             />
+    const lhs = <CheckList
+                    scenario={scen}
+                    steps={scen.steps}
+                    heading="Checklist"
+                    first={true}
+                    config={lhsConfig}
                 />
     const rhs = <RaterInfo
                   scenario={scen}
