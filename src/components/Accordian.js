@@ -9,7 +9,7 @@ import {
 
 import  CheckList  from "./CheckList"
 
-const Accordian = ({ steps, config }) => {
+const Accordian = ({scenario, steps, config }) => {
 
     const childrenAreHeadings = (step) => {
         return step.children && step.children[0].type === 'heading'
@@ -24,10 +24,12 @@ const Accordian = ({ steps, config }) => {
                 <CardBody>
                     { childrenAreHeadings(step)
                       ?  <Accordian
+                            scenario={scenario}
                             steps={step.children}
                             config={config}
                         />
                       :  <CheckList
+                            scenario={scenario}
                             steps={step.children}
                             config={config}
                         />
