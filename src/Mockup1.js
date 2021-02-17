@@ -8,7 +8,6 @@ import Outline from "./components/Outline";
 class Mockup1 extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       callouts: {},
       vitals: {},
