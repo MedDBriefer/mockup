@@ -77,9 +77,9 @@ class Mockup3 extends React.Component {
     const rhsConfig = this.mkConfig(false, true, false)
 
     const lhs = <Accordian
-                  key="first"
-                  heading="Checklist"
+                  scenario={scen}
                   steps={scen.steps}
+                  heading="Checklist"
                   first={true}
                   config={lhsConfig}
                 />
