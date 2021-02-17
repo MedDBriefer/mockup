@@ -10,23 +10,34 @@ import {
 
 import classnames from "classnames";
 
-import CheckBox from "./CheckBox";
+// import CheckBox from "./CheckBox";
+import CheckListItem from "./CheckListItem"
 
+const isLeafNode = (step) => {
+  return !step.children.length > 0
+}
 
-export default function CheckList({ heading, steps, depth = 3, first = false, config }){
+export default function CheckList({ scenario, steps, heading, depth = 3, first = false, config }){
   const [collapsed, setCollapsed] = useState(false);
-  const toggle = () => setCollapsed(!collapsed);
-
+  const toggle = () => {
+    console.log("toggling");
+    setCollapsed(!collapsed);
+  }
   return (
     <ul className={classnames({first:  first})}>
       {steps.map((step) => (
         <li key={`li-${step.id}`}>
-          {!step.children.length > 0
+          {isLeafNode(step)
           ?
-            <CheckBox
-                step={step}
+            // <CheckBox
+            //     step={step}
+            //     config={config}
+            //   />
+            <CheckListItem
+                scenario={scenario}
+                item={step}
                 config={config}
-              />
+            />
           :
             <>
               <p
@@ -35,6 +46,7 @@ export default function CheckList({ heading, steps, depth = 3, first = false, co
                   {step.label}
               </p>
               <CheckList
+                  scenario={scenario}
                   steps={step.children}
                   depth={depth + 1}
                   config={config}
