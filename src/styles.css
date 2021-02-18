@@ -69,6 +69,11 @@ ul.first {
   padding-left: 13px;
 }
 
+.checkbox-icon {
+  /* margin-top: 5px; */
+  transform: translateY(5px);
+}
+
 .callout-icon {
   margin-left: 10px;
 }
