@@ -10,7 +10,7 @@ import classnames from "classnames"
 import Panel from "./Panel"
 import RevealTableRow from "./RevealTableRow"
 
-export default function RevealTable({heading, rows=[] }) {
+export default function RevealTable({heading, rows=[], config}) {
 
     return (
         <Panel title={heading} titleSize={"h5"}>
@@ -27,6 +27,7 @@ export default function RevealTable({heading, rows=[] }) {
                             key={index}
                             label={row.label}
                             value={row.value}
+                            config={config}
                         />
                     )}
                 </tbody>
