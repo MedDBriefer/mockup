@@ -208,6 +208,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "stabilizes-spine": {
             id: "c-spine-interventions",
             type: CHECK,
+            steps: [],
             interventions: [
                 { id: "c-spine-intervention-10", label: "Holds manual stabilization" },
                 { id: "c-spine-intervention-20", label: "Applies cervical collar" }
@@ -217,6 +218,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "manages-airway": {
             id: "airway-interventions",
             type: RADIO,
+            steps: [],
             interventions: [
                 { id: "airway-intervention-10", label: "Inserts OPA" },
                 { id: "airway-intervention-20", label: "Inserts NPA" },
@@ -226,6 +228,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "assess-ventilation": {
             id: "ventilation-interventions",
             type: RADIO,
+            steps: [],
             interventions: [
                 { id: "ventilation-intervention-10", label: "Endotracheal intubation" },
                 { id: "ventilation-intervention-20", label: "Bag-valve mask" },
@@ -239,6 +242,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
                 { id: "bleeding-intervention-10", label: "Applies direct pressure" },
                 { id: "bleeding-intervention-20", label: "Applies tourniquet" }
             ],
+            steps: [],
             criticalCriteria: [ // Critical criteria should automatically be check boxes
                 { id: "bleeding-crit-30", type: CRIT_FAIL, label: "Did not control hemorrhage using correct procedures in a timely manner" },
                 { id: "bleeding-crit-40", type: CRIT_FAIL, label: "Did not apply direct pressure to wound before applying tourniquet" },
@@ -254,6 +258,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
                 { id: "shock-intervention-20", label: "IV fluid therapy--IV Push/Bolus" },
                 { id: "shock-intervention-30", label: "Covers patient" }
             ],
+            steps: [],
             criticalCriteria: [
                 { id: "shock-crit-10", type: CRIT_FAIL, label: "Fails to establish a patent and properly adjusted IV within 6-minute time limit" },
                 { id: "shock-crit-20", type: CRIT_FAIL, label: "Fails to establish IV within 3 attempts during 6-minute time limit" },
@@ -269,6 +274,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
                 { id: "transport-intervention-10", label: "Scoop Stretcher" },
                 { id: "transport-intervention-20", label: "Supine Long Backboard" },
             ],
+            steps: [],
             criticalCriteria: [
                 { id: "transport-crit-10", type: CRIT_FAIL, label: "Did not immediately direct or take manual immobilization of head" },
                 { id: "transport-crit-20", type: CRIT_FAIL, label: "Did not properly apply appropriately sized cervical collar before ordering releaseof manual immobilization" },
@@ -424,23 +430,5 @@ const traumaScenarioIndexer = (scenario) => {
     return data;
 }
 
-
-// export const scenarioBuilder = (scen) => {
-//     let { info, callouts, outline, items, criticalCriteria, initialVitalSigns, SAMPLE, reassessmentVitals } = scen;
-//     items = annotateItems(items, callouts, criticalCriteria)
-//     let newScen = {
-//         info,
-//         callouts,
-//         steps: annotateStepsTree(outline, items),
-//         items,
-//         criticalCriteria,
-//         initialVitalSigns,
-//         SAMPLE,
-//         reassessmentVitals
-//     };
-//     return newScen;
-// };
-
-// }
 
 export default traumaScenarioIndexer
