@@ -6,6 +6,12 @@ const CallOut = ({ step, config }) => {
           ?
             <span className="callout">{step.callout}</span>
           :
-            <i className="callout-icon fa fa-comment" />;
+            // <i className="callout-icon fa fa-comment" />;
+            <span
+              className="callout-icon material-icons-outlined"
+              // onClick={() => alert("step.callout")}
+            >
+              message
+            </span>
 }
 export default CallOut;
