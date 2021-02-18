@@ -36,11 +36,11 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
         // similar to calloutButton/calloutIcon (whatever you want to call it)
         // except it merely displays the callout label and calls the appropriate
         // setter(s) which would trigger the value's component to be displayed/highlighted
-        callouts = scenario.callouts.map(co => {
+        callouts = scenario.assessmentSteps.map(step => {
             return {
-                id: co.stepId,
-                label: co.calloutLabel,
-                value: co.calloutText
+                id: step.id,
+                label: step.calloutLabel,
+                value: step.callout
             }
         })
     }
