@@ -1,5 +1,4 @@
 import React from "react"
-// , {useState}
 
 import {
     Card,
@@ -10,7 +9,7 @@ import {
 
 import  CheckList  from "./CheckList"
 
-const Accordian = ({isChecked, toggleChecked, steps, showCallouts, showCalloutIcon}) => {
+const Accordian = ({scenario, steps, config }) => {
 
     const childrenAreHeadings = (step) => {
         return step.children && step.children[0].type === 'heading'
@@ -25,18 +24,14 @@ const Accordian = ({isChecked, toggleChecked, steps, showCallouts, showCalloutIc
                 <CardBody>
                     { childrenAreHeadings(step)
                       ?  <Accordian
-                            isChecked={isChecked}
-                            toggleChecked={toggleChecked}
+                            scenario={scenario}
                             steps={step.children}
-                            showCallouts={showCallouts}
-                            showCalloutIcon={showCalloutIcon}
+                            config={config}
                         />
                       :  <CheckList
-                            isChecked={isChecked}
-                            toggleChecked={toggleChecked}
+                            scenario={scenario}
                             steps={step.children}
-                            showCallouts={showCallouts}
-                            showCalloutIcon={showCalloutIcon}
+                            config={config}
                         />
                     }
                 </CardBody>

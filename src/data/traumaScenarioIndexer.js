@@ -76,7 +76,6 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "assess-injury-mechanism", type: ASSESS, label: "Determines the mechanism of injury/nature of illness" },
             { id: "assess-num-patients",     type: ASSESS, label: "Determines the number of patients" },
             { id: "request-addl-help",       type: ASSESS, label: "Requests additional help if necessary" },
-            { id: "assess-spinal-stability", type: ASSESS, label: "Considers stabilization of spine" }, // crit criteria 610
             { id: "stabilizes-spine",        type: INTERV, label: "Stabilizes or directs assistant to stabilize the cervical spine, as indicated" } // crit criteria 610
         ],
         'general-assessment': [
@@ -85,18 +84,19 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "determines-life-threats",      type: ASSESS, label: "Determines chief complaint/apparent life-threats" }
         ],
         'airway': [
-            { id: "assess-airway",   type: ASSESS, label: "Opens and assesses airway" },
-            { id: "manages-airway",  type: INTERV, label: "Inserts adjunct as indicated" } // action / crit criteria 690
+            { id: "assess-airway",    type: ASSESS, label: "Opens and assesses airway" },
+            { id: "inserts-adjunct",  type: INTERV, label: "Inserts adjunct as indicated" }, // action / crit criteria 690
+            { id: "manages-airway",   type: INTERV, label: "Appropriately manages any problems associated with airway"}
         ],
         'breathing': [
-            { id: "assess-breathing",        type: ASSESS, label: "Assess breathing" },
-            { id: "assess-ventilation",      type: ASSESS, label: "Assess adequate ventilation" },
+            { id: "assess-breathing",        type: ASSESS, label: "Assesses breathing" },
+            { id: "assess-ventilation",      type: ASSESS, label: "Assures adequate ventilation" },
             { id: "oxygen-therapy",          type: INTERV, label: "Initiates appropriate oxygen therapy" }, // crit criteria 620
-            { id: "manage-breathing-injury", type: INTERV, label: "Manages any injury which may compromise breathing/ventilation" } // crit criteria 630
+            { id: "manage-breathing-injury", type: INTERV, label: "Manages any injury that may compromise breathing/ventilation" } // crit criteria 630
         ],
         'circulation': [
             { id: "assess-pulse",     type: ASSESS, label: "Checks pulse" },
-            { id: "assess-skin",      type: ASSESS, label: "Assess skin [either skin color, temperature, or condition]" },
+            { id: "assess-skin",      type: ASSESS, label: "Assesses skin [either skin color, temperature, or condition]" },
             { id: "assess-bleeding",  type: ASSESS, label: "Assesses for major bleeding" },
             { id: "control-bleeding", type: INTERV, label: "Controls major bleeding if present" },
             { id: "control-shock",    type: INTERV, label: "Initiates shock management as indicated" } // crit criteria 640
@@ -208,6 +208,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "stabilizes-spine": {
             id: "c-spine-interventions",
             type: CHECK,
+            steps: [],
             interventions: [
                 { id: "c-spine-intervention-10", label: "Holds manual stabilization" },
                 { id: "c-spine-intervention-20", label: "Applies cervical collar" }
@@ -217,6 +218,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "manages-airway": {
             id: "airway-interventions",
             type: RADIO,
+            steps: [],
             interventions: [
                 { id: "airway-intervention-10", label: "Inserts OPA" },
                 { id: "airway-intervention-20", label: "Inserts NPA" },
@@ -226,6 +228,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "assess-ventilation": {
             id: "ventilation-interventions",
             type: RADIO,
+            steps: [],
             interventions: [
                 { id: "ventilation-intervention-10", label: "Endotracheal intubation" },
                 { id: "ventilation-intervention-20", label: "Bag-valve mask" },
@@ -239,6 +242,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
                 { id: "bleeding-intervention-10", label: "Applies direct pressure" },
                 { id: "bleeding-intervention-20", label: "Applies tourniquet" }
             ],
+            steps: [],
             criticalCriteria: [ // Critical criteria should automatically be check boxes
                 { id: "bleeding-crit-30", type: CRIT_FAIL, label: "Did not control hemorrhage using correct procedures in a timely manner" },
                 { id: "bleeding-crit-40", type: CRIT_FAIL, label: "Did not apply direct pressure to wound before applying tourniquet" },
@@ -254,6 +258,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
                 { id: "shock-intervention-20", label: "IV fluid therapy--IV Push/Bolus" },
                 { id: "shock-intervention-30", label: "Covers patient" }
             ],
+            steps: [],
             criticalCriteria: [
                 { id: "shock-crit-10", type: CRIT_FAIL, label: "Fails to establish a patent and properly adjusted IV within 6-minute time limit" },
                 { id: "shock-crit-20", type: CRIT_FAIL, label: "Fails to establish IV within 3 attempts during 6-minute time limit" },
@@ -269,6 +274,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
                 { id: "transport-intervention-10", label: "Scoop Stretcher" },
                 { id: "transport-intervention-20", label: "Supine Long Backboard" },
             ],
+            steps: [],
             criticalCriteria: [
                 { id: "transport-crit-10", type: CRIT_FAIL, label: "Did not immediately direct or take manual immobilization of head" },
                 { id: "transport-crit-20", type: CRIT_FAIL, label: "Did not properly apply appropriately sized cervical collar before ordering releaseof manual immobilization" },
@@ -424,23 +430,5 @@ const traumaScenarioIndexer = (scenario) => {
     return data;
 }
 
-
-// export const scenarioBuilder = (scen) => {
-//     let { info, callouts, outline, items, criticalCriteria, initialVitalSigns, SAMPLE, reassessmentVitals } = scen;
-//     items = annotateItems(items, callouts, criticalCriteria)
-//     let newScen = {
-//         info,
-//         callouts,
-//         steps: annotateStepsTree(outline, items),
-//         items,
-//         criticalCriteria,
-//         initialVitalSigns,
-//         SAMPLE,
-//         reassessmentVitals
-//     };
-//     return newScen;
-// };
-
-// }
 
 export default traumaScenarioIndexer

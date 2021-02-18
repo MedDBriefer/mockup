@@ -2,7 +2,6 @@ import React from "react";
 
 import MDBContainer from "./components/MDBContainer"
 
-// import CheckList from "./components/CheckList";
 import Accordian from "./components/Accordian"
 import RaterInfo from "./components/RaterInfo"
 
@@ -16,15 +15,20 @@ class Mockup3 extends React.Component {
      checkListItems: {},
      criticalCriteria: {}
    };
-    // bind event event handlers;
-    this.toggleChecked = this.toggleChecked.bind(this)
-    // state accessor needs to be bound also as 'this' isn't defined in
-    // function components
-    this.isChecked = this.isChecked.bind(this)
+   // bind event handlers and other methods being passed down as props
+   this.toggleChecked = this.toggleChecked.bind(this)
+   this.setChecked = this.setChecked.bind(this)
+   this.isChecked = this.isChecked.bind(this)
   }
 
   isChecked(id) {
     return (id in this.state.checkListItems) ? this.state.checkListItems[id] : false
+  }
+
+  setChecked(id, boolVal) {
+    this.setState((prevState) => ({
+      checkListItems: { ...prevState.children, [id]: boolVal }
+    }))
   }
 
   toggleChecked(id) {
@@ -54,32 +58,35 @@ class Mockup3 extends React.Component {
     });
   }
 
+
+  mkConfig(dispCalloutIcons, dispCalloutText, dispForms) {
+    return {
+      isChecked: this.isChecked,
+      toggleChecked: this.toggleChecked,
+      setChecked: this.setChecked,
+      displayCalloutIcons: dispCalloutIcons,
+      displayCalloutText: dispCalloutText,
+      displayInterventionForms: dispForms,
+    }
+  }
+
   render() {
     const scen = this.props.scenario;
 
-    // const lhs = <CheckList
-    //               isChecked = { this.isChecked }
-    //               toggleChecked = { this.toggleChecked }
-    //               key="first"
-    //               heading="Checklist"
-    //               steps={scen.steps}
-    //               first={true}
-    //               showCallouts={false}
-    //             />
+    const lhsConfig = this.mkConfig(true, false, true)
+    const rhsConfig = this.mkConfig(false, true, false)
+
     const lhs = <Accordian
-                  isChecked={this.isChecked}
-                  toggleChecked={this.toggleChecked}
-                  key="first"
-                  heading="Checklist"
+                  scenario={scen}
                   steps={scen.steps}
+                  heading="Checklist"
                   first={true}
-                  showCallouts={false}
-                  showCalloutIcon={true}
+                  config={lhsConfig}
                 />
     const rhs = <RaterInfo
                   scenario={scen}
-                  showCallouts={true}
-                  showCalloutIcon={true}
+                  defaultTab={rhsConfig.dispCalloutText ? "callouts" : "initialVitals"}
+                  config={rhsConfig}
                 />
 
     return <MDBContainer

@@ -1,12 +1,11 @@
 import React from "react";
 
-const CallOut = ({ text, show }) => {
+const CallOut = ({ step, config }) => {
 
-  if (show) {
-    return <span className="callout">{text}</span>;
-  } else {
-      // return <i className="callout-icon fa fa-comment" />;
-      return <span class="material-icons">message</span>
-  }
+  return (config.isChecked(step.id))
+          ?
+            <span className="callout">{step.callout}</span>
+          :
+            <i className="callout-icon fa fa-comment" />;
 }
 export default CallOut;

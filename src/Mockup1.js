@@ -8,7 +8,6 @@ import Outline from "./components/Outline";
 class Mockup1 extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       callouts: {},
       vitals: {},
@@ -16,13 +15,12 @@ class Mockup1 extends React.Component {
       checkListItems: {},
       criticalCriteria: {}
     };
-    // bind event event handlers;
+    // bind event handlers and other methods being passed down as props
     this.setCurrentNode    = this.setCurrentNode.bind(this)
+    this.getCurrentNode    = this.getCurrentNode.bind(this)
     this.toggleChecked     = this.toggleChecked.bind(this)
     this.setChecked        = this.setChecked.bind(this)
-    // need to bind these as well as functional components don't have a 'this'
     this.isChecked         = this.isChecked.bind(this)
-    this.getCurrentNode    = this.getCurrentNode.bind(this)
   }
 
   setCurrentNode(node) {
@@ -82,24 +80,35 @@ class Mockup1 extends React.Component {
     });
   }
 
+  mkConfig(dispCalloutIcons, dispCalloutText, dispForms) {
+    return {
+      getCurrentNode: this.getCurrentNode,
+      setCurrentNode: this.setCurrentNode,
+      isChecked: this.isChecked,
+      toggleChecked: this.toggleChecked,
+      setChecked: this.setChecked,
+      displayCalloutIcons: dispCalloutIcons,
+      displayCalloutText: dispCalloutText,
+      displayInterventionForms: dispForms,
+    }
+  }
+
   render() {
     const scen = this.props.scenario;
+
+    const lhsConfig = this.mkConfig(false, false, false)
+    const rhsConfig = this.mkConfig(true, true, true)
 
     const lhs = <Outline
                   heading="Navigation"
                   scenario={scen}
                   steps={scen.steps}
-                  switcher={this.setCurrentNode}
                   first={true}
+                  config={lhsConfig}
                 />
     const rhs = <MDBDetailsPane
                   scenario={scen}
-                  getCurrentNode={this.getCurrentNode}
-                  isChecked={this.isChecked}
-                  toggleChecked={this.toggleChecked}
-                  setChecked={this.setChecked}
-                  showCallouts={true}
-                  showCalloutIcons={true}
+                  config={rhsConfig}
                 />
 
     return <MDBContainer
