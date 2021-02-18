@@ -53,9 +53,7 @@ class Mockup1 extends React.Component {
   }
 
   toggleChecked(id) {
-    this.setState((prevState) => ({
-        checkListItems: {...prevState.checkListItems, [id]: !prevState.checkListItems[id]}
-    }))
+    this.setChecked(id, !this.state.checkListItems[id])
   }
 
   componentDidMount() {
