@@ -103,6 +103,7 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
                         <RevealTable
                             heading="Assessment Findings"
                             rows={callouts}
+                            config={config}
                         />
                     </TabPane>
                 }
@@ -110,18 +111,21 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
                     <RevealTable
                         heading="Initial Vitals"
                         rows={initVitals}
+                        config={config}
                     />
                 </TabPane>
                 <TabPane tabId="sample">
                     <RevealTable
                         heading="SAMPLE"
                         rows={sample}
+                        config={config}
                     />
                 </TabPane>
                 <TabPane tabId="reassessmentVitals">
                     <RevealTable
                         heading="Reassessment Vitals"
                         rows={reassessVitals}
+                        config={config}
                     />
                 </TabPane>
             </TabContent>
