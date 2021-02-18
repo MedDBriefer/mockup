@@ -379,18 +379,11 @@ function addNodeLabelsToBranches(steps, labelsMap) {
         return step
     })
 }
-    // eslint-disable-next-line
- function addLeavesToBranches(steps, items) {
-    // console.log(steps);
-    // console.log(items)
+
+function addLeavesToBranches(steps, items) {
     return steps.map((step) => {
         if (!step.children) {
             step.children = (step.id in items) ? addEmptyChildren(items[step.id]) : []
-            // let callout = callouts.find((ca) => ca.step === step.id);
-            // // let callout = callouts[]
-            // if (callout) {
-            //   step.callout = callout.id;
-            // }
         } else {
             step.children = addLeavesToBranches(step.children, items);
         }
@@ -400,6 +393,18 @@ function addNodeLabelsToBranches(steps, labelsMap) {
 
 function deepCopy(object) {
     return JSON.parse(JSON.stringify(object))
+}
+
+function getAssessmentNodes(tree, assessments=[]) {
+    // console.log(tree)
+    for (const node of tree) {
+        if (node.type === 'assessment') {
+            assessments.push(node)
+        } else if (node.type === 'heading') {
+            assessments = getAssessmentNodes(node.children, assessments)
+        }
+    }
+    return assessments;
 }
 
 const traumaScenarioIndexer = (scenario) => {
@@ -427,6 +432,10 @@ const traumaScenarioIndexer = (scenario) => {
     const steps = addNodeLabelsToBranches(TRAUMA_SCENARIO_STRUCTURE.tree, TRAUMA_SCENARIO_STRUCTURE.nodeLabels)
     data.steps = addLeavesToBranches(steps, data.items)
 
+    // filter through tree of steps, creating ordered list of assessment steps'
+    const assessments = getAssessmentNodes(steps)
+    // console.log(assessments)
+    data.assessmentSteps = assessments;
     return data;
 }
 
