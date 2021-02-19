@@ -47,8 +47,12 @@ class Mockup1 extends React.Component {
   }
 
   setChecked(id, boolVal) {
+    // bad example, a bug, damm auto-complete...
+    // this.setState((prevState) => ({
+    //   checkListItems: { ...prevState.children, [id]: boolVal }
+    // }))
     this.setState((prevState) => ({
-      checkListItems: {...prevState.children, [id]: boolVal}
+      checkListItems: {...prevState.checkListItems, [id]: boolVal}
     }))
   }
 
