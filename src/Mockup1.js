@@ -47,7 +47,10 @@ class Mockup1 extends React.Component {
   }
 
   setChecked(id, boolVal) {
-    // bad example, a bug, damm auto-complete...
+    // bad example, a bug, BAD auto-complete...
+    // keeping as a comment for now just in case you based
+    // your setter method off my bad example, so you can see
+    // what the fix is
     // this.setState((prevState) => ({
     //   checkListItems: { ...prevState.children, [id]: boolVal }
     // }))
@@ -72,11 +75,9 @@ class Mockup1 extends React.Component {
       })
     }
     this.setState({
-      // ui-related state vars
       callouts: {},
       vitals: {},
       currentNode: null,
-      // domain stuff (log to db)
       checkListItems: cli,
       criticalCriteria: crits
     });
