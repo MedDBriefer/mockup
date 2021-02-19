@@ -7,8 +7,30 @@ const CheckListItem = ({scenario, step, config}) => {
 
     switch (step.type) {
         case 'assessment':
-            // replace this with both CallOutIcon and CallOutText (or whatever you name them)
-            const inlines = (<CallOut scenario={scenario} step={step} config={config} />)
+            // replace this:
+            const inlines = (
+                <CallOut
+                    scenario={scenario}
+                    step={step}
+                    config={config}
+                />
+            )
+            // with both CallOutIcon and CallOutText
+            // make CallOutText conditional based on config.dispCalloutText
+            // something like::
+            // const inlines = (
+            //     <>
+            //         <CallOutIcon scenario={scenario} step={step} config={config} />
+            //         { config.dispCallOutText &&
+            //             <CallOutText scenario={scenario} step={step} config={config} />
+            //         }
+            //     </>
+            // )
+            // or, if you'd rather have CalloutText appear *below* the checkbox line
+            // do a
+            // <CheckBox props>
+            //     {config.dispCalloutText && <CallOutText props> }
+            // </Checkbox>
             return (
                 <CheckBox
                     scenario={scenario}
@@ -21,6 +43,7 @@ const CheckListItem = ({scenario, step, config}) => {
         case 'required-action':
         case 'critical-criteria':
         case 'execution-error':
+            // perhaps this should just be the 'default'
             return (
                 <CheckBox
                     scenario={scenario}
@@ -60,7 +83,6 @@ const CheckListItem = ({scenario, step, config}) => {
         }
 
 }
-
 
 
 export default CheckListItem;
