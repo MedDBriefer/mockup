@@ -20,7 +20,7 @@ const MDBDetailsPane = ({scenario, config }) => {
                         <li key={child.id}>
                             <CheckListItem
                                 scenario={scenario}
-                                item={child}
+                                step={child}
                                 config={config}
                             />
                         </li>
