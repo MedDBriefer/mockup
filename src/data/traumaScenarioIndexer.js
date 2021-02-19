@@ -181,25 +181,25 @@ const TRAUMA_SCENARIO_STRUCTURE = {
     ],
     criticalCriteria: [
         // we might be able to auto-check based off of timer expiring
-        { id: "580", type: CRIT_FAIL, parent: "transport-decision", label: "Failure to initiate or call for transport of the patient within 10 minute time limit" },
+        { id: "critial-failure-timely-transport-decision",       type: CRIT_FAIL, parent: "transport-decision", label: "Failure to initiate or call for transport of the patient within 10 minute time limit" },
         // true if 'apply-ppe' not checked?
-        { id: "590", type: CRIT_FAIL, parent: "bsi",                label: "Failure to take or verbalize appropriate PPE precautions" },
+        { id: "critical-failure-ppe",                            type: CRIT_FAIL, parent: "bsi",                label: "Failure to take or verbalize appropriate PPE precautions" },
         // true if 'assess-scene-safety' not checked?
-        { id: "600", type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to determine scene safety" },
+        { id: "critical-failure-scene-safety",                   type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to determine scene safety" },
         // true if 'stabilize-spine' not checked AND indicated?
-        { id: "610", type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to assess for and provide spinal protection when indicated" },
-        { id: "620", type: CRIT_FAIL, parent: "breathing",          label: "Failure to voice and ultimately provide high concentration of oxygen" },
+        { id: "critical-failure-spinal-protection",              type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to assess for and provide spinal protection when indicated" },
+        { id: "critical-failure-oxygen-supply",                  type: CRIT_FAIL, parent: "breathing",          label: "Failure to voice and ultimately provide high concentration of oxygen" },
         // true if ANY of the ventiliation
-        { id: "630", type: CRIT_FAIL, parent: "breathing",          label: "Failure to assess/provide adequate ventilation" },
+        { id: "critical-failure-ventilation",                    type: CRIT_FAIL, parent: "breathing",          label: "Failure to assess/provide adequate ventilation" },
         // not giving this one a parent, as it belongs to a heading whose only other children are other headings, making it
         // problematic in the navigation/details layout - readdress this if we don't go with that
-        { id: "640", type: CRIT_FAIL,                               label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
+        { id: "critical-failure-manage-life-threats",            type: CRIT_FAIL,                               label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
         // combine below with 580?
-        { id: "650", type: CRIT_FAIL, parent: "transport-decision", label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
-        { id: "660", type: CRIT_FAIL,                               label: "Does other detailed history or physical exam before assessing/treating threats to airway, breathing, and circulation" },
-        { id: "680", type: CRIT_FAIL,                               label: "Failure to manage the patient as a competent EMT" },
-        { id: "670", type: CRIT_FAIL,                               label: "Exhibits unacceptable affect with patient or other personnel" },
-        { id: "690", type: CRIT_FAIL,                               label: "Uses or orders a dangerous or inappropriate intervention" }
+        { id: "critical-failure-differentiate-immediate-transport-vs-on-scene-treatment",  type: CRIT_FAIL, parent: "transport-decision", label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
+        { id: "critical-failure-prioritizing-non-life-threats",  type: CRIT_FAIL,                               label: "Does other detailed history or physical exam before assessing/treating threats to airway, breathing, and circulation" },
+        { id: "critical-failure-incompetence",                   type: CRIT_FAIL,                               label: "Failure to manage the patient as a competent EMT" },
+        { id: "critical-failure-unacceptable-affect",            type: CRIT_FAIL,                               label: "Exhibits unacceptable affect with patient or other personnel" },
+        { id: "critical-failure-inapproriate-intervention",      type: CRIT_FAIL,                               label: "Uses or orders a dangerous or inappropriate intervention" }
     ],
     interventionForms: {
         // Each selected intervention should, by default, also include an 'other / incorrect intervention' option
