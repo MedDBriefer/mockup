@@ -90,6 +90,7 @@ class Mockup1 extends React.Component {
       isChecked: this.isChecked,
       toggleChecked: this.toggleChecked,
       setChecked: this.setChecked,
+      showOnlyIcon: false,
       displayCalloutIcons: dispCalloutIcons,
       displayCalloutText: dispCalloutText,
       displayInterventionForms: dispForms,

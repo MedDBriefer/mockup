@@ -2,6 +2,7 @@ import React from "react"
 
 import CheckBox from "./CheckBox"
 import CallOut from "./CallOut"
+import CallOutIcon from "./CallOutIcon"
 
 const CheckListItem = ({scenario, step, config}) => {
 
@@ -9,6 +10,12 @@ const CheckListItem = ({scenario, step, config}) => {
         case 'assessment':
             // replace this:
             const inlines = (
+                config.showOnlyIcon === true && 
+                <CallOutIcon
+                    scenario={scenario}
+                    step={step}
+                    config={config}
+                /> || config.showOnlyIcon === false && 
                 <CallOut
                     scenario={scenario}
                     step={step}
