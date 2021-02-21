@@ -8,14 +8,39 @@ const CheckListItem = ({scenario, step, config}) => {
 
     switch (step.type) {
         case 'assessment':
+            // while I see you got this working, you may see the warnings reported by the "npm watch" script.
+            // I fixed the curly braces, etc and wrapped the entire thing (as it might contain more than 1 componet) with a
+            // react fragment, <> </>  (simply acts like a div to wrap multiple components) which I believe is the same as
+            // <React.Fragment> </React.Fragment>
+            //  (see the react docs, under Fragment - could be hidden under Advanced if you don't see elsewhere)
+            //
+            // const inlines = (
+            //     <>
+            //         { config.showOnlyIcon &&
+            //             <CallOutIcon
+            //                 scenario={scenario}
+            //                 step={step}
+            //                 config={config}
+            //             />
+            //         }
+            //         { !config.showOnlyIcon &&
+            //             <CallOut
+            //                 scenario={scenario}
+            //                 step={step}
+            //                 config={config}
+            //             />
+            //         }
+            //     </>
+            // )
+
             // replace this:
             const inlines = (
-                config.showOnlyIcon === true && 
+                config.showOnlyIcon === true &&
                 <CallOutIcon
                     scenario={scenario}
                     step={step}
                     config={config}
-                /> || config.showOnlyIcon === false && 
+                /> || config.showOnlyIcon === false &&
                 <CallOut
                     scenario={scenario}
                     step={step}
