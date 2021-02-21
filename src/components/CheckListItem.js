@@ -35,18 +35,23 @@ const CheckListItem = ({scenario, step, config}) => {
 
             // replace this:
             const inlines = (
-                config.showOnlyIcon === true &&
-                <CallOutIcon
-                    scenario={scenario}
-                    step={step}
-                    config={config}
-                /> || config.showOnlyIcon === false &&
-                <CallOut
-                    scenario={scenario}
-                    step={step}
-                    config={config}
-                />
-            )
+                     <>
+                         { config.showOnlyIcon &&
+                             <CallOutIcon
+                                 scenario={scenario}
+                                 step={step}
+                                 config={config}
+                             />
+                         }
+                         { !config.showOnlyIcon &&
+                             <CallOut
+                                 scenario={scenario}
+                                 step={step}
+                                 config={config}
+                             />
+                         }
+                     </>
+                 )
             // with both CallOutIcon and CallOutText
             // make CallOutText conditional based on config.dispCalloutText
             // something like::
