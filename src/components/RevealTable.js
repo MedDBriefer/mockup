@@ -4,8 +4,6 @@ import {
     Table
 } from "reactstrap"
 
-// eslint-disable-next-line no-unused-vars
-import classnames from "classnames"
 
 import Panel from "./Panel"
 import RevealTableRow from "./RevealTableRow"
