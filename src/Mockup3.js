@@ -11,7 +11,8 @@ class Mockup3 extends React.Component {
    super(props);
    this.state = {
      callouts: {},
-     vitals: {},
+     currentVitals: {},
+     vitalsRecomputed: false,
      checkListItems: {},
      criticalCriteria: {}
    };
@@ -19,6 +20,14 @@ class Mockup3 extends React.Component {
    this.toggleChecked = this.toggleChecked.bind(this)
    this.setChecked = this.setChecked.bind(this)
    this.isChecked = this.isChecked.bind(this)
+   this.getCurrentVital = this.getCurrentVital.bind(this)
+   this.setCurrentVital = this.setCurrentVital.bind(this)
+   this.recomputeVitals = this.recomputeVitals.bind(this)
+   this.getVitalsRecomputed = this.getVitalsRecomputed.bind(this)
+
+   // total hack for now
+   window.recomputeVitals = this.recomputeVitals
+
   }
 
   isChecked(id) {
@@ -37,6 +46,32 @@ class Mockup3 extends React.Component {
     }))
   }
 
+
+  getCurrentVital(vital) {
+    return this.state.currentVitals[vital]
+  }
+
+  setCurrentVital(vital, value) {
+    this.setState((prevState) => ({
+      currentVitals: { ...prevState.currentVitals, [vital]: value }
+    }))
+  }
+
+  getVitalsRecomputed() {
+    return this.state.vitalsRecomputed
+  }
+
+  recomputeVitals() {
+    let scen = this.props.scenario
+    for (const [vital, obj] of Object.entries(scen.reassessmentVitals)) {
+      this.setCurrentVital(vital, (Math.random() > 0.5) ? obj.goodVitals : obj.badVitals)
+    }
+    this.setState((prevState) => ({
+      vitalsRecomputed: true
+    }));
+
+  }
+
   componentDidMount() {
     let scen = this.props.scenario;
     let crits = {}
@@ -49,10 +84,9 @@ class Mockup3 extends React.Component {
       })
     }
     this.setState({
-      // ui-related state vars
       callouts: {},
-      vitals: {},
-      // domain stuff (log to db)
+      currentVitals: Object.assign({}, scen.initialVitalSigns),
+      vitalsRecomputed: false,
       checkListItems: cli,
       criticalCriteria: crits
     });
@@ -64,6 +98,8 @@ class Mockup3 extends React.Component {
       isChecked: this.isChecked,
       toggleChecked: this.toggleChecked,
       setChecked: this.setChecked,
+      getCurrentVital: this.getCurrentVital,
+      getVitalsRecomputed: this.getVitalsRecomputed,
       showOnlyIcon: true,
       displayCalloutIcons: dispCalloutIcons,
       displayCalloutText: dispCalloutText, //assessment findings
@@ -87,7 +123,7 @@ class Mockup3 extends React.Component {
                 />
     const rhs = <RaterInfo
                   scenario={scen}
-                  defaultTab={rhsConfig.dispCalloutText ? "callouts" : "initialVitals"}
+                  defaultTab={rhsConfig.dispCalloutText ? "callouts" : "vitals"}
                   config={rhsConfig}
                 />
 
