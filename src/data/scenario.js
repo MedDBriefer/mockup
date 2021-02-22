@@ -1,6 +1,3 @@
-const AND = "and";
-const OR = "or";
-
 const scenarioData = {
   id: "PHTC M2CA",
   scenarioType: "trauma",
@@ -69,82 +66,42 @@ const scenarioData = {
   },
   reassessmentVitals: {
     BP: {
-      "good-if": {
-        "type": AND,
-        "ids": ["bleeding-interventions", "shock-interventions"] // hemorrhage control, IV
-      },
       "goodVitals": "96 / P",
       "badVitals": "78 / P"
     },
     P: {
-      "good-if": {
-        "type": AND,
-        "ids": ["bleeding-interventions", "shock-interventions"] // hemorrhage control, IV
-      },
       "goodVitals": "120, weak",
       "badVitals": "130, weak radial pulses"
     },
     R: {
-      "good-if": {
-        "type": AND,
-        "ids": ["ventilation-intervention-10", "manage-breathing-injury"] // intubation, ventilation
-      },
       "goodVitals": "12, LS clear and equal with crepitus on right",
       "badVitals": "38, shallow; LS clear and equal with crepitus on right"
     },
     Skin: {
-      "good-if": {
-        "type": AND,
-        "ids": ["bleeding-interventions", "shock-interventions", "ventilation-intervention-10", "manage-breathing-injury"] // Hemorrhage control, IV, intubates, ventilates
-      },
       "goodVitals": "Pale, diaphoretic",
       "badVitals": "Cyanonic, diaphoretic"
     },
     Spo2: {
-      "good-if": {
-        "type": AND,
-        "ids": ["ventilation-intervention-10", "manage-breathing-injury"] // intubation, ventilation
-      },
       "goodVitals": "99%, O2 ",
       "badVitals": "No capture"
     },
     ETCO2: {
-      "good-if": {
-        "type": AND,
-        "ids": ["ventilation-intervention-10", "manage-breathing-injury"] // intubation, ventilation
-      },
       goodVitals: "45 mm Hg",
       badVitals: "32 mm Hg"
     },
     GCS: {
-      "good-if": {
-        "type": AND,
-        "ids": ["bleeding-interventions", "shock-interventions", "ventilation-intervention-10" ] // hemorrhage control, IV, intubation
-      },
       "goodVitals": "8",
       "badVitals": "4"
     },
     Glucose: {
-      "good-if": {
-        "type": OR,
-        "ids": [] // always the same
-      },
       "goodVitals": "86 mg/dl(4.8 mmol / l)",
       "badVitals": "86 mg/dl(4.8 mmol / l)"
     },
     Pain: {
-      "good-if": {
-        "type": OR,
-        "ids": [] // always the same
-      },
       "goodVitals": "Unable to access",
       "badVitals": "Unable to access"
     },
     Temp: {
-      "good-if": {
-        "type": OR,
-        "ids": ["shock-intervention-30"] // covers patient
-      },
       "goodVitals": "96.5 F(35.8 C)",
       "badVitals": "94.8"
     }
