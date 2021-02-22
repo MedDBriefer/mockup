@@ -59,7 +59,7 @@ class Mockup2 extends React.Component {
     });
   }
 
-  mkConfig(dispCalloutIcons, dispCalloutText, dispForms) {
+  mkConfig(dispCalloutIcons, dispCalloutText, dispForms, autoRevealRaterInfo) {
     return {
       isChecked: this.isChecked,
       toggleChecked: this.toggleChecked,
@@ -68,14 +68,15 @@ class Mockup2 extends React.Component {
       displayCalloutIcons: dispCalloutIcons,
       displayCalloutText: dispCalloutText,
       displayInterventionForms: dispForms,
+      autoRevealRaterInfo: autoRevealRaterInfo,
     }
   }
 
   render() {
     const scen = this.props.scenario;
 
-    const lhsConfig = this.mkConfig(true, false, true)
-    const rhsConfig = this.mkConfig(false, true, false)
+    const lhsConfig = this.mkConfig(true, false, true, false)
+    const rhsConfig = this.mkConfig(false, true, false, false)
 
     // const lhs = <Accordian
     //               scenario={scen}

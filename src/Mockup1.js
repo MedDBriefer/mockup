@@ -83,7 +83,7 @@ class Mockup1 extends React.Component {
     });
   }
 
-  mkConfig(dispCalloutIcons, dispCalloutText, dispForms) {
+  mkConfig(dispCalloutIcons, dispCalloutText, dispForms, autoRevealRaterInfo) {
     return {
       getCurrentNode: this.getCurrentNode,
       setCurrentNode: this.setCurrentNode,
@@ -94,14 +94,15 @@ class Mockup1 extends React.Component {
       displayCalloutIcons: dispCalloutIcons,
       displayCalloutText: dispCalloutText,
       displayInterventionForms: dispForms,
+      autoRevealRaterInfo: autoRevealRaterInfo
     }
   }
 
   render() {
     const scen = this.props.scenario;
 
-    const lhsConfig = this.mkConfig(false, false, false)
-    const rhsConfig = this.mkConfig(true, true, true)
+    const lhsConfig = this.mkConfig(false, false, false, false)
+    const rhsConfig = this.mkConfig(true, true, true, false)
 
     const lhs = <Outline
                   heading="Navigation"
