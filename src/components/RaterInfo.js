@@ -16,7 +16,6 @@ import classnames from "classnames"
 import RevealTable from "./RevealTable"
 
 export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
-
     const [activeTab, setActiveTab] = useState(defaultTab)
     const toggle = (tab) => {
         if (activeTab !== tab) setActiveTab(tab)
@@ -32,23 +31,32 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
             return {
                 id: step.id,
                 label: step.calloutLabel,
-                value: step.callout
+                value: [step.callout]
             }
         })
     }
 
-    const initVitals = Object.entries(scenario.initialVitalSigns).map(iv => {
-        return {label: iv[0], value: iv[1]}
-    })
 
     const sample = Object.entries(scenario.SAMPLE).map(rec => {
-        return {label: rec[0], value: rec[1]}
+        return {label: rec[0], value: [rec[1]]}
     })
 
-    // need to put some smarts in here or elsewhere
-    const reassessVitals = Object.entries(scenario.reassessmentVitals).map(rec => {
-        const [key, obj] = rec;
-        return {label: key, value: obj.goodVitals}
+
+    const vitalsHeaders =
+        (config.getVitalsRecomputed())
+        ? ["Type", "Initial Value", "Current Value"]
+        : ["Type", "Current Value"]
+
+    const vitals = Object.entries(scenario.initialVitalSigns).map(iv => {
+        const value =
+            (config.getVitalsRecomputed())
+            ? [ iv[1], config.getCurrentVital(iv[0]) ]
+            : [ iv[1] ]
+
+        return {
+            label: iv[0],
+            value: value
+        }
     })
 
     return (
@@ -66,10 +74,10 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
                 }
                 <NavItem>
                     <NavLink
-                        className={classnames({ active: activeTab === 'initialVitals' })}
-                        onClick={() => toggle('initialVitals')}
+                        className={classnames({ active: activeTab === 'vitals' })}
+                        onClick={() => toggle('vitals')}
                     >
-                        Initial Vitals
+                        Vitals
                     </NavLink>
                 </NavItem>
                 <NavItem>
@@ -80,43 +88,31 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
                         SAMPLE
                     </NavLink>
                 </NavItem>
-                <NavItem>
-                    <NavLink
-                        className={classnames({ active: activeTab === 'reassessmentVitals' })}
-                        onClick={() => toggle('reassessmentVitals')}
-                    >
-                        Reassessment Vitals
-                    </NavLink>
-                </NavItem>
             </Nav>
             <TabContent activeTab={activeTab}>
                 {config.displayCalloutText &&
                     <TabPane tabId="callouts">
                         <RevealTable
-                            heading="Assessment Findings"
+                            title="Assessment Findings"
+                            headings={["Type", "Value"]}
                             rows={callouts}
                             config={config}
                         />
                     </TabPane>
                 }
-                <TabPane tabId="initialVitals">
+                <TabPane tabId="vitals">
                     <RevealTable
-                        heading="Initial Vitals"
-                        rows={initVitals}
+                        title="Vitals"
+                        headings={vitalsHeaders}
+                        rows={vitals}
                         config={config}
                     />
                 </TabPane>
                 <TabPane tabId="sample">
                     <RevealTable
-                        heading="SAMPLE"
+                        title="SAMPLE"
+                        headings={["Type", "Value"]}
                         rows={sample}
-                        config={config}
-                    />
-                </TabPane>
-                <TabPane tabId="reassessmentVitals">
-                    <RevealTable
-                        heading="Reassessment Vitals"
-                        rows={reassessVitals}
                         config={config}
                     />
                 </TabPane>
