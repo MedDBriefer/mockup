@@ -6,7 +6,7 @@ import React, {
 import classnames from "classnames"
 
 
-export default function RevealTableRow({label, value, config}) {
+export default function RevealTableRow({label, values, config}) {
     const [show, setShow] = useState(false)
     const toggle = () => setShow(!show)
 
@@ -18,16 +18,20 @@ export default function RevealTableRow({label, value, config}) {
             :
                 <th onClick={() => toggle()}>{label} </th>
             }
-            <td>
-                {(config.autoRevealRaterInfo)
-                ?
-                    <span>{value}</span>
-                :
-                    <span className={classnames({hidden: !show})}>
-                        {value}
-                    </span>
-                }
-            </td>
+            {
+                values.map((value, index) => (
+                    <td key={ index }>
+                        {(config.autoRevealRaterInfo)
+                            ?
+                            <span >{value}</span>
+                            :
+                            <span className={classnames({ hidden: !show })}>
+                                {value}
+                            </span>
+                        }
+                    </td>
+                ))
+            }
         </tr>
     )
 
