@@ -26,16 +26,8 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
     // displayed within this pane
     let callouts = []
     if (config.displayCalloutText) {
-        // here you could be passing actual Callout components, which
-        // initialized with the step and the config, would know when to
-        // display and/or highlight itself, although we still need
-        // to add some vars to the app state and some getters/setters for
-        // those vars to get it to work.
-        // if we want this component to make the labels clickable in order
-        // to toggle the display of the callout, you could pass in a component
-        // similar to calloutButton/calloutIcon (whatever you want to call it)
-        // except it merely displays the callout label and calls the appropriate
-        // setter(s) which would trigger the value's component to be displayed/highlighted
+        // here you'd be passing actual Callout/CalloutText (whatever you call it)
+        // components as the value instead of merely step.callout
         callouts = scenario.assessmentSteps.map(step => {
             return {
                 id: step.id,
