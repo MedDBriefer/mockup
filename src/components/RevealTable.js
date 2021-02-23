@@ -12,7 +12,7 @@ export default function RevealTable({title, headings=[], rows=[], config}) {
 
     return (
         <Panel title={title} titleSize={"h5"}>
-            <Table striped={true}>
+            <Table striped={true} size="sm">
                 <thead>
                     <tr>
                         {
