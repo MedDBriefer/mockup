@@ -25,8 +25,6 @@ const scen = traumaScenarioIndexer(scenarioData)
 console.log(scen)
 
 const App = (props) => {
-    const scen = traumaScenarioIndexer(scenarioData)
-    console.log(scen)
 
     const [showInfo, setShowInfo] = useState(false);
     const toggleShowInfo = () => {
