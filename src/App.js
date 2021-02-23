@@ -3,6 +3,7 @@ import React, {useState} from "react"
 import MDBNavBar from "./components/MDBNavBar"
 import MDBModal from "./components/MDBModal"
 import ScenarioInfo from "./components/ScenarioInfo"
+import PreferencesForm from "./components/PreferencesForm"
 
 import Mockup1 from "./Mockup1"
 import Mockup2 from "./Mockup2"
@@ -21,18 +22,24 @@ import scenarioData  from "./data/scenario"
 import traumaScenarioIndexer from "./data/traumaScenarioIndexer"
 
 const App = (props) => {
+    const scen = traumaScenarioIndexer(scenarioData)
+    console.log(scen)
+
     const [showInfo, setShowInfo] = useState(false);
     const toggleShowInfo = () => {
         setShowInfo(!showInfo);
     }
-    const scen = traumaScenarioIndexer(scenarioData)
-    console.log(scen)
+    const [showPrefs, setShowPrefs] = useState(false);
+    const toggleShowPrefs = () => {
+        setShowPrefs(!showPrefs);
+    }
 
     return (
         <Router>
             <MDBNavBar
                 title={scen.id}
-                toggler={toggleShowInfo}
+                scenInfoToggler={toggleShowInfo}
+                prefsFormToggler={toggleShowPrefs}
             />
             <Switch>
                 <Route path="/mockup1">
@@ -56,7 +63,13 @@ const App = (props) => {
             >
                 <ScenarioInfo scenario={scen} />
             </MDBModal>
-
+            <MDBModal
+                title="User Preferences"
+                show={showPrefs}
+                toggler={toggleShowPrefs}
+            >
+                <PreferencesForm />
+            </MDBModal>
         </Router>
     )
 }

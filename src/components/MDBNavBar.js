@@ -13,7 +13,7 @@ import {
 import MockupButton from "./MockupButton"
 
 
-const MDBNavBar = ({branding, title, toggler}) => {
+const MDBNavBar = ({branding, title, scenInfoToggler, prefsFormToggler}) => {
     return (
         <Navbar color="dark" dark>
             {/* <NavbarBrand href="#">
@@ -34,8 +34,11 @@ const MDBNavBar = ({branding, title, toggler}) => {
            {!!title &&
                 <NavbarText tag="h3">{title}</NavbarText>
             }
-            <Button color="success" onClick={toggler}>
+            <Button color="success" onClick={scenInfoToggler}>
                 Scenario Info
+            </Button>
+            <Button color="primary" onClick={prefsFormToggler}>
+                Preferences
             </Button>
         </Navbar>
     )
