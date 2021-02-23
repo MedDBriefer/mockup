@@ -20,13 +20,14 @@ import "./styles.css";
 import scenarioData  from "./data/scenario"
 import traumaScenarioIndexer from "./data/traumaScenarioIndexer"
 
+const scen = traumaScenarioIndexer(scenarioData)
+console.log(scen)
+
 const App = (props) => {
     const [showInfo, setShowInfo] = useState(false);
     const toggleShowInfo = () => {
         setShowInfo(!showInfo);
     }
-    const scen = traumaScenarioIndexer(scenarioData)
-    console.log(scen)
 
     return (
         <Router>
@@ -34,6 +35,7 @@ const App = (props) => {
                 title={scen.id}
                 toggler={toggleShowInfo}
             />
+
             <Switch>
                 <Route path="/mockup1">
                     <Mockup1 scenario={scen} />
