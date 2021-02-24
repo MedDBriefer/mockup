@@ -68,6 +68,12 @@ const CheckListItem = ({scenario, step, config}) => {
             // <CheckBox props>
             //     {config.dispCalloutText && <CallOutText props> }
             // </Checkbox>
+
+
+            /*in CheckListItem, for assessment steps, 
+            you'd pass toggleCallout as the clickHandler prop to CheckBox rather than toggleChecked, 
+            so you get both behaviors instead of simply the checking of the checkbox*/
+
             return (
                 <CheckBox
                     scenario={scenario}
