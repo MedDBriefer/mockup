@@ -74,13 +74,8 @@ class Mockup2 extends React.Component {
   render() {
     const scen = this.props.scenario;
 
-<<<<<<< Updated upstream
-    const lhsConfig = this.mkConfig(true, false, true)
-    const rhsConfig = this.mkConfig(false, true, false)
-=======
     const lhsConfig = this.mkConfig(false, false, true, false)
     const rhsConfig = this.mkConfig(false, true, false, false)
->>>>>>> Stashed changes
 
     // const lhs = <Accordian
     //               scenario={scen}
