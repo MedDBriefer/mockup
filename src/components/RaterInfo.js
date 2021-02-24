@@ -2,6 +2,7 @@
 import React,
 { useState }
 from "react"
+import CallOutText from "./CallOutText"
 
 import {
     Nav,
@@ -31,7 +32,12 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
             return {
                 id: step.id,
                 label: step.calloutLabel,
-                value: [step.callout]
+                value:
+                    <CallOutText
+                        scenario={scenario}
+                        step={step}
+                        config={config}
+                    />
             }
         })
     }

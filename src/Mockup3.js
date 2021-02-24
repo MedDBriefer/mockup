@@ -18,6 +18,7 @@ class Mockup3 extends React.Component {
    };
    // bind event handlers and other methods being passed down as props
    this.toggleChecked = this.toggleChecked.bind(this)
+   this.toggleCallout = this.toggleCallout.bind(this)
    this.setChecked = this.setChecked.bind(this)
    this.isChecked = this.isChecked.bind(this)
    this.getCurrentVital = this.getCurrentVital.bind(this)
@@ -72,6 +73,16 @@ class Mockup3 extends React.Component {
 
   }
 
+  toggleCallout(id)
+  {
+    if (this.isChecked(id))
+    {
+      this.setState((prevState) => ({currentCallOut: null}))
+    }
+    this.toggleChecked(id)
+  }
+
+
   componentDidMount() {
     let scen = this.props.scenario;
     let crits = {}
@@ -97,10 +108,12 @@ class Mockup3 extends React.Component {
     return {
       isChecked: this.isChecked,
       toggleChecked: this.toggleChecked,
+      toggleCallout: this.toggleCallout,
       setChecked: this.setChecked,
       getCurrentVital: this.getCurrentVital,
       getVitalsRecomputed: this.getVitalsRecomputed,
       showOnlyIcon: true,
+      currentCallOut: null,
       displayCalloutIcons: dispCalloutIcons,
       displayCalloutText: dispCalloutText, //assessment findings
       displayInterventionForms: dispForms,
