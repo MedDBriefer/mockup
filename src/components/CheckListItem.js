@@ -36,14 +36,14 @@ const CheckListItem = ({scenario, step, config}) => {
             // replace this:
             const inlines = (
                      <>
-                         { config.showOnlyIcon &&
+                         { config.displayCalloutIcons &&
                              <CallOutIcon
                                  scenario={scenario}
                                  step={step}
                                  config={config}
                              />
                          }
-                         { !config.showOnlyIcon &&
+                         { !config.displayCalloutIcons &&
                              <CallOut
                                  scenario={scenario}
                                  step={step}
