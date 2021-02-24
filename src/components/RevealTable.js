@@ -4,21 +4,22 @@ import {
     Table
 } from "reactstrap"
 
-// eslint-disable-next-line no-unused-vars
-import classnames from "classnames"
 
 import Panel from "./Panel"
 import RevealTableRow from "./RevealTableRow"
 
-export default function RevealTable({heading, rows=[], config}) {
+export default function RevealTable({title, headings=[], rows=[], config}) {
 
     return (
-        <Panel title={heading} titleSize={"h5"}>
+        <Panel title={title} titleSize={"h5"}>
             <Table striped={true}>
                 <thead>
                     <tr>
-                        <th>Type</th>
-                        <th>Value</th>
+                        {
+                            headings.map((heading, index) => (
+                                <th key={index}>{heading}</th>
+                            ))
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +27,7 @@ export default function RevealTable({heading, rows=[], config}) {
                         <RevealTableRow
                             key={index}
                             label={row.label}
-                            value={row.value}
+                            values={row.value}
                             config={config}
                         />
                     )}

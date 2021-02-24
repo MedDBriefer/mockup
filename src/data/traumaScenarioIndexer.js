@@ -4,15 +4,15 @@
 // * a tree of steps (and weave the scenario-speific info into them)
 // * various other mappings of things so they can be looked up by id,  more details later
 
+// const CHECK = "check-box";
+// const RADIO = "radio-button";
 
-const ASSESS = "assessment";
-const INTERV = "intervention";
-const REQURED = "required-action"
+const HEADING = "heading"; //not a leaf node, simply a step which has child steps
 
-const CHECK = "check-box";
-const RADIO = "radio-button";
+const ASSESS    = "assessment";
+const INTERV    = "intervention"; // an action performed on the patient
+const REQURED   = "required-action"   // an action the EMT performs, but not on the patient
 const CRIT_FAIL = "critical-criteria";
-const HEADING = "heading";
 
 const TRAUMA_SCENARIO_STRUCTURE = {
     nodeLabels: {
@@ -105,7 +105,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "transport-priority", type: REQURED, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
         ],
         'history-taking': [
-            { id: "obtains-vitals", type: ASSESS, label: "Obtains, or directs assistant to obtain, baseline vital signs" }, // point to vitals
+            { id: "obtains-vitals",        type: ASSESS, label: "Obtains, or directs assistant to obtain, baseline vital signs" }, // point to vitals
             { id: "attempt-obtain-sample", type: ASSESS, label: "Attempts to obtain SAMPLE history" } // point to SAMPLE
         ],
         'head': [
@@ -204,45 +204,92 @@ const TRAUMA_SCENARIO_STRUCTURE = {
     interventionForms: {
         // Each selected intervention should, by default, also include an 'other / incorrect intervention' option
         // Each object title matches checklist item id for easier mapping
-        // TODO: may have to assign type to individual steps to account for medical scenarios (or for a mix or radios/checks)
         "stabilizes-spine": {
             id: "c-spine-interventions",
-            type: CHECK,
-            steps: [],
             interventions: [
                 { id: "c-spine-intervention-10", label: "Holds manual stabilization" },
                 { id: "c-spine-intervention-20", label: "Applies cervical collar" }
             ],
-            criticalCriteria: []
+            steps: [
+                { id: 'bogus-step-1', label: "bogus step 1" },
+                { id: 'bogus-step-2', label: "bogus step 2" }
+            ],
+            criticalCriteria: [
+                { id: "bogus-crit-1", label: "bogus critical criteria 1" },
+                { id: "bogus-crit-2", label: "bogus critical criteria 2" },
+            ]
+        },
+        "inserts-adjunct": {
+            id: "adjunct-interventions",
+            interventions: [
+                { id: "adjunct-intervention-10", label: "Inserts OPA" },
+                { id: "adjunct-intervention-20", label: "Inserts NPA" },
+            ],
+            steps: [
+                { id: 'bogus-step-1', label: "bogus step 1" },
+                { id: 'bogus-step-2', label: "bogus step 2" }
+            ],
+            criticalCriteria: [
+                { id: "bogus-crit-1", label: "bogus critical criteria 1" },
+                { id: "bogus-crit-2", label: "bogus critical criteria 2" },
+            ]
         },
         "manages-airway": {
             id: "airway-interventions",
-            type: RADIO,
-            steps: [],
             interventions: [
-                { id: "airway-intervention-10", label: "Inserts OPA" },
-                { id: "airway-intervention-20", label: "Inserts NPA" },
+                { id: "airway-intervention-10", label: "bogus intervetion1" },
+                { id: "airway-intervention-20", label: "bogus intervention2" },
             ],
-            criticalCriteria: []
+            steps: [
+                { id: 'bogus-step-1', label: "bogus step 1" }
+            ],
+            criticalCriteria: [
+                { id: "bogus-crit-1", label: "bogus critical criteria 1" },
+                { id: "bogus-crit-2", label: "bogus critical criteria 2" },
+                { id: "bogus-crit-3", label: "bogus critical criteria 3" },
+            ]
         },
-        "assess-ventilation": {
-            id: "ventilation-interventions",
-            type: RADIO,
-            steps: [],
+        "oxygen-therapy": {
+            id: "oxygen-therapy-interventions",
             interventions: [
                 { id: "ventilation-intervention-10", label: "Endotracheal intubation" },
                 { id: "ventilation-intervention-20", label: "Bag-valve mask" },
             ],
-            criticalCriteria: []
+            steps: [
+                { id: "bogus-step-1", label: "bogus step 1" },
+                { id: "bogus-step-2", label: "bogus step 2" },
+            ],
+            criticalCriteria: [
+                { id: "bogus-crit-1", label: "bogus critical criteria 1" },
+                { id: "bogus-crit-2", label: "bogus critical criteria 2" },
+            ]
+        },
+        "manage-breathing-injury": {
+            id: "manage-breathing-injury-intervention",
+            interventions: [
+                {id: "manage-breathing-intervention-10", label: "bogus intervention 1"},
+                {id: "manage-breathing-intervention-29", label: "bogus intervention 2"}
+            ],
+            steps: [
+                {id: "bogus-step-1", label: "bogus step 1" },
+                {id: "bogus-step-2", label: "bogus step 2" },
+            ],
+            criticalCriteria: [
+                { id: "bogus-crit-1", label: "bogus critical criteria 1" },
+                { id: "bogus-crit-2", label: "bogus critical criteria 2" },
+
+            ]
         },
         "control-bleeding": {
             id: "bleeding-interventions",
-            type: RADIO,
             interventions: [
                 { id: "bleeding-intervention-10", label: "Applies direct pressure" },
                 { id: "bleeding-intervention-20", label: "Applies tourniquet" }
             ],
-            steps: [],
+            steps: [
+                { id: "bogus-step-1", label: "bogus step 1" },
+                { id: "bogus-step-2", label: "bogus step 2" },
+            ],
             criticalCriteria: [ // Critical criteria should automatically be check boxes
                 { id: "bleeding-crit-30", type: CRIT_FAIL, label: "Did not control hemorrhage using correct procedures in a timely manner" },
                 { id: "bleeding-crit-40", type: CRIT_FAIL, label: "Did not apply direct pressure to wound before applying tourniquet" },
@@ -252,13 +299,15 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         },
         "control-shock": {
             id: "shock-interventions",
-            type: RADIO,
             interventions: [
                 { id: "shock-intervention-10", label: "IV fluid therapy--Peripheral IV insertion" },
                 { id: "shock-intervention-20", label: "IV fluid therapy--IV Push/Bolus" },
                 { id: "shock-intervention-30", label: "Covers patient" }
             ],
-            steps: [],
+            steps: [
+                { id: "bogus-step-1", label: "bogus step 1" },
+                { id: "bogus-step-2", label: "bogus step 2" },
+            ],
             criticalCriteria: [
                 { id: "shock-crit-10", type: CRIT_FAIL, label: "Fails to establish a patent and properly adjusted IV within 6-minute time limit" },
                 { id: "shock-crit-20", type: CRIT_FAIL, label: "Fails to establish IV within 3 attempts during 6-minute time limit" },
@@ -269,12 +318,14 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         },
         "transport-priority": {
             id: "transport-interventions",
-            type: RADIO,
             interventions: [
                 { id: "transport-intervention-10", label: "Scoop Stretcher" },
                 { id: "transport-intervention-20", label: "Supine Long Backboard" },
             ],
-            steps: [],
+            steps: [
+                { id: "bogus-step-1", label: "bogus step 1" },
+                { id: "bogus-step-2", label: "bogus step 2" },
+            ],
             criticalCriteria: [
                 { id: "transport-crit-10", type: CRIT_FAIL, label: "Did not immediately direct or take manual immobilization of head" },
                 { id: "transport-crit-20", type: CRIT_FAIL, label: "Did not properly apply appropriately sized cervical collar before ordering releaseof manual immobilization" },
