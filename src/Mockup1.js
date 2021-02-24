@@ -100,8 +100,13 @@ class Mockup1 extends React.Component {
   render() {
     const scen = this.props.scenario;
 
+<<<<<<< Updated upstream
     const lhsConfig = this.mkConfig(false, false, false)
     const rhsConfig = this.mkConfig(true, true, true)
+=======
+    const lhsConfig = this.mkConfig(false, false, false, false)
+    const rhsConfig = this.mkConfig(false, true, true, true)
+>>>>>>> Stashed changes
 
     const lhs = <Outline
                   heading="Navigation"
