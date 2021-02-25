@@ -4,10 +4,8 @@ import React, {
 
 import {
     Button,
-    Label
 } from "reactstrap"
 
-import Panel from "./Panel"
 import {PreferencesContext} from "./PreferencesContext"
 
 const PreferencesForm = (props) => {
@@ -23,47 +21,52 @@ const PreferencesForm = (props) => {
     }
 
     return (
-        <Panel title="Preferences">
-            <Label>
-                <input
-                    type="checkbox"
-                    name="dispCheckBoxesInline"
-                    checked={getPref("dispCheckBoxesInline")}
-                    onChange={handleInputChange}
-                />
-                Display Checkboxes within Checklist Outline
-            </Label>
-            <br/>
-            <Label>
-                <input
-                    type="checkbox"
-                    name="dispCallOutsInline"
-                    checked={getPref("dispCallOutsInline")}
-                    onChange={handleInputChange}
-                />
-                Display Assessment Findings within checklist
-            </Label>
-            <br/>
-            <Label>
-                <input
-                    type="checkbox"
-                    name="dispFormsInline"
-                    checked={getPref("dispFormsInline")}
-                    onChange={handleInputChange}
-                />
-                Display Intervention Forms within checklist
-            </Label>
-            <br />
-            <Label>
-                <input
-                    type="checkbox"
-                    name="hideRaterInfo"
-                    checked={getPref("hideRaterInfo")}
-                    onChange={handleInputChange}
-                />
-                Prevent Evaluator Oversharing of Information
-            </Label>
-            <br />
+        <div className="container">
+            <div className="row">
+                <label>
+                    <input
+                        type="checkbox"
+                        name="dispCheckBoxesInline"
+                        checked={getPref("dispCheckBoxesInline")}
+                        onChange={handleInputChange}
+                    />
+                    &nbsp; Embed Checkboxes within Checklist Outline
+                </label>
+            </div>
+            <div className="row">
+                <label>
+                    <input
+                        type="checkbox"
+                        name="dispCallOutsInline"
+                        checked={getPref("dispCallOutsInline")}
+                        onChange={handleInputChange}
+                    />
+                    &nbsp; Embed Assessment Findings within checklist
+                </label>
+            </div>
+            <div className="row">
+                <label>
+                    <input
+                        type="checkbox"
+                        name="dispFormsInline"
+                        checked={getPref("dispFormsInline")}
+                        onChange={handleInputChange}
+                    />
+                    &nbsp; Embed Intervention Forms within checklist
+                </label>
+            </div>
+            <div className="row">
+                <label>
+                    <input
+                        type="checkbox"
+                        name="hideRaterInfo"
+                        checked={getPref("hideRaterInfo")}
+                        onChange={handleInputChange}
+                    />
+                    &nbsp; Inhibit Oversharing of Information
+                </label>
+            </div>
+
             <Button
                 type="button"
                 className="btn btn-success"
@@ -71,7 +74,7 @@ const PreferencesForm = (props) => {
             >
                 Dismiss
             </Button>
-        </Panel>
+        </div>
     )
 }
 
