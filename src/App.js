@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 
 import MDBNavBar from "./components/MDBNavBar"
 import MDBModal from "./components/MDBModal"
@@ -20,47 +20,58 @@ import "./styles.css";
 import scenarioData  from "./data/scenario"
 import traumaScenarioIndexer from "./data/traumaScenarioIndexer"
 
-const scen = traumaScenarioIndexer(scenarioData)
-console.log(scen)
 
-const App = (props) => {
-    const [showInfo, setShowInfo] = useState(false);
-    const toggleShowInfo = () => {
-        setShowInfo(!showInfo);
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showInfo: false
+        }
+        this.toggleShowInfo = this.toggleShowInfo.bind(this)
+        this.scen = traumaScenarioIndexer(scenarioData)
+        console.log(this.scen)
     }
 
-    return (
-        <Router>
-            <MDBNavBar
-                title={scen.id}
-                toggler={toggleShowInfo}
-            />
+    toggleShowInfo() {
+        this.setState((prevState) => ({
+            showInfo: !prevState.showInfo
+        }))
+    }
 
-            <Switch>
-                <Route path="/mockup1">
-                    <Mockup1 scenario={scen} />
-                </Route>
-                <Route path="/mockup2">
-                    <Mockup2 scenario={scen} />
-                </Route>
-                <Route path="/mockup3">
-                    <Mockup3 scenario={scen} />
-                </Route>
-                <Route path="*">
-                    <h3>Click on one of the mockups listed above</h3>
-                </Route>
-            </Switch>
+    render() {
+        return (
+            <Router>
+                <MDBNavBar
+                    title={this.scen.id}
+                    toggler={this.toggleShowInfo}
+                />
 
-            <MDBModal
-                title="Scenario Info"
-                show={showInfo}
-                toggler={toggleShowInfo}
-            >
-                <ScenarioInfo scenario={scen} />
-            </MDBModal>
+                <Switch>
+                    <Route path="/mockup1">
+                        <Mockup1 scenario={this.scen} />
+                    </Route>
+                    <Route path="/mockup2">
+                        <Mockup2 scenario={this.scen} />
+                    </Route>
+                    <Route path="/mockup3">
+                        <Mockup3 scenario={this.scen} />
+                    </Route>
+                    <Route path="*">
+                        <h3>Click on one of the mockups listed above</h3>
+                    </Route>
+                </Switch>
 
-        </Router>
-    )
+                <MDBModal
+                    title="Scenario Info"
+                    show={this.state.showInfo}
+                    toggler={this.toggleShowInfo}
+                >
+                    <ScenarioInfo scenario={this.scen} />
+                </MDBModal>
+
+            </Router>
+        )
+    }
 }
 
 export default App;
