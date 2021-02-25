@@ -32,12 +32,12 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
             return {
                 id: step.id,
                 label: step.calloutLabel,
-                value:
+                value: [
                     <CallOutText
                         scenario={scenario}
                         step={step}
                         config={config}
-                    />
+                    />]
             }
         })
     }
