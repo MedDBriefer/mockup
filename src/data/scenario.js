@@ -108,6 +108,7 @@ const scenarioData = {
   },
   interventions: {
     "stabilizes-spine": "do", // "c-spine-interventions"
+    "inserts-adjunct": "na",
     "manages-airway": "do", // "airway-interventions"
     "oxygen-therapy": "do", // na?? - no intervention list for it but should be done
     "manage-breathing-injury": "do", // ventilation-interventions

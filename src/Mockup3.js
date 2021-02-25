@@ -4,18 +4,26 @@ import MDBContainer from "./components/MDBContainer"
 import CheckList from "./components/CheckList"
 import RaterInfo from "./components/RaterInfo"
 
+function initKeysToFalse(dict) {
+  const newDict = Object.keys(dict).reduce((obj, key) => {
+    obj[key] = false;
+    return obj;
+  }, {})
+  return newDict;
+}
 
 class Mockup extends React.Component {
  constructor(props) {
-   super(props);
+   super(props)
    this.state = {
      callouts: {},
      currentVitals: {},
      vitalsRecomputed: false,
      currentNode: null,
      checkListItems: {},
-     criticalCriteria: {}
-   };
+     criticalCriteria: {},
+     showForm: {}
+}
    // bind event handlers and other methods being passed down as props
    this.setCurrentNode      = this.setCurrentNode.bind(this)
    this.getCurrentNode      = this.getCurrentNode.bind(this)
@@ -28,6 +36,9 @@ class Mockup extends React.Component {
    this.getVitalsRecomputed = this.getVitalsRecomputed.bind(this)
    this.toggleCallout       = this.toggleCallout.bind(this)
    this.getCurrentCallout   = this.getCurrentCallout.bind(this)
+   this.setDisplayForm      = this.setDisplayForm.bind(this)
+   this.toggleDisplayForm   = this.toggleDisplayForm.bind(this)
+   this.getDisplayForm      = this.getDisplayForm.bind(this)
 
    // total hack for now
    window.recomputeVitals = this.recomputeVitals
@@ -108,6 +119,21 @@ class Mockup extends React.Component {
     return this.state.currentCallOut
   }
 
+  getDisplayForm(stepId) {
+    return Object.keys(this.state.showForm).includes(stepId)
+      ? this.state.showForm[stepId]
+      : false
+  }
+
+  setDisplayForm(stepId, boolVal) {
+    this.setState((prevState) => ({
+      showForm: { ...prevState.showForm, [stepId]: boolVal }
+    }))
+  }
+
+  toggleDisplayForm(stepId) {
+    this.setDisplayForm(stepId, !this.getDisplayForm(stepId))
+  }
 
   mkConfig(dispCalloutIcons, dispCalloutText, dispForms, autoRevealRaterInfo) {
     const config = {
@@ -120,6 +146,9 @@ class Mockup extends React.Component {
       getVitalsRecomputed: this.getVitalsRecomputed,
       toggleCallout: this.toggleCallout,
       getCurrentCallout: this.getCurrentCallout,
+      setDisplayForm: this.setDisplayForm,
+      toggleDisplayForm: this.toggleDisplayForm,
+      getDisplayForm: this.getDisplayForm,
       displayCalloutIcons: dispCalloutIcons,
       displayCalloutText: dispCalloutText,
       displayInterventionForms: dispForms,
@@ -135,20 +164,14 @@ class Mockup extends React.Component {
     let scen = this.props.scenario;
     let crits = {}
     scen.criticalCriteria.forEach((cc) => { crits[cc.id] = false });
-    let cli = {}
-    // eslint-disable-next-line
-    for (const [key, value] of Object.entries(scen.items)) {
-      value.forEach((item) => {
-        cli[item.id] = false;
-      })
-    }
     this.setState({
       callouts: {},
       currentVitals: Object.assign({}, scen.initialVitalSigns),
       currentNode: null,
       vitalsRecomputed: false,
-      checkListItems: cli,
-      criticalCriteria: crits
+      checkListItems: initKeysToFalse(scen.items),
+      criticalCriteria: crits,
+      showForm: initKeysToFalse(scen.interventionForms)
     });
   }
 

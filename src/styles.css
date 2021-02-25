@@ -92,6 +92,9 @@ ul.first {
   padding-top: 5px;
 }
 
+.intervention-form {
+  margin-left: 20px;
+}
 .hidden {
   display: none;
 }

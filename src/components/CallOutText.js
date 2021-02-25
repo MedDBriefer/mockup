@@ -1,14 +1,14 @@
 import React from "react";
-import classnames from "classnames"; 
+import classnames from "classnames";
 
-const CallOut = ({ step, config }) => {
+const CallOutText = ({ step, config }) => {
 
   return  (
     <span className={classnames("callout", {currentCallOut: config.getCurrentCallout() === step.id})}>
       {step.callout}
     </span>
   )
-          
+
 }
-export default CallOut;
+export default CallOutText;
 
