@@ -29,7 +29,7 @@ const MDBDetailsPane = ({scenario, config }) => {
             </Panel>
             <RaterInfo
                 scenario={scenario}
-                defaultTab={"initialVitals"}
+                defaultTab={"vitals"}
                 config={raterInfoConfig}
             />
         </>

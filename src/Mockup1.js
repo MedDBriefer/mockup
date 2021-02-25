@@ -8,9 +8,11 @@ import Outline from "./components/Outline";
 class Mockup1 extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       callouts: {},
-      vitals: {},
+      currentVitals: {},
+      vitalsRecomputed: false,
       currentNode: null,
       checkListItems: {},
       criticalCriteria: {}
@@ -21,6 +23,13 @@ class Mockup1 extends React.Component {
     this.toggleChecked     = this.toggleChecked.bind(this)
     this.setChecked        = this.setChecked.bind(this)
     this.isChecked         = this.isChecked.bind(this)
+    this.getCurrentVital   = this.getCurrentVital.bind(this)
+    this.setCurrentVital   = this.setCurrentVital.bind(this)
+    this.recomputeVitals   = this.recomputeVitals.bind(this)
+    this.getVitalsRecomputed = this.getVitalsRecomputed.bind(this)
+
+    // total hack for now
+    window.recomputeVitals = this.recomputeVitals
   }
 
   setCurrentNode(node) {
@@ -47,13 +56,6 @@ class Mockup1 extends React.Component {
   }
 
   setChecked(id, boolVal) {
-    // bad example, a bug, BAD auto-complete...
-    // keeping as a comment for now just in case you based
-    // your setter method off my bad example, so you can see
-    // what the fix is
-    // this.setState((prevState) => ({
-    //   checkListItems: { ...prevState.children, [id]: boolVal }
-    // }))
     this.setState((prevState) => ({
       checkListItems: {...prevState.checkListItems, [id]: boolVal}
     }))
@@ -61,6 +63,30 @@ class Mockup1 extends React.Component {
 
   toggleChecked(id) {
     this.setChecked(id, !this.state.checkListItems[id])
+  }
+
+  getCurrentVital(vital) {
+    return this.state.currentVitals[vital]
+  }
+
+  setCurrentVital(vital, value) {
+    this.setState((prevState) => ({
+      currentVitals: {...prevState.currentVitals, [vital]: value}
+   }))
+  }
+
+  getVitalsRecomputed() {
+    return this.state.vitalsRecomputed
+  }
+
+  recomputeVitals() {
+    let scen = this.props.scenario
+    for (const [vital, obj] of Object.entries(scen.reassessmentVitals)) {
+      this.setCurrentVital(vital, (Math.random() > 0.5) ? obj.goodVitals : obj.badVitals)
+    }
+    this.setState((prevState) => ({
+      vitalsRecomputed: true
+    }));
   }
 
   componentDidMount() {
@@ -74,26 +100,31 @@ class Mockup1 extends React.Component {
         cli[item.id] = false;
       })
     }
+    // console.log(scen.initialVitalSigns)
     this.setState({
       callouts: {},
-      vitals: {},
+      currentVitals: Object.assign({}, scen.initialVitalSigns),
       currentNode: null,
+      vitalsRecomputed: false,
       checkListItems: cli,
       criticalCriteria: crits
     });
   }
 
-  mkConfig(dispCalloutIcons, dispCalloutText, dispForms) {
+  mkConfig(dispCalloutIcons, dispCalloutText, dispForms, autoRevealRaterInfo) {
     return {
       getCurrentNode: this.getCurrentNode,
       setCurrentNode: this.setCurrentNode,
       isChecked: this.isChecked,
       toggleChecked: this.toggleChecked,
       setChecked: this.setChecked,
+      getCurrentVital: this.getCurrentVital,
+      getVitalsRecomputed: this.getVitalsRecomputed,
       showOnlyIcon: false,
       displayCalloutIcons: dispCalloutIcons,
       displayCalloutText: dispCalloutText,
       displayInterventionForms: dispForms,
+      autoRevealRaterInfo: autoRevealRaterInfo
     }
   }
 
