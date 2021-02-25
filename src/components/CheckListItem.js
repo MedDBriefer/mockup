@@ -1,7 +1,7 @@
 import React from "react"
 
 import CheckBox from "./CheckBox"
-import CallOut from "./CallOut"
+import CallOutText from "./CallOutText"
 import CallOutIcon from "./CallOutIcon"
 
 const CheckListItem = ({scenario, step, config}) => {
@@ -36,15 +36,13 @@ const CheckListItem = ({scenario, step, config}) => {
             // replace this:
             const inlines = (
                      <>
-                         { config.showOnlyIcon &&
-                             <CallOutIcon
-                                 scenario={scenario}
-                                 step={step}
-                                 config={config}
-                             />
-                         }
-                         { !config.showOnlyIcon &&
-                             <CallOut
+                            <CallOutIcon
+                                scenario={scenario}
+                                step={step}
+                                config={config}
+                            />
+                         { config.displayCalloutText &&
+                             <CallOutText
                                  scenario={scenario}
                                  step={step}
                                  config={config}
@@ -68,12 +66,18 @@ const CheckListItem = ({scenario, step, config}) => {
             // <CheckBox props>
             //     {config.dispCalloutText && <CallOutText props> }
             // </Checkbox>
+
+
+            /*in CheckListItem, for assessment steps, 
+            you'd pass toggleCallout as the clickHandler prop to CheckBox rather than toggleChecked, 
+            so you get both behaviors instead of simply the checking of the checkbox*/
+
             return (
                 <CheckBox
                     scenario={scenario}
                     step={step}
                     config={config}
-                    clickHandler={config.toggleChecked}
+                    clickHandler={config.toggleCallout}
                     inlineChildren={inlines}
                 />
             )
@@ -85,7 +89,7 @@ const CheckListItem = ({scenario, step, config}) => {
                 <CheckBox
                     scenario={scenario}
                     step={step}
-                    clickHandler={config.toggleChecked}
+                    clickHandler={config.toggleChecked}   
                     config={config}
                 />
             )

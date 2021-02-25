@@ -5,10 +5,9 @@ import MDBDetailsPane from "./components/MDBDetailsPane"
 import Outline from "./components/Outline";
 
 
-class Mockup1 extends React.Component {
+class Mockup extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       callouts: {},
       currentVitals: {},
@@ -18,19 +17,25 @@ class Mockup1 extends React.Component {
       criticalCriteria: {}
     };
     // bind event handlers and other methods being passed down as props
-    this.setCurrentNode    = this.setCurrentNode.bind(this)
-    this.getCurrentNode    = this.getCurrentNode.bind(this)
-    this.toggleChecked     = this.toggleChecked.bind(this)
-    this.setChecked        = this.setChecked.bind(this)
-    this.isChecked         = this.isChecked.bind(this)
-    this.getCurrentVital   = this.getCurrentVital.bind(this)
-    this.setCurrentVital   = this.setCurrentVital.bind(this)
-    this.recomputeVitals   = this.recomputeVitals.bind(this)
+    this.setCurrentNode      = this.setCurrentNode.bind(this)
+    this.getCurrentNode      = this.getCurrentNode.bind(this)
+    this.toggleChecked       = this.toggleChecked.bind(this)
+    this.setChecked          = this.setChecked.bind(this)
+    this.isChecked           = this.isChecked.bind(this)
+    this.getCurrentVital     = this.getCurrentVital.bind(this)
+    this.setCurrentVital     = this.setCurrentVital.bind(this)
+    this.recomputeVitals     = this.recomputeVitals.bind(this)
     this.getVitalsRecomputed = this.getVitalsRecomputed.bind(this)
+    this.toggleCallout       = this.toggleCallout.bind(this)
+    this.getCurrentCallout   = this.getCurrentCallout.bind(this)
 
     // total hack for now
     window.recomputeVitals = this.recomputeVitals
+
+    this.lhsConfig = this.mkConfig(false, false, false, false)
+    this.rhsConfig = this.mkConfig(true, true, true, true)
   }
+
 
   setCurrentNode(node) {
     this.setState({
@@ -57,7 +62,7 @@ class Mockup1 extends React.Component {
 
   setChecked(id, boolVal) {
     this.setState((prevState) => ({
-      checkListItems: {...prevState.checkListItems, [id]: boolVal}
+      checkListItems: { ...prevState.checkListItems, [id]: boolVal }
     }))
   }
 
@@ -71,7 +76,7 @@ class Mockup1 extends React.Component {
 
   setCurrentVital(vital, value) {
     this.setState((prevState) => ({
-      currentVitals: {...prevState.currentVitals, [vital]: value}
+      currentVitals: { ...prevState.currentVitals, [vital]: value }
    }))
   }
 
@@ -89,10 +94,47 @@ class Mockup1 extends React.Component {
     }));
   }
 
+  toggleCallout(id) {
+    if (this.isChecked(id)) {
+      this.setState((prevState) => ({ currentCallOut: null }))
+    }
+    else {
+      this.setState((prevState) => ({ currentCallOut: id }))
+    }
+    this.toggleChecked(id)
+  }
+
+  getCurrentCallout() {
+    return this.state.currentCallOut
+  }
+
+
+  mkConfig(dispCalloutIcons, dispCalloutText, dispForms, autoRevealRaterInfo) {
+    const config = {
+      getCurrentNode: this.getCurrentNode,
+      setCurrentNode: this.setCurrentNode,
+      isChecked: this.isChecked,
+      toggleChecked: this.toggleChecked,
+      setChecked: this.setChecked,
+      getCurrentVital: this.getCurrentVital,
+      getVitalsRecomputed: this.getVitalsRecomputed,
+      toggleCallout: this.toggleCallout,
+      getCurrentCallout: this.getCurrentCallout,
+      displayCalloutIcons: dispCalloutIcons,
+      displayCalloutText: dispCalloutText,
+      displayInterventionForms: dispForms,
+      autoRevealRaterInfo: autoRevealRaterInfo
+    }
+    if (dispCalloutText !== config.displayCalloutText) {
+      console.log("Mockup1::config", config)
+    }
+    return config
+  }
+
   componentDidMount() {
     let scen = this.props.scenario;
     let crits = {}
-    scen.criticalCriteria.forEach((cc) => {crits[cc.id] = false});
+    scen.criticalCriteria.forEach((cc) => { crits[cc.id] = false });
     let cli = {}
     // eslint-disable-next-line
     for (const [key, value] of Object.entries(scen.items)) {
@@ -100,7 +142,6 @@ class Mockup1 extends React.Component {
         cli[item.id] = false;
       })
     }
-    // console.log(scen.initialVitalSigns)
     this.setState({
       callouts: {},
       currentVitals: Object.assign({}, scen.initialVitalSigns),
@@ -111,48 +152,33 @@ class Mockup1 extends React.Component {
     });
   }
 
-  mkConfig(dispCalloutIcons, dispCalloutText, dispForms, autoRevealRaterInfo) {
-    return {
-      getCurrentNode: this.getCurrentNode,
-      setCurrentNode: this.setCurrentNode,
-      isChecked: this.isChecked,
-      toggleChecked: this.toggleChecked,
-      setChecked: this.setChecked,
-      getCurrentVital: this.getCurrentVital,
-      getVitalsRecomputed: this.getVitalsRecomputed,
-      showOnlyIcon: false,
-      displayCalloutIcons: dispCalloutIcons,
-      displayCalloutText: dispCalloutText,
-      displayInterventionForms: dispForms,
-      autoRevealRaterInfo: autoRevealRaterInfo
-    }
-  }
-
   render() {
     const scen = this.props.scenario;
 
-    const lhsConfig = this.mkConfig(false, false, false, false)
-    const rhsConfig = this.mkConfig(true, true, true, true)
-
-    const lhs = <Outline
-                  heading="Navigation"
-                  scenario={scen}
-                  steps={scen.steps}
-                  first={true}
-                  config={lhsConfig}
-                />
-    const rhs = <MDBDetailsPane
-                  scenario={scen}
-                  config={rhsConfig}
-                />
-
-    return <MDBContainer
-              lhs={lhs}
-              rhs={rhs}
-              lhsWidth={5}
-              rhsWidth={7}
-           />;
+    const lhs = (
+      <Outline
+        heading="Navigation"
+        scenario={scen}
+        steps={scen.steps}
+        first={true}
+        config={this.lhsConfig}
+      />
+    )
+    const rhs = (
+      <MDBDetailsPane
+        scenario={scen}
+        config={this.rhsConfig}
+      />
+    )
+    return (
+      <MDBContainer
+        lhs={lhs}
+        rhs={rhs}
+        lhsWidth={5}
+        rhsWidth={7}
+      />
+    )
   }
 }
 
-export default Mockup1;
+export default Mockup;

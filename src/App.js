@@ -1,6 +1,4 @@
-import React, {
-    // useState
-} from "react"
+import React from "react"
 
 import MDBNavBar from "./components/MDBNavBar"
 import MDBModal from "./components/MDBModal"
@@ -25,30 +23,21 @@ import scenarioData  from "./data/scenario"
 import traumaScenarioIndexer from "./data/traumaScenarioIndexer"
 
 
-
 class App extends React.Component {
-
     constructor(props) {
-        console.log("App constructor called")
         super(props)
         this.state = {
             showInfo: false,
             showPrefs: false,
             ...defaultPrefs
         }
-        // dispCheckBoxesInline: false,
-        //     dispCallOutsInline: false,
-        //         dispFormsInline: false,
-        //             hideRaterInfo: false
-
-        this.scen = traumaScenarioIndexer(scenarioData)
-        console.log(this.scen)
-
         this.toggleShowInfo = this.toggleShowInfo.bind(this)
         this.toggleShowPrefs = this.toggleShowPrefs.bind(this)
         this.getPref = this.getPref.bind(this)
         this.setPref = this.setPref.bind(this)
         this.saveState = this.saveState.bind(this)
+        this.scen = traumaScenarioIndexer(scenarioData)
+        console.log(this.scen)
     }
 
     toggleShowInfo() {
@@ -72,19 +61,10 @@ class App extends React.Component {
         }, () => this.saveState())
     }
 
-
     saveState() {
         // simply dump to console for now. will eventually persist to db
         console.log(this.state)
     }
-
-    // const [showInfo, setShowInfo] = useState(false);
-    // const toggleShowInfo = () => {
-    //     setShowInfo(!showInfo);
-    // }
-    // const [showPrefs, setShowPrefs] = useState(false);
-    // const
-
 
     render () {
 
@@ -119,18 +99,17 @@ class App extends React.Component {
                 >
                     <ScenarioInfo scenario={this.scen} />
                 </MDBModal>
-                    <MDBModal
-                        title="User Preferences"
-                        show={this.state.showPrefs}
-                        toggler={this.toggleShowPrefs}
-                    >
-                        <PreferencesContext.Provider value={{ getPref: this.getPref, setPref: this.setPref }}>
-                            <PreferencesForm hideModal={this.toggleShowPrefs} />
-                        </PreferencesContext.Provider>
-                    </MDBModal>
+                <MDBModal
+                    title="User Preferences"
+                    show={this.state.showPrefs}
+                    toggler={this.toggleShowPrefs}
+                >
+                    <PreferencesContext.Provider value={{ getPref: this.getPref, setPref: this.setPref }}>
+                        <PreferencesForm hideModal={this.toggleShowPrefs} />
+                    </PreferencesContext.Provider>
+                </MDBModal>
             </Router>
         )
-
     }
 }
 
