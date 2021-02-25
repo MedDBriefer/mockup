@@ -9,7 +9,6 @@ function initKeysToFalse(dict) {
     obj[key] = false;
     return obj;
   }, {})
-  console.log(newDict)
   return newDict;
 }
 
