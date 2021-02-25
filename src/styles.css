@@ -85,7 +85,9 @@ ul.first {
   overflow: none;
   text-overflow: ellipsis;
 }
-
+.callout.currentCallOut {
+  background-color: yellow;
+}
 .card-body {
   padding-top: 5px;
 }

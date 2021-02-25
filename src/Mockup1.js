@@ -27,9 +27,29 @@ class Mockup1 extends React.Component {
     this.setCurrentVital   = this.setCurrentVital.bind(this)
     this.recomputeVitals   = this.recomputeVitals.bind(this)
     this.getVitalsRecomputed = this.getVitalsRecomputed.bind(this)
+    this.toggleCallout = this.toggleCallout.bind(this)
+    this.getCurrentCallout = this.getCurrentCallout.bind(this) 
 
     // total hack for now
     window.recomputeVitals = this.recomputeVitals
+  }
+
+
+  toggleCallout(id)
+  {
+    if (this.isChecked(id))
+    {
+      this.setState((prevState) => ({currentCallOut: null}))
+    }
+    else 
+    {
+      this.setState((prevState) => ({currentCallOut: id}))
+    }
+    this.toggleChecked(id)
+  }
+
+  getCurrentCallout() {
+    return this.state.currentCallOut
   }
 
   setCurrentNode(node) {
@@ -112,11 +132,14 @@ class Mockup1 extends React.Component {
   }
 
   mkConfig(dispCalloutIcons, dispCalloutText, dispForms, autoRevealRaterInfo) {
+    console.log("dispCalloutText", dispCalloutText)
     return {
       getCurrentNode: this.getCurrentNode,
       setCurrentNode: this.setCurrentNode,
       isChecked: this.isChecked,
       toggleChecked: this.toggleChecked,
+      toggleCallout: this.toggleCallout,
+      getCurrentCallout: this.getCurrentCallout,
       setChecked: this.setChecked,
       getCurrentVital: this.getCurrentVital,
       getVitalsRecomputed: this.getVitalsRecomputed,
@@ -132,8 +155,9 @@ class Mockup1 extends React.Component {
     const scen = this.props.scenario;
 
     const lhsConfig = this.mkConfig(false, false, false, false)
-    const rhsConfig = this.mkConfig(false, true, true, true)
-
+    const rhsConfig = this.mkConfig(true, true, true, true)
+    console.log("left", lhsConfig)
+    console.log("right", rhsConfig)
     const lhs = <Outline
                   heading="Navigation"
                   scenario={scen}

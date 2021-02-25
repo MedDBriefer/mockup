@@ -25,6 +25,7 @@ class Mockup3 extends React.Component {
    this.setCurrentVital = this.setCurrentVital.bind(this)
    this.recomputeVitals = this.recomputeVitals.bind(this)
    this.getVitalsRecomputed = this.getVitalsRecomputed.bind(this)
+   this.getCurrentCallout = this.getCurrentCallout.bind(this) 
 
    // total hack for now
    window.recomputeVitals = this.recomputeVitals
@@ -53,10 +54,16 @@ class Mockup3 extends React.Component {
     {
       this.setState((prevState) => ({currentCallOut: null}))
     }
+    else 
+    {
+      this.setState((prevState) => ({currentCallOut: id}))
+    }
     this.toggleChecked(id)
   }
 
-  
+  getCurrentCallout() {
+    return this.state.currentCallOut
+  }
   getCurrentVital(vital) {
     return this.state.currentVitals[vital]
   }
@@ -109,6 +116,7 @@ class Mockup3 extends React.Component {
       toggleChecked: this.toggleChecked,
       toggleCallout: this.toggleCallout,
       setChecked: this.setChecked,
+      getCurrentCallout: this.getCurrentCallout,
       getCurrentVital: this.getCurrentVital,
       getVitalsRecomputed: this.getVitalsRecomputed,
       showOnlyIcon: true,

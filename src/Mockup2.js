@@ -24,6 +24,8 @@ class Mockup2 extends React.Component {
     this.setCurrentVital   = this.setCurrentVital.bind(this)
     this.recomputeVitals   = this.recomputeVitals.bind(this)
     this.getVitalsRecomputed = this.getVitalsRecomputed.bind(this)
+    this.getCurrentCallout = this.getCurrentCallout.bind(this) 
+    this.toggleCallout = this.toggleCallout.bind(this)
 
     // total hack for now
     window.recomputeVitals = this.recomputeVitals
@@ -89,6 +91,23 @@ class Mockup2 extends React.Component {
     });
   }
 
+  toggleCallout(id)
+  {
+    if (this.isChecked(id))
+    {
+      this.setState((prevState) => ({currentCallOut: null}))
+    }
+    else 
+    {
+      this.setState((prevState) => ({currentCallOut: id}))
+    }
+    this.toggleChecked(id)
+  }
+
+  getCurrentCallout() {
+    return this.state.currentCallOut
+  }
+
   mkConfig(dispCalloutIcons, dispCalloutText, dispForms, autoRevealRaterInfo) {
     return {
       isChecked: this.isChecked,
@@ -96,6 +115,8 @@ class Mockup2 extends React.Component {
       setChecked: this.setChecked,
       getCurrentVital: this.getCurrentVital,
       getVitalsRecomputed: this.getVitalsRecomputed,
+      toggleCallout: this.toggleCallout,
+      getCurrentCallout: this.getCurrentCallout,
       showOnlyIcon: false,
       displayCalloutIcons: dispCalloutIcons,
       displayCalloutText: dispCalloutText,

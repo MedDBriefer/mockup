@@ -1,7 +1,7 @@
 import React from "react"
 
 import CheckBox from "./CheckBox"
-import CallOut from "./CallOut"
+import CallOutText from "./CallOutText"
 import CallOutIcon from "./CallOutIcon"
 
 const CheckListItem = ({scenario, step, config}) => {
@@ -36,15 +36,13 @@ const CheckListItem = ({scenario, step, config}) => {
             // replace this:
             const inlines = (
                      <>
-                         { config.displayCalloutIcons &&
-                             <CallOutIcon
-                                 scenario={scenario}
-                                 step={step}
-                                 config={config}
-                             />
-                         }
-                         { !config.displayCalloutIcons &&
-                             <CallOut
+                            <CallOutIcon
+                                scenario={scenario}
+                                step={step}
+                                config={config}
+                            />
+                         { config.displayCalloutText &&
+                             <CallOutText
                                  scenario={scenario}
                                  step={step}
                                  config={config}
