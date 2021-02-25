@@ -3,6 +3,8 @@ import React from "react"
 import CheckBox from "./CheckBox"
 import CallOutText from "./CallOutText"
 import CallOutIcon from "./CallOutIcon"
+import InterventionButton from "./InterventionButton"
+import InterventionForm from "./InterventionForm"
 
 const CheckListItem = ({scenario, step, config}) => {
 
@@ -48,32 +50,36 @@ const CheckListItem = ({scenario, step, config}) => {
                     config={config}
                 />
             )
-        // case 'intervention':
-            // const inlines = (
-            //     <InterventionButton
-            //         scenario={scenario}
-            //         step={step}
-            //         config={config}
-            //     />
-            // )
-            //
-            // pass some component which simply wraps an InterventionForm with a div and determines
-            // whether to display itself based by setting .hidden if getDispForm(step.id) or something like that.
-            // return (
-            //     <CheckBox
-            //         scenario={scenario}
-            //         step={step}
-            //         config={config}
-            //         clickHandler={config.toggleForm}
-            //         inlineChildren={inlines}
-            //     >
-            //         <WrappedInterventionForm
-            //             scenario={scenario}
-            //             step={step}
-            //             config={config}
-            //         />
-            //     </CheckBox>
-            // )
+        case 'intervention':
+            const clickHandler = (step.intervention === "say")
+                ? config.toggleChecked
+                : config.toggleDisplayForm
+
+            const ib = (
+                <InterventionButton
+                    scenario={scenario}
+                    step={step}
+                    config={config}
+                />
+            )
+
+            return (
+                <CheckBox
+                    scenario={scenario}
+                    step={step}
+                    config={config}
+                    clickHandler={clickHandler}
+                    inlineChildren={ib}
+                >
+                    {config.displayInterventionForms &&
+                        <InterventionForm
+                            scenario={scenario}
+                            step={step}
+                            config={config}
+                        />
+                    }
+                </CheckBox>
+            )
         default:
             return <p>{JSON.stringify(step, null, 4)}</p>
         }
