@@ -1,14 +1,30 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+
+import { ScenarioContext } from "../contexts/ScenarioContext"
 
 import CheckListItem from "./CheckListItem"
+import Panel from "./Panel"
 import RaterInfo from "./RaterInfo"
 
-import Panel from "./Panel"
 
-const MDBDetailsPane = ({scenario, config }) => {
+const MDBDetailsPane = () => {
+    const { scenario, currentNode } = useContext(ScenarioContext)
+    const [label, setLabel] = useState(null)
+    const [children, setChildren] = useState([])
 
-    const raterInfoConfig = Object.assign(config, {displayCalloutText: false})
-    const {label, children} = config.getCurrentNode()
+
+    useEffect(
+        () => {
+            if(!!currentNode) {
+                setLabel(scenario.nodeLabels[currentNode])
+                setChildren(scenario.items[currentNode])
+            } else {
+                setLabel(null)
+                setChildren([])
+            }
+        },[scenario, currentNode]
+    )
+
     if (null === label) {
         return <div></div>
     }
@@ -18,20 +34,12 @@ const MDBDetailsPane = ({scenario, config }) => {
                 <ul>
                     {children.map((child) =>
                         <li key={child.id}>
-                            <CheckListItem
-                                scenario={scenario}
-                                step={child}
-                                config={config}
-                            />
+                            <CheckListItem step={child} />
                         </li>
                     )}
                 </ul>
             </Panel>
-            <RaterInfo
-                scenario={scenario}
-                defaultTab={"vitals"}
-                config={raterInfoConfig}
-            />
+            <RaterInfo defaultTab={"vitals"} />
         </>
     )
 }

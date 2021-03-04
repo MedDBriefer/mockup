@@ -1,13 +1,15 @@
-import React from "react";
-
+import React, { useContext } from "react";
 
 import classnames from "classnames"
 
+import { ScenarioContext } from "../contexts/ScenarioContext"
 
 const CheckBox = (props) => {
   // need props param to exist in order to access props.children
-  // eslint-disable-next-line no-unused-vars
-  const { scenario, step, clickHandler, inlineChildren = [], config } = props
+
+  const { step, clickHandler, inlineChildren = [] } = props
+
+  const { isChecked } = useContext(ScenarioContext)
 
   return (
     <>
@@ -18,7 +20,7 @@ const CheckBox = (props) => {
         <span
           className="checkbox-icon material-icons-outlined"
         >
-          {config.isChecked(step.id) ? "check_box": "check_box_outline_blank"}
+          {isChecked(step.id) ? "check_box": "check_box_outline_blank"}
         </span>
         <b>{step.label}</b>
         {inlineChildren}

@@ -1,6 +1,4 @@
-import React
-, { useState }
- from "react";
+import React, { useState } from "react";
 
 import classnames from "classnames";
 
@@ -10,7 +8,7 @@ const isLeafNode = (step) => {
   return !step.children.length > 0
 }
 
-export default function CheckList({ scenario, steps, heading, depth = 3, first = false, config }){
+export default function CheckList({ steps, heading, depth = 3, first = false}){
   const [collapsed, setCollapsed] = useState(false);
   const toggle = () => {
     console.log("toggling");
@@ -22,11 +20,7 @@ export default function CheckList({ scenario, steps, heading, depth = 3, first =
         <li key={`li-${step.id}`}>
           {isLeafNode(step)
           ?
-            <CheckListItem
-                scenario={scenario}
-                step={step}
-                config={config}
-            />
+            <CheckListItem step={step} />
           :
             <>
               <p
@@ -35,10 +29,8 @@ export default function CheckList({ scenario, steps, heading, depth = 3, first =
                   {step.label}
               </p>
               <CheckList
-                  scenario={scenario}
                   steps={step.children}
                   depth={depth + 1}
-                  config={config}
               />
             </>
           }

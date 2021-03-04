@@ -1,7 +1,8 @@
 import React from "react"
 
 import classnames from "classnames"
-const InterventionButton = ({scenario, step, config}) => {
+
+const InterventionButton = ({step}) => {
 
     return (
         <>

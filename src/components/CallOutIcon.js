@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 
-// import classnames from "classnames"
+import { ScenarioContext } from "../contexts/ScenarioContext"
 
-const CallOutIcon = ({ step, config }) => {
+const CallOutIcon = ({ step }) => {
 
+  const { isChecked } = useContext(ScenarioContext)
 
-  return (config.isChecked(step.id))
-          ?
-          <span
-              className="callout-icon material-icons-outlined" style={{color:'grey'}}
-            >
-              message
-            </span>
-          :
-            <span
-              className="callout-icon material-icons-outlined"
-            >
-              message
-            </span>
-
+  return (
+    isChecked(step.id)
+    ?
+      <span
+        className="callout-icon material-icons-outlined"
+        style={{color:'grey'}}
+      >
+        message
+      </span>
+    :
+      <span
+        className="callout-icon material-icons-outlined"
+      >
+        message
+      </span>
+  )
 }
 export default CallOutIcon;

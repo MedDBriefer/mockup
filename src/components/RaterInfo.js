@@ -1,8 +1,5 @@
 
-import React,
-{ useState }
-from "react"
-import CallOutText from "./CallOutText"
+import React,{ useState, useContext } from "react"
 
 import {
     Nav,
@@ -10,13 +7,22 @@ import {
     NavLink,
     TabContent,
     TabPane
- } from "reactstrap"
+} from "reactstrap"
 
 import classnames from "classnames"
 
+import { usePrefs } from "../contexts/PreferencesContext"
+import { ScenarioContext } from "../contexts/ScenarioContext"
+
+import CallOutText from "./CallOutText"
+
+
+
 import RevealTable from "./RevealTable"
 
-export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
+export default function RaterInfo({defaultTab = "callouts"}) {
+    const {dispAssessmentFindingsInline} = usePrefs()
+    const {scenario, currentVitals, vitalsRecomputed} = useContext(ScenarioContext)
     const [activeTab, setActiveTab] = useState(defaultTab)
     const toggle = (tab) => {
         if (activeTab !== tab) setActiveTab(tab)
@@ -25,7 +31,7 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
     // conditionally compute callouts array only if they are supposed to be
     // displayed within this pane
     let callouts = []
-    if (config.displayCalloutText) {
+    if (!dispAssessmentFindingsInline) {
         // here you'd be passing actual Callout/CalloutText (whatever you call it)
         // components as the value instead of merely step.callout
         callouts = scenario.assessmentSteps.map(step => {
@@ -34,9 +40,8 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
                 label: step.calloutLabel,
                 value: [
                     <CallOutText
-                        scenario={scenario}
                         step={step}
-                        config={config}
+                        displayAssessmentFindings={true}
                     />
                 ]
             }
@@ -50,14 +55,14 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
 
 
     const vitalsHeaders =
-        (config.getVitalsRecomputed())
-        ? ["Type", "Initial Value", "Current Value"]
-        : ["Type", "Current Value"]
+        vitalsRecomputed
+        ? ["Vital Sign", "Initial Value", "Current Value"]
+        : ["Vital Sign", "Current Value"]
 
     const vitals = Object.entries(scenario.initialVitalSigns).map(iv => {
         const value =
-            (config.getVitalsRecomputed())
-            ? [ iv[1], config.getCurrentVital(iv[0]) ]
+            vitalsRecomputed
+            ? [ iv[1], currentVitals[iv[0]] ]
             : [ iv[1] ]
 
         return {
@@ -69,7 +74,7 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
     return (
         <>
             <Nav tabs>
-                {config.displayCalloutText &&
+                {!dispAssessmentFindingsInline &&
                     <NavItem>
                         <NavLink
                             className={classnames({ active: activeTab === 'callouts' })}
@@ -97,13 +102,12 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
                 </NavItem>
             </Nav>
             <TabContent activeTab={activeTab}>
-                {config.displayCalloutText &&
+                {!dispAssessmentFindingsInline &&
                     <TabPane tabId="callouts">
                         <RevealTable
                             title="Assessment Findings"
-                            headings={["Type", "Value"]}
+                            headings={["Asssesment", "Finding"]}
                             rows={callouts}
-                            config={config}
                         />
                     </TabPane>
                 }
@@ -112,7 +116,6 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
                         title="Vitals"
                         headings={vitalsHeaders}
                         rows={vitals}
-                        config={config}
                     />
                 </TabPane>
                 <TabPane tabId="sample">
@@ -120,7 +123,6 @@ export default function RaterInfo({scenario, defaultTab = "callouts", config}) {
                         title="SAMPLE"
                         headings={["Type", "Value"]}
                         rows={sample}
-                        config={config}
                     />
                 </TabPane>
             </TabContent>

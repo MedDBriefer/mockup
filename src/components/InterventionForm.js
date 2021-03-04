@@ -1,16 +1,32 @@
-import React from "react"
+import React, { useContext, useState, useEffect } from "react"
 
-const InterventionForm = ({scenario, step, config}) => {
+import { ScenarioContext } from "../contexts/ScenarioContext"
 
-    const formData = scenario.interventionForms[step.id]
-    if (!config.getDisplayForm(step.id)) {
+const InterventionForm = ({step}) => {
+
+    const { scenario, shouldDisplayInterventionForm, toggleChecked } = useContext(ScenarioContext)
+
+    const [interventions, setInterventions] = useState([])
+    const [steps, setSteps ] = useState([])
+    const [criticalCriteria, setCriticalCriteria] = useState([])
+
+    useEffect(
+        () => {
+            const formData = scenario.interventionForms[step.id]
+            setInterventions(formData.interventions)
+            setSteps(formData.steps)
+            setCriticalCriteria(formData.criticalCriteria)
+        }, [scenario.interventionForms, step.id]
+    )
+
+    if (!shouldDisplayInterventionForm(step.id)) {
         return (
             <div></div>
         )
     } else {
 
-        const interventions = (
-            formData.interventions.map((intv) => (
+        const ivs = (
+            interventions.map((intv) => (
                 <div key={intv.id}>
                     <label>
                         <input type="checkbox" />
@@ -20,7 +36,7 @@ const InterventionForm = ({scenario, step, config}) => {
             ))
         )
         const checklist = (
-            formData.steps.map((cl) => (
+            steps.map((cl) => (
                 <div key={cl.id}>
                     <label>
                         <input type="checkbox" />
@@ -30,7 +46,7 @@ const InterventionForm = ({scenario, step, config}) => {
             ))
         )
         const crits = (
-            formData.criticalCriteria.map((cc) => (
+            criticalCriteria.map((cc) => (
                 <div key={cc.id}>
                     <label className="text-danger">
                         <input type="checkbox" />
@@ -43,7 +59,7 @@ const InterventionForm = ({scenario, step, config}) => {
             <div className="intervention-form">
                 <form>
                     <h5>Relevant Interventions</h5>
-                    {interventions}
+                    {ivs}
                     <h5>Checklist</h5>
                     {checklist}
                     <h5>Critical Criteria</h5>
@@ -51,7 +67,7 @@ const InterventionForm = ({scenario, step, config}) => {
                     <button
                         type="button"
                         className="btn btn-primary btn-small"
-                        onClick={() => config.toggleChecked(step.id)}
+                        onClick={() => toggleChecked(step.id)}
                     >
                         Submit
                     </button>

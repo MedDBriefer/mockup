@@ -1,4 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
+
+import { ScenarioContext } from "../contexts/ScenarioContext"
+import { usePrefs } from "../contexts/PreferencesContext"
 
 import CheckBox from "./CheckBox"
 import CallOutText from "./CallOutText"
@@ -6,82 +9,59 @@ import CallOutIcon from "./CallOutIcon"
 import InterventionButton from "./InterventionButton"
 import InterventionForm from "./InterventionForm"
 
-const CheckListItem = ({scenario, step, config}) => {
+const CheckListItem = ({step}) => {
+    const { dispAssessmentFindingsInline } = usePrefs()
+    const {
+        isChecked,
+        toggleChecked,
+        toggleAssessmentFinding,
+        toggleDisplayInterventionForm
+    } = useContext(ScenarioContext)
 
     switch (step.type) {
         case 'assessment':
-            const inlines = (
-                <CallOutIcon
-                    scenario={scenario}
-                    step={step}
-                    config={config}
-                />
-            )
+            const inlines = (<CallOutIcon step={step} />)
             return (
                 <CheckBox
-                    scenario={scenario}
                     step={step}
-                    config={config}
-                    clickHandler={config.toggleCallout}
+                    clickHandler={toggleAssessmentFinding}
                     inlineChildren={inlines}
                 >
-                    {config.displayCalloutText &&
+                    {dispAssessmentFindingsInline &&
                         <div>
-                            {config.isChecked(step.id) &&
-                                <CallOutText
-                                    scenario={scenario}
-                                    step={step}
-                                    config={config}
-                                />
+                            {isChecked(step.id) &&
+                                <CallOutText step={step} />
                             }
                         </div>
                     }
                 </CheckBox>
             )
-        case 'required-action':
-        case 'critical-criteria':
-        case 'execution-error':
-            // perhaps this should just be the 'default'
-            return (
-                <CheckBox
-                    scenario={scenario}
-                    step={step}
-                    clickHandler={config.toggleChecked}
-                    config={config}
-                />
-            )
         case 'intervention':
             const clickHandler = (step.intervention === "say")
-                ? config.toggleChecked
-                : config.toggleDisplayForm
+                ? toggleChecked
+                : toggleDisplayInterventionForm
 
-            const ib = (
-                <InterventionButton
-                    scenario={scenario}
-                    step={step}
-                    config={config}
-                />
-            )
+            const ib = (<InterventionButton step={step} /> )
 
             return (
                 <CheckBox
-                    scenario={scenario}
                     step={step}
-                    config={config}
                     clickHandler={clickHandler}
                     inlineChildren={ib}
                 >
-                    {config.displayInterventionForms &&
-                        <InterventionForm
-                            scenario={scenario}
-                            step={step}
-                            config={config}
-                        />
-                    }
+                    <InterventionForm step={step} />
                 </CheckBox>
             )
         default:
-            return <p>{JSON.stringify(step, null, 4)}</p>
+            // case 'required-action':
+            // case 'critical-criteria':
+            // case 'execution-error':
+            return (
+                <CheckBox
+                    step={step}
+                    clickHandler={toggleChecked}
+                />
+            )
         }
 
 }

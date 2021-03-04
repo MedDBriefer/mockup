@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useContext } from "react"
 
-import {Button} from "reactstrap"
+import { ScenarioContext } from "../contexts/ScenarioContext"
+
+import { Button } from "reactstrap"
 
 // I guess I don't need these functions anymore, now that they are only
 // evaluated in a single location
@@ -11,9 +13,9 @@ function allChildrenAreHeadings(step) {
     return step.children.every((child) => child.type === 'heading')
 }
 
+const Outline = ({ steps, depth = 3, first=false}) => {
 
-const Outline = ({ scenario, steps, depth = 3, first=false, config}) => {
-
+    const {setCurrentNode} = useContext(ScenarioContext)
     return (
         <ul className={first ? "first" : ""}>
         {steps.map((step) => (
@@ -26,16 +28,14 @@ const Outline = ({ scenario, steps, depth = 3, first=false, config}) => {
                             {step.label}
                         </div>
                         <Outline
-                            scenario={scenario}
                             steps={step.children}
                             depth={depth + 1}
-                            config={config}
                         />
                     </>
                 :
                     <Button
                         color="link"
-                        onClick={() => config.setCurrentNode(step.id)}>
+                        onClick={() => setCurrentNode(step.id)}>
                         <span className={`h${depth + 1}`}>
                             {step.label}
                         </span>
