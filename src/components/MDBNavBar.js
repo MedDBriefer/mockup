@@ -3,41 +3,31 @@ import React from 'react';
 import {
     Button,
     Nav,
-    NavItem,
+    // NavItem,
     Navbar,
+    NavbarBrand,
     NavbarText,
 } from "reactstrap";
 
-import MockupButton from "./MockupButton"
 
-
-const MDBNavBar = ({branding, title, scenInfoToggler, prefsFormToggler}) => {
+const MDBNavBar = ({title, scenInfoToggler, prefsToggler}) => {
     return (
         <Navbar color="dark" dark>
-            {/* <NavbarBrand href="#">
-                {branding}
+            <NavbarBrand href="#">
+                MedDBriefer
             </NavbarBrand>
-             */}
-            <Nav tabs>
-                <NavItem>
-                    <MockupButton to="/mockup1" label="Mockup 1" />
-                </NavItem>
-                <NavItem>
-                    <MockupButton to="/mockup2" label="Mockup 2" />
-                </NavItem>
-                <NavItem>
-                    <MockupButton to="/mockup3" label="Mockup 3" />
-                </NavItem>
-            </Nav>
+
            {!!title &&
                 <NavbarText tag="h3">{title}</NavbarText>
             }
-            <Button color="success" onClick={scenInfoToggler}>
-                Scenario Info
-            </Button>
-            <Button color="primary" onClick={prefsFormToggler}>
-                Preferences
-            </Button>
+            <Nav>
+                <Button color="success" onClick={scenInfoToggler}>
+                    Scenario Info
+                </Button>
+                <Button color="primary" onClick={prefsToggler}>
+                    Preferences
+                </Button>
+            </Nav>
         </Navbar>
     )
 }
