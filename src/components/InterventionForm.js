@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext } from "react"
 
 import { ScenarioContext } from "../contexts/ScenarioContext"
 
@@ -6,27 +6,9 @@ const InterventionForm = ({step}) => {
 
     const { scenario, shouldDisplayInterventionForm, toggleChecked } = useContext(ScenarioContext)
 
-    const [interventions, setInterventions] = useState([])
-    const [steps, setSteps ] = useState([])
-    const [criticalCriteria, setCriticalCriteria] = useState([])
-
-    useEffect(
-        () => {
-            const formData = scenario.interventionForms[step.id]
-            setInterventions(formData.interventions)
-            setSteps(formData.steps)
-            setCriticalCriteria(formData.criticalCriteria)
-        }, [scenario.interventionForms, step.id]
-    )
-
-    if (!shouldDisplayInterventionForm(step.id)) {
+    const getInterventionsList = () => {
         return (
-            <div></div>
-        )
-    } else {
-
-        const ivs = (
-            interventions.map((intv) => (
+            scenario.interventionForms[step.id].interventions.map((intv) => (
                 <div key={intv.id}>
                     <label>
                         <input type="checkbox" />
@@ -35,8 +17,11 @@ const InterventionForm = ({step}) => {
                 </div>
             ))
         )
-        const checklist = (
-            steps.map((cl) => (
+    }
+
+    const getChecklistItems = () => {
+        return (
+            scenario.interventionForms[step.id].steps.map((cl) => (
                 <div key={cl.id}>
                     <label>
                         <input type="checkbox" />
@@ -45,8 +30,11 @@ const InterventionForm = ({step}) => {
                 </div>
             ))
         )
-        const crits = (
-            criticalCriteria.map((cc) => (
+    }
+
+    const getCriticalCriteria = () => {
+        return (
+            scenario.interventionForms[step.id].criticalCriteria.map((cc) => (
                 <div key={cc.id}>
                     <label className="text-danger">
                         <input type="checkbox" />
@@ -55,15 +43,20 @@ const InterventionForm = ({step}) => {
                 </div>
             ))
         )
+    }
+
+    if (!shouldDisplayInterventionForm(step.id)) {
+        return (<div></div>)
+    } else {
         return (
             <div className="intervention-form">
                 <form>
                     <h5>Relevant Interventions</h5>
-                    {ivs}
+                    { getInterventionsList() }
                     <h5>Checklist</h5>
-                    {checklist}
+                    { getChecklistItems() }
                     <h5>Critical Criteria</h5>
-                    {crits}
+                    { getCriticalCriteria() }
                     <button
                         type="button"
                         className="btn btn-primary btn-small"
