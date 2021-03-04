@@ -1,16 +1,48 @@
-import React from "react"
+import React, {useState, useContext} from "react"
 
-export const defaultPrefs = {
-    dispCheckBoxesInline: false,
-    dispCallOutsInline: false,
-    dispFormsInline: false,
-    hideRaterInfo: false
+const defaultPrefs = {
+    dispLeafNodesInline: true,
+    dispAssessmentFindingsInline: true,
+    inhibitRaterOversharing: false
 }
 
-function placeHolder() {
-    console.log("placeHolder was called")
+const noop = () => {}
+export const PreferencesContext = React.createContext({...defaultPrefs, setPref: noop})
+
+
+export const PreferencesProvider = (props) => {
+    const [dispLeafNodesInline, setDispLeafNodesInline] = useState(defaultPrefs.dispLeafNodesInline)
+    const [dispAssessmentFindingsInline, setDispAssessmentFindingsInline] = useState(defaultPrefs.dispAssessmentFindingsInline)
+    const [inhibitRaterOversharing, setInhibitRaterOversharing] = useState(defaultPrefs.inhibitRaterOversharing)
+
+    const setPref = (name, value) => {
+        switch(name) {
+            case "dispLeafNodesInline":
+                setDispLeafNodesInline(value)
+                break
+            case "dispAssessmentFindingsInline":
+                setDispAssessmentFindingsInline(value)
+                break;
+            case "inhibitRaterOversharing":
+                setInhibitRaterOversharing(value)
+                break
+            default:
+                console.log(`not setting unknown pref ${name} to ${value}`)
+        }
+    }
+
+    return (
+        <PreferencesContext.Provider
+            value={{
+                dispLeafNodesInline,
+                dispAssessmentFindingsInline,
+                inhibitRaterOversharing,
+                setPref
+            }}
+        >
+            {props.children}
+        </PreferencesContext.Provider>
+    )
 }
-export const PreferencesContext = React.createContext({
-    getPrefs: () => placeHolder(),
-    setPrefs: () => placeHolder()
-})
+
+export const usePrefs = () => useContext(PreferencesContext)
