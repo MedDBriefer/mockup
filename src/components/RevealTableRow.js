@@ -1,18 +1,18 @@
-import React, {
-    useState
-} from "react"
+import React, { useState } from "react"
 
+import { usePrefs } from "../contexts/PreferencesContext"
 
 import classnames from "classnames"
 
 
-export default function RevealTableRow({label, values, config}) {
+export default function RevealTableRow({label, values}) {
+    const {inhibitRaterOversharing} = usePrefs()
     const [show, setShow] = useState(false)
     const toggle = () => setShow(!show)
 
     return (
         <tr>
-            { (config.autoRevealRaterInfo)
+            { (!inhibitRaterOversharing)
             ?
                 <th>{label}</th>
             :
@@ -21,7 +21,7 @@ export default function RevealTableRow({label, values, config}) {
             {
                 values.map((value, index) => (
                     <td key={ index }>
-                        {(config.autoRevealRaterInfo)
+                        {(!inhibitRaterOversharing)
                             ?
                             <span >{value}</span>
                             :
