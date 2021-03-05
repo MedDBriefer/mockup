@@ -41,7 +41,7 @@ const MDBNavBar = ({title, scenInfoToggler, prefsToggler}) => {
         event.preventDefault()
         setPref("dispLeafNodesInline", true)
         setPref("dispAssessmentFindingsInline", true)
-        setPref("inhibitRaterOversharing", false)
+        setPref("inhibitRaterOversharing", true)
         setActiveMockup("mockup2")
     }
     const setMockup3Prefs = (event) => {
