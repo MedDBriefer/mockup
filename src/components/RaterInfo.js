@@ -34,7 +34,7 @@ export default function RaterInfo({defaultTab = "callouts"}) {
             if (activeTab === "callouts" && dispAssessmentFindingsInline) {
                 setActiveTab("vitals")
             }
-        }, [activeTab]
+        }, [dispAssessmentFindingsInline, activeTab]
     )
 
     const getAssessmentFindingsTabPane = () => {
