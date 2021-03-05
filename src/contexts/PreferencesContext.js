@@ -1,7 +1,13 @@
 import React, {useState, useContext} from "react"
 
+// const defaultPrefs = {
+//     dispLeafNodesInline: true,
+//     dispAssessmentFindingsInline: true,
+//     inhibitRaterOversharing: false
+// }
+
 const defaultPrefs = {
-    dispLeafNodesInline: true,
+    dispLeafNodesInline: false,
     dispAssessmentFindingsInline: true,
     inhibitRaterOversharing: false
 }
