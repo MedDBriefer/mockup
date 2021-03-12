@@ -41,13 +41,13 @@ const CheckListItem = ({step}) => {
                 ? toggleChecked
                 : toggleDisplayInterventionForm
 
-            const ib = (<InterventionButton step={step} /> )
+            // const ib = (<InterventionButton step={step} /> )
 
             return (
                 <CheckBox
                     step={step}
                     clickHandler={clickHandler}
-                    inlineChildren={ib}
+                    // inlineChildren={ib}
                 >
                     <InterventionForm step={step} />
                 </CheckBox>
