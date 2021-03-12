@@ -51,12 +51,7 @@ const InterventionForm = ({step}) => {
         return (
             <div className="intervention-form">
                 <form>
-                    <h5>Relevant Interventions</h5>
                     { getInterventionsList() }
-                    <h5>Checklist</h5>
-                    { getChecklistItems() }
-                    <h5>Critical Criteria</h5>
-                    { getCriticalCriteria() }
                     <button
                         type="button"
                         className="btn btn-primary btn-small"
