@@ -28,7 +28,7 @@ export default function RaterInfo({defaultTab = "callouts"}) {
 
     useEffect(
         () => {
-            console.log(activeTab)
+            console.log(`setting active tab to "${activeTab}"`)
             // disable the callouts tab ability to be active if assessment findings
             // are supposed to be displayed inline
             if (activeTab === "callouts" && dispAssessmentFindingsInline) {
