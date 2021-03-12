@@ -9,7 +9,7 @@ import React, {useState, useContext} from "react"
 const defaultPrefs = {
     dispLeafNodesInline: false,
     dispAssessmentFindingsInline: true,
-    inhibitRaterOversharing: false
+    inhibitRaterOversharing: true
 }
 
 const noop = () => {}
