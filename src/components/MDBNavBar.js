@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+    // useEffect,
+    useState
+} from 'react';
 
 import { usePrefs } from "../contexts/PreferencesContext"
 
@@ -20,26 +23,27 @@ import {
 
 const MDBNavBar = ({title, scenInfoToggler }) => {
 
-    // const {setPref} = usePrefs()
-    // const [activeMockup, setActiveMockup] = useState("mockup1")
+    const { setPref } = usePrefs()
+    const [activeMockup, setActiveMockup] = useState("mockup1")
 
-    // const isCurrentMockup = (mockup) => mockup === activeMockup
+    const isCurrentMockup = (mockup) => mockup === activeMockup
 
-    // const setMockup1Prefs = (event) => {
-    //     event.preventDefault()
-    //     setPref("dispLeafNodesInline", false)
-    //     setPref("dispAssessmentFindingsInline", true)
-    //     setPref("inhibitRaterOversharing", false)
-    //     setActiveMockup("mockup1")
-    // }
+    const setMockup1Prefs = (event) => {
+        event.preventDefault()
+        setPref("dispLeafNodesInline", false)
+        setPref("dispAssessmentFindingsInline", true)
+        setPref("inhibitRaterOversharing", true)
+        setActiveMockup("mockup1")
+    }
 
-    // const setMockup2Prefs = (event) => {
-    //     event.preventDefault()
-    //     setPref("dispLeafNodesInline", true)
-    //     setPref("dispAssessmentFindingsInline", true)
-    //     setPref("inhibitRaterOversharing", true)
-    //     setActiveMockup("mockup2")
-    // }
+    const setMockup2Prefs = (event) => {
+        event.preventDefault()
+        setPref("dispLeafNodesInline", true)
+        setPref("dispAssessmentFindingsInline", true)
+        setPref("inhibitRaterOversharing", true)
+        setActiveMockup("mockup2")
+    }
+
     // const setMockup3Prefs = (event) => {
     //     event.preventDefault()
     //     setPref("dispLeafNodesInline", true)
@@ -48,24 +52,6 @@ const MDBNavBar = ({title, scenInfoToggler }) => {
     //     setActiveMockup("mockup3")
     // }
 
-    // useEffect(() => {
-
-    // },[])
-
-    // <Nav>
-    //     <Button color={isCurrentMockup("mockup1") ? "success" : "primary"}
-    //         onClick={setMockup1Prefs}>
-    //         Mockup 1
-    //             </Button>
-    //     <Button color={isCurrentMockup("mockup2") ? "success" : "primary"}
-    //         onClick={setMockup2Prefs}>
-    //         Mockup 2
-    //             </Button>
-    //     <Button color={isCurrentMockup("mockup3") ? "success" : "primary"}
-    //         onClick={setMockup3Prefs}>
-    //         Mockup 3
-    //             </Button>
-    // </Nav>
 
     return (
         <Navbar color="dark" dark>
@@ -73,6 +59,21 @@ const MDBNavBar = ({title, scenInfoToggler }) => {
             <NavbarBrand href="#">
                 MedDBriefer
             </NavbarBrand>
+
+            <Nav>
+                <Button
+                    color={isCurrentMockup("mockup1") ? "success" : "primary"}
+                    onClick={setMockup1Prefs}
+                >
+                    Layout 1
+                </Button>
+                <Button
+                    color={isCurrentMockup("mockup2") ? "success" : "primary"}
+                    onClick={setMockup2Prefs}
+                >
+                    Layout 2
+                </Button>
+            </Nav>
 
            {!!title &&
                 <NavbarText tag="h3">{title}</NavbarText>
