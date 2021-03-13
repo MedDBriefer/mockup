@@ -27,12 +27,12 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         "history-taking":                   "History Taking",
         "detailed-physical-examination":    "Secondary Assessment",
         "head":                             "Head",
-        "neck":                             "Neck**",
-        "chest":                            "Chest**",
-        "abdomen-pelvis":                   "Abdomen/pelvis**",
-        "lower-extremities":                "Lower extremities**",
+        "neck":                             "Neck",
+        "chest":                            "Chest",
+        "abdomen-pelvis":                   "Abdomen/pelvis",
+        "lower-extremities":                "Lower extremities",
         "upper-extremities":                "Upper extremities",
-        "posterior-thorax-lumbar-buttocks": "Posterior thorax, lumbar, and buttocks**",
+        "posterior-thorax-lumbar-buttocks": "Posterior thorax, lumbar, and buttocks",
         "misc":                             "Ongoing management and reassessment",
         "critical-criteria":                "Critical Criteria"
     },
@@ -85,13 +85,13 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         ],
         'airway': [
             { id: "assess-airway",    type: ASSESS, label: "Opens and assesses airway" },
-            { id: "inserts-adjunct",  type: INTERV, label: "Inserts adjunct as indicated" }, // action / crit criteria 690
+            { id: "inserts-adjunct",  type: INTERV, label: "Inserts appropriately sized adjunct" }, // action / crit criteria 690
             { id: "manages-airway",   type: INTERV, label: "Appropriately manages any problems associated with airway"}
         ],
         'breathing': [
             { id: "assess-breathing",        type: ASSESS, label: "Assesses breathing" },
             { id: "assess-ventilation",      type: ASSESS, label: "Assures adequate ventilation" },
-            { id: "oxygen-therapy",          type: INTERV, label: "Initiates appropriate oxygen therapy" }, // crit criteria 620
+            { id: "oxygen-therapy",          type: INTERV, label: "Administers oxygen" }, // crit criteria 620
             { id: "manage-breathing-injury", type: INTERV, label: "Manages any injury that may compromise breathing/ventilation" } // crit criteria 630
         ],
         'circulation': [
@@ -99,7 +99,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "assess-skin",      type: ASSESS, label: "Assesses skin [either skin color, temperature, or condition]" },
             { id: "assess-bleeding",  type: ASSESS, label: "Assesses for major bleeding" },
             { id: "control-bleeding", type: INTERV, label: "Controls major bleeding if present" },
-            { id: "control-shock",    type: INTERV, label: "Initiates shock management as indicated" } // crit criteria 640
+            { id: "control-shock",    type: INTERV, label: "Initiates shock management" } // crit criteria 640
         ],
         'transport-decision': [
             { id: "transport-priority", type: REQURED, label: "Identifies priority patients/makes transport decision based upon calculated GCS" } // crit criteria 650
@@ -109,12 +109,12 @@ const TRAUMA_SCENARIO_STRUCTURE = {
             { id: "attempt-obtain-sample", type: ASSESS, label: "Attempts to obtain SAMPLE history" } // point to SAMPLE
         ],
         'head': [
-            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth**, nose**, and assesses facial area" },
+            { id: "assess-mouth-nose-face", type: ASSESS, label: "Inspects mouth, nose, and assesses facial area" },
             { id: "assess-scape-ears",      type: ASSESS, label: "Inspects and palpates scalp and ears" },
-            { id: "assess-perrl",           type: ASSESS, label: "Assesses eyes for PERRL**" }
+            { id: "assess-perrl",           type: ASSESS, label: "Assesses eyes for PERRL" }
         ],
         'neck': [
-            { id: "assess-trachea", type: ASSESS, label: "Checks position of trachea" },
+            { id: "assess-trachea", type: ASSESS, label: "Inspects position of trachea" },
             { id: "assess-jugular", type: ASSESS, label: "Checks jugular veins" },
             { id: "assess-spine",   type: ASSESS, label: "Palpates cervical spine" }
         ],
@@ -142,7 +142,7 @@ const TRAUMA_SCENARIO_STRUCTURE = {
         ],
         "misc": [
             { id: "manage-secondary-injuries", type: REQURED, label: "Manages secondary injuries and wounds appropriately" },
-            { id: "performs-ongoing-assessment", type: REQURED, label: "Performs ongoing assessment" }
+            { id: "performs-ongoing-assessment", type: REQURED, label: "Reassesses Patient" }
         ],
         "critical-criteria": [] // these need to all be woven in by the scenario builder, as what goes here is depending on some options
     },
@@ -181,25 +181,26 @@ const TRAUMA_SCENARIO_STRUCTURE = {
     ],
     criticalCriteria: [
         // we might be able to auto-check based off of timer expiring
-        { id: "critial-failure-timely-transport-decision",       type: CRIT_FAIL, parent: "transport-decision", label: "Failure to initiate or call for transport of the patient within 10 minute time limit" },
+        // { id: "critial-failure-timely-transport-decision",       type: CRIT_FAIL, parent: "transport-decision", label: "Failure to initiate or call for transport of the patient within 10 minute time limit" },
         // true if 'apply-ppe' not checked?
-        { id: "critical-failure-ppe",                            type: CRIT_FAIL, parent: "bsi",                label: "Failure to take or verbalize appropriate PPE precautions" },
+        // { id: "critical-failure-ppe",                            type: CRIT_FAIL, parent: "bsi",                label: "Failure to take or verbalize appropriate PPE precautions" },
         // true if 'assess-scene-safety' not checked?
-        { id: "critical-failure-scene-safety",                   type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to determine scene safety" },
+        // { id: "critical-failure-scene-safety",                   type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to determine scene safety" },
         // true if 'stabilize-spine' not checked AND indicated?
-        { id: "critical-failure-spinal-protection",              type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to assess for and provide spinal protection when indicated" },
-        { id: "critical-failure-oxygen-supply",                  type: CRIT_FAIL, parent: "breathing",          label: "Failure to voice and ultimately provide high concentration of oxygen" },
+        // { id: "critical-failure-spinal-protection",              type: CRIT_FAIL, parent: "scene-size-up",      label: "Failure to assess for and provide spinal protection when indicated" },
+        // { id: "critical-failure-oxygen-supply",                  type: CRIT_FAIL, parent: "breathing",          label: "Failure to voice and ultimately provide high concentration of oxygen" },
         // true if ANY of the ventiliation
-        { id: "critical-failure-ventilation",                    type: CRIT_FAIL, parent: "breathing",          label: "Failure to assess/provide adequate ventilation" },
+        // { id: "critical-failure-ventilation",                    type: CRIT_FAIL, parent: "breathing",          label: "Failure to assess/provide adequate ventilation" },
         // not giving this one a parent, as it belongs to a heading whose only other children are other headings, making it
         // problematic in the navigation/details layout - readdress this if we don't go with that
-        { id: "critical-failure-manage-life-threats",            type: CRIT_FAIL,                               label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
+        // { id: "critical-failure-manage-life-threats",            type: CRIT_FAIL,                               label: "Failure to find or appropriately manage problems associated with airway, breathing, hemorrhage or shock [hypoperfusion]" },
         // combine below with 580?
-        { id: "critical-failure-differentiate-immediate-transport-vs-on-scene-treatment",  type: CRIT_FAIL, parent: "transport-decision", label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
-        { id: "critical-failure-prioritizing-non-life-threats",  type: CRIT_FAIL,                               label: "Does other detailed history or physical exam before assessing/treating threats to airway, breathing, and circulation" },
-        { id: "critical-failure-incompetence",                   type: CRIT_FAIL,                               label: "Failure to manage the patient as a competent EMT" },
-        { id: "critical-failure-unacceptable-affect",            type: CRIT_FAIL,                               label: "Exhibits unacceptable affect with patient or other personnel" },
-        { id: "critical-failure-inapproriate-intervention",      type: CRIT_FAIL,                               label: "Uses or orders a dangerous or inappropriate intervention" }
+        // { id: "critical-failure-differentiate-immediate-transport-vs-on-scene-treatment",  type: CRIT_FAIL, parent: "transport-decision", label: "Failure to differentiate patient's need for immediate transportation versus continued assessment/treatment at the scene" },
+        // { id: "critical-failure-prioritizing-non-life-threats",  type: CRIT_FAIL,                               label: "Does other detailed history or physical exam before assessing/treating threats to airway, breathing, and circulation" },
+        // { id: "critical-failure-incompetence",                   type: CRIT_FAIL,                               label: "Failure to manage the patient as a competent EMT" },
+        // { id: "critical-failure-unacceptable-affect",            type: CRIT_FAIL,                               label: "Exhibits unacceptable affect with patient or other personnel" },
+        { id: "critical-failure-inapproriate-intervention",      type: CRIT_FAIL,                               label: "Uses or orders a dangerous or inappropriate intervention" },
+        { id: "critical-failure-inapproriate-behavior",          type: CRIT_FAIL,                               label: "Exhibits unprofessional behavior" }
     ],
     interventionForms: {
         // Each selected intervention should, by default, also include an 'other / incorrect intervention' option
