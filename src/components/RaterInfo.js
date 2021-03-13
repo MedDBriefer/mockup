@@ -6,7 +6,8 @@ import {
     NavItem,
     NavLink,
     TabContent,
-    TabPane
+    TabPane,
+    Table,
 } from "reactstrap"
 
 import classnames from "classnames"
@@ -19,31 +20,33 @@ import RevealTable from "./RevealTable"
 
 export default function RaterInfo({defaultTab = "callouts"}) {
     const {dispAssessmentFindingsInline} = usePrefs()
-    const {scenario, currentVitals, vitalsRecomputed} = useContext(ScenarioContext)
+    const {scenario, isChecked, currentVitals, vitalsRecomputed} = useContext(ScenarioContext)
     const [activeTab, setActiveTab] = useState(defaultTab)
     const activateTab = (tab) => {
         if (activeTab !== tab) setActiveTab(tab)
     }
     const isActiveTab = (tab) => tab === activeTab
 
-    useEffect(
-        () => {
-            console.log(`setting active tab to "${activeTab}"`)
-            // disable the callouts tab ability to be active if assessment findings
-            // are supposed to be displayed inline
-            if (activeTab === "callouts" && dispAssessmentFindingsInline) {
-                setActiveTab("vitals")
-            }
-        }, [dispAssessmentFindingsInline, activeTab]
-    )
+    // useEffect(
+    //     () => {
+    //         // console.log(`setting active tab to "${activeTab}"`)
+    //         // disable the callouts tab ability to be active if assessment findings
+    //         // are supposed to be displayed inline
+    //         if (activeTab === "callouts" && dispAssessmentFindingsInline) {
+    //             setActiveTab("vitals")
+    //         }
+    //     }, [dispAssessmentFindingsInline, activeTab]
+    // )
 
     const getAssessmentFindingsTabPane = () => {
-        const callouts = scenario.assessmentSteps.map(step => {
+        const checkedAssessmentSteps = scenario.assessmentSteps.filter(step => isChecked(step.id))
+        const callouts = checkedAssessmentSteps.map(step => {
             return {
                 id: step.id,
                 label: step.calloutLabel,
                 value: [
                     <CallOutText
+                        key={step.id}
                         step={step}
                         displayAssessmentFindings={true}
                     />
@@ -52,11 +55,25 @@ export default function RaterInfo({defaultTab = "callouts"}) {
         })
         return (
             <TabPane tabId = "callouts" >
-                <RevealTable
-                    title="Assessment Findings"
-                    headings={["Asssesment", "Finding"]}
-                    rows={callouts}
-                />
+                {callouts.length > 0 &&
+                    <Table size="sm" striped={true}>
+                        <thead>
+                            <tr>
+                                <th>Assessment</th>
+                                <th>Finding</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {callouts.map((co) => (
+                                <tr key={co.id}>
+                                    <th>{co.label}</th>
+                                    <td>{co.value}</td>
+                                </tr>
+                                )
+                            )}
+                        </tbody>
+                    </Table>
+                }
             </TabPane >
         )
     }
@@ -111,16 +128,16 @@ export default function RaterInfo({defaultTab = "callouts"}) {
     return (
         <>
             <Nav tabs>
-                {!dispAssessmentFindingsInline &&
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: isActiveTab('callouts') })}
-                            onClick={() => activateTab('callouts')}
-                        >
-                            Assessment Findings
-                        </NavLink>
-                    </NavItem>
-                }
+
+                <NavItem>
+                    <NavLink
+                        className={classnames({ active: isActiveTab('callouts') })}
+                        onClick={() => activateTab('callouts')}
+                    >
+                        Assessment Findings
+                    </NavLink>
+                </NavItem>
+
                 <NavItem>
                     <NavLink
                         className={classnames({ active: isActiveTab('vitals') })}
@@ -139,7 +156,7 @@ export default function RaterInfo({defaultTab = "callouts"}) {
                 </NavItem>
             </Nav>
             <TabContent activeTab={activeTab}>
-                {!dispAssessmentFindingsInline && getAssessmentFindingsTabPane() }
+                { getAssessmentFindingsTabPane() }
                 { getVitalsTabPane() }
                 { getSampleTabPane() }
             </TabContent>
