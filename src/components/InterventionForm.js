@@ -12,38 +12,13 @@ const InterventionForm = ({step}) => {
                 <div key={intv.id}>
                     <label>
                         <input type="checkbox" />
-                        {intv.label}
+                        &nbsp; {intv.label}
                     </label>
                 </div>
             ))
         )
     }
 
-    const getChecklistItems = () => {
-        return (
-            scenario.interventionForms[step.id].steps.map((cl) => (
-                <div key={cl.id}>
-                    <label>
-                        <input type="checkbox" />
-                        {cl.label}
-                    </label>
-                </div>
-            ))
-        )
-    }
-
-    const getCriticalCriteria = () => {
-        return (
-            scenario.interventionForms[step.id].criticalCriteria.map((cc) => (
-                <div key={cc.id}>
-                    <label className="text-danger">
-                        <input type="checkbox" />
-                        {cc.label}
-                    </label>
-                </div>
-            ))
-        )
-    }
 
     if (!shouldDisplayInterventionForm(step.id)) {
         return (<div></div>)
