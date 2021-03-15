@@ -128,16 +128,6 @@ export default function RaterInfo({defaultTab = "callouts"}) {
     return (
         <>
             <Nav tabs>
-
-                <NavItem>
-                    <NavLink
-                        className={classnames({ active: isActiveTab('callouts') })}
-                        onClick={() => activateTab('callouts')}
-                    >
-                        Assessment Findings
-                    </NavLink>
-                </NavItem>
-
                 <NavItem>
                     <NavLink
                         className={classnames({ active: isActiveTab('vitals') })}
@@ -154,11 +144,19 @@ export default function RaterInfo({defaultTab = "callouts"}) {
                         SAMPLE
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink
+                        className={classnames({ active: isActiveTab('callouts') })}
+                        onClick={() => activateTab('callouts')}
+                    >
+                        Assessment Findings
+                    </NavLink>
+                </NavItem>
             </Nav>
             <TabContent activeTab={activeTab}>
-                { getAssessmentFindingsTabPane() }
                 { getVitalsTabPane() }
                 { getSampleTabPane() }
+                { getAssessmentFindingsTabPane() }
             </TabContent>
         </>
     );
