@@ -77,6 +77,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+@meddbriefer/analysis
+UNLICENSED
+
+@meddbriefer/feedback-data
+UNLICENSED
+
 @meddbriefer/mdb-auth
 
 @meddbriefer/mdb-firebase
@@ -85,6 +91,8 @@ SOFTWARE.
 
 @meddbriefer/scenario-data
 UNLICENSED
+
+@meddebriefer/prompt-answer-grading
 
 @nrwl/web
 MIT
